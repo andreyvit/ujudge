@@ -1,0 +1,10 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+first:
+  id: 1
+  name: NSU
+  city: Novosibirsk
+  address: Pussy
+  zip: 666
+  person_for_invitation: dick 
+  created_at: 0 
+

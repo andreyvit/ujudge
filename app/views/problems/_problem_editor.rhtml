@@ -1,0 +1,72 @@
+<%
+    if problem.new_record?
+      the_url, method = problems_url(@contest), 'post'
+    else
+      the_url, method = problem_url(@contest, @problem), 'put'
+    end
+%>
+<%= form_remote_tag :url => the_url, :html => {:method => method}, :complete => evaluate_remote_response,
+ 			:before => "Element.show('#{prefix}_indicator')" 
+ 	%>
+<% name_prefix = "problem" %>
+<% unless problem.new_record? %>
+<%= tag :input, :type => 'hidden', :name => "problem_id", :value => problem.id %>
+<% end %>
+<table width="80%">
+  <tr>
+    <td>Номер в контесте:</td>
+    <td><%= tag :input, :type => 'text', :id => "#{prefix}_letter", :name => "#{name_prefix}[letter]", :value => problem.letter %><%= error_info problem, :letter 	%></td>
+	</tr>
+  <tr>
+    <td>Название для строки адреса:</td>
+    <td><%= tag :input, :type => 'text', :id => "#{prefix}_name", :name => "#{name_prefix}[name]", :value => problem.name %><%= error_info problem, :name %></td>
+	</tr>
+  <tr>
+  <tr>
+    <td>Название:</td>
+    <td><%= tag :input, :type => 'text', :id => "#{prefix}_display_name", :name => "#{name_prefix}[display_name]", :value => problem.display_name %><%= error_info problem, :display_name %></td>
+	</tr>
+  <tr>
+    <td>Метод проверки ответа:</td>
+    <td><%= content_tag(:select,
+         options_for_select([["Считать неверным всегда", 0],
+            ["Сравнивать текстуально (diff)", 2],
+            ["Чекер старого стандарта Четвертакова (checkres)", 1],
+            ["Чекер нового стандарта Четвертакова (возвращает 0/1)", 3],
+            ["Чекер с частичными ответами стандарта Дятлова", 4]],
+            problem.check_method),
+         :id => "#{prefix}_check_method", :name => "#{name_prefix}[check_method]") %>
+         <%= error_info problem, :check_method %></td>
+	</tr>
+  <tr>
+    <td>Ограничение времени на тест:</td>
+    <td><%= tag :input, :type => 'text', :id => "#{prefix}_time_limit", :name => "#{name_prefix}[time_limit]", :value => problem.time_limit %> миллисекунд<%= error_info problem, :time_limit %></td>
+	</tr>
+  <tr>
+    <td>Ограничение памяти на тест:</td>
+    <td><%= tag :input, :type => 'text', :id => "#{prefix}_memory_limit", :name => "#{name_prefix}[memory_limit]", :value => problem.memory_limit %> мегабайт<%= error_info problem, :memory_limit %></td>
+  <tr>
+    <td>Входной файл:</td>
+    <td><%= tag :input, :type => 'text', :id => "#{prefix}_input_file", :name => "#{name_prefix}[input_file]", :value => problem.input_file %><%= error_info problem, :input_file %></td>
+	</tr>
+  <tr>
+    <td>Выходной файл:</td>
+    <td><%= tag :input, :type => 'text', :id => "#{prefix}_output_file", :name => "#{name_prefix}[output_file]", :value => problem.output_file %><%= error_info problem, :output_file %></td>
+	</tr>
+  <tr>
+    <td>Доступность:</td>
+    <td>
+			<%= tag :input, :type => 'radio', :id => "#{prefix}_available_yes", :name => "#{name_prefix}[available]", :value => "1", :checked => checked_attr(problem.available?) %>
+			<label for="<%= prefix %>_available_yes">задача входит в контест</label><br>
+			<%= tag :input, :type => 'radio', :id => "#{prefix}_available_no", :name => "#{name_prefix}[available]", :value => "0", :checked => checked_attr(!problem.available?) %>
+			<label for="<%= prefix %>_available_no">задача в запасе</label>
+		</td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><input type="submit" value="Сохранить изменения" />
+			<%= image_tag 'indicator-small.gif', :alt => '', :id => "#{prefix}_indicator",
+			 	:style => 'display: none;' %></td>
+	</tr>
+</table>
+</form>

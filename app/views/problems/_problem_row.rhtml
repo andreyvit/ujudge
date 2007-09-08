@@ -1,0 +1,18 @@
+<tr id="problem_<%= problem.id %>" problem_id="<%= problem.id %>">
+    <td class="icon">
+        <%= image_tag 'icons/note.png', :alt => "" %>
+    </td>
+    <td class="item_number">
+        <span class="grey"><%=h problem.letter || (?A + problem_counter).chr %></span>
+    </td>
+    <td class="editable-cell" editor="problem">
+        <%= link_to problem.display_name, problem_url(problem.contest, problem) %><span> »</span></a>
+    </td>
+    <td class="editable-cell" editor="statement">
+        <a href="<%=h '#' %>">
+            <%= if problem.statements.last then problem.statements.last.filename
+                else "Добавить условие" end %>
+        <span> »</span></a>
+    </td>
+    <td class="editable-cell" editor="tests"><a href="#">Добавить тесты<span> »</span></a></td>
+</tr>

@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+one:
+  id: 1
+  problem_id: 1
+  position: 1
+  input_file: MyString
+  answer_file: MyString
+two:
+  id: 2
+  problem_id: 1
+  position: 1
+  input_file: MyString
+  answer_file: MyString

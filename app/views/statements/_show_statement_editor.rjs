@@ -1,0 +1,3 @@
+prefix = "problem_#{problem.id}"
+page["#{prefix}_editor_body"].replace_html :partial => 'statement_editor',
+  :locals => {:problem => problem, :statement => statement}

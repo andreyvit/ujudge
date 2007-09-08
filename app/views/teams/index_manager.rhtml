@@ -1,0 +1,81 @@
+<%
+	@page_title = "Информация о Всесибирской олимпиаде 2006 года"
+-%>
+<!-- project activity -->
+
+<div class="mb">
+	<div class="mb">
+		<p>Определён только один тур, да и тот — криво.</p>
+		
+		<h1 class="section">Что тут должно быть</h1>
+
+		<p>Степень готовности или ход тура (состояние, в общем).</p>
+	</div>
+
+  <h1 class="section">Степень готовности?</h1>
+
+  <div class="column">
+    <ul>
+      <li><img alt="Ticket" class="icon" src="/images/icons/ticket.png?1163815094">Полконя не валялось.</li>
+
+      <li><img alt="Note" class="icon" src="/images/icons/note.png?1163815094">Вторые полконя тоже не валялись</li>
+
+      <li><img alt="Note" class="icon" src="/images/icons/calendar.png?1163815094">С хвостом не лучше</li>
+
+    </ul>
+  </div>
+
+  <h1 class="section">Что нового за последнюю неделю?</h1>
+
+  <dl class="timeline">
+    <dt><img alt="Project" class="icon" src="/images/icons/project.png?1163815094"> Изменены правила тестирования</dt>
+
+    <dd>Change by <span title="Andrey Tarantsov (andreyvit@gmail.com)">andrey_tarantsov</span>, <span title="Sun Dec 03 00:30:47 UTC 2006" class="date_ago">Sun Dec 03 00:30:47 UTC 2006</span></dd>
+
+    <dt><img alt="Chat" class="icon" src="/images/icons/chat.png?1163815094"> <a href="/fignya/chat/view/45">7 новых вопросов от участников</a></dt>
+
+    <dt><img alt="Chat" class="icon" src="/images/icons/chat.png?1163815094"> <a href="/fignya/chat/view/45">Письмо от Андрея Лопатина</a></dt>
+
+    <dd>Change by <span title="Andrey Tarantsov (andreyvit@gmail.com)">andrey_tarantsov</span>, <span title="Sat Dec 02 18:39:01 UTC 2006" class="date_ago">Sat Dec 02 18:39:01 UTC 2006</span></dd>
+
+    <dt><img alt="Note" class="icon" src="/images/icons/note.png?1163815094"> <a href="/fignya/note/view/1">Еще какая-то поебень изменилась</a></dt>
+
+    <dd>Change by <span title="Andrey Tarantsov (andreyvit@gmail.com)">andrey_tarantsov</span>, <span title="Sat Dec 02 18:35:44 UTC 2006" class="date_ago">Sat Dec 02 18:35:44 UTC 2006</span></dd>
+
+    <dt><img alt="Task" class="icon" src="/images/icons/task.png?1163815094"> <a href="/fignya/task/view/2">Раздавлен один таракан</a></dt>
+
+    <dd>Change by <span title="Andrey Tarantsov (andreyvit@gmail.com)">andrey_tarantsov</span>, <span title="Sat Dec 02 18:33:09 UTC 2006" class="date_ago">Sat Dec 02 18:33:09 UTC 2006</span></dd>
+  </dl>
+</div>
+
+<h1 class="section">Project statistics</h1>
+
+<div id="project_statistics" class="haslayout clearfix f6f6f6 mb">
+  <div class="column">
+    <ul>
+      <li><img alt="Ticket" class="icon" src="/images/icons/ticket.png?1163815094">0 open tickets of 0 total</li>
+
+      <li><img alt="Note" class="icon" src="/images/icons/note.png?1163815094">1 notes posted</li>
+
+      <li><img alt="Tasks" class="icon" src="/images/icons/tasks.png?1163815094">2 tasks open of 2 total</li>
+
+      <li><img alt="Calendar" class="icon" src="/images/icons/calendar.png?1163815094">0 events in the calendar</li>
+    </ul>
+  </div>
+
+  <div class="column">
+    <ul>
+      <li><img alt="Dashboard" class="icon" src="/images/icons/dashboard.png?1163815094">Project started <span title="Sat Dec 02 18:30:55 UTC 2006" class="date_ago">Sat Dec 02 18:30:55 UTC 2006</span></li>
+
+      <li><img alt="User" class="icon" src="/images/icons/user.png?1163815094">1 active users</li>
+
+      <li><img alt="Comment" class="icon" src="/images/icons/comment.png?1163815094">1 existing chat rooms</li>
+
+      <li><img alt="Docs" class="icon" src="/images/icons/docs.png?1163815094">0 uploaded files</li>
+    </ul>
+  </div>
+</div>
+
+<% content_for(:hint) do %>
+	<%= render :partial => 'contests/overview', :locals => {:contest => @contest} %>
+<% end %>

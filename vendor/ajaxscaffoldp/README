@@ -1,0 +1,80 @@
+AjaxScaffoldPlugin
+============
+
+AjaxScaffoldPlugin by Scott Rutherford, UK, July 2006
+scott@cominded.com, scott@caronsoftware.com
+
+Adapted from the excellent AjaxScaffold by Richard White
+www.ajaxscaffold.com
+
+Uses DhtmlHistory by Brad Neuberg, bkn3@columbia.edu
+http://codinginparadise.org
+
+Uses Querystringby by Adam Vandenberg
+http://adamv.com/dev/javascript/querystring
+
+Permission is hereby granted, free of charge, to any person obtaining
+a copy of this software and associated documentation files (the
+"Software"), to deal in the Software without restriction, including
+without limitation the rights to use, copy, modify, merge, publish,
+distribute, sublicense, and/or sell copies of the Software, and to
+permit persons to whom the Software is furnished to do so, subject to
+the following conditions:
+
+The above copyright notice and this permission notice shall be
+included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
+OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+Description goes here
+
+TODO: 
+
+1) History has problems
+
+- arriving on page (for multiple tables) adds entry for every table
+- need to add current page when sorting or paging, as otherwise you get taken
+  to the previous but one page / table
+
+2) No Search
+
+3) No Components, check out widgets: 
+homepage: http://blogrium.com/?p=60
+svn: http://progrium.com/svn/vforge/plugins/widgets
+
+4) When no actions are defined no end border is drawn on right of row
+
+USAGE:
+
+The following class produces 2 tables for the models users and reports 
+
+:suffix => true - this creates methods with the model name as a suffix and
+                  the table name as model_table. use for multiple tables in a controller
+:rows_per_page  - number of rows on a page
+:except         - don;t make these methods
+
+class TestController < ApplicationController
+  
+  ajax_scaffold :user, :rows_per_page => 4, :suffix => true
+  ajax_scaffolf :report, :except => ['edit', 'delete'], :suffix => true
+  
+  @@report_scaffold_columns = [ 
+        AjaxScaffold::ScaffoldColumn.new(Report, { :name => "title",
+          :eval => "row.current_definition.title", :sort_sql => 'method:current_definition.title'}),
+        AjaxScaffold::ScaffoldColumn.new(Report, { :name => "last run", 
+          :eval => "row.last_report_run.run_at", :sort_sql => 'method:last_report_run.run_at' }),
+        AjaxScaffold::ScaffoldColumn.new(Report, { :name => "run", 
+          :eval => "row.runs", :sort_sql => 'runs' }),
+        AjaxScaffold::ScaffoldColumn.new(Report, { :name => "viewed", 
+          :eval => "row.views", :sort_sql => 'views' }),
+        AjaxScaffold::ScaffoldColumn.new(Report, { :name => "runtime (sec)", 
+          :eval => "row.last_report_run.run_time", :sort_sql => 'method:last_report_run.run_time' })
+      ]
+
+end

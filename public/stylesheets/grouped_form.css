@@ -1,0 +1,136 @@
+/*************************************************************************************************
+ * Styles for Grouped Forms
+ ************************************************************************************************/
+ 
+ /*
+    DIV.block
+      H?.header
+      DIV.body
+        P.help
+        TABLE.fields
+          TR
+            TD.col1
+            TD.error
+          TR
+            TH.col1
+            TD
+          TR
+            TD.col1
+            TD.comment
+ */
+ 
+ 
+/*************************************************************************************************
+ * Font/text
+ ************************************************************************************************/
+
+/*
+    1em = BODY/font-size
+	0.92em = SMALL/font-size
+*/
+
+.block p.help, .block .fields th, .block .fields td {
+	font-size: 0.86em;
+}
+
+.block .fields td.error {
+	font-size: 0.78em;
+}
+
+.block .fields td.comment {
+	font-size: 0.70em;
+}
+ 
+/*************************************************************************************************
+ * Colors/borders
+ ************************************************************************************************/
+
+.block .header {
+	color: green;
+}
+
+.block .fields {
+	background: #eeeeee;
+	border: 8px solid #eeeeee;
+}
+
+.block td.comment {
+	color:	#036;
+}
+
+.block .error {
+	color: red;
+}
+
+/*************************************************************************************************
+ * Vertical layout
+ ************************************************************************************************/
+ 
+.block {
+	padding-top: 8px;
+	padding-bottom: 8px;
+}
+
+.block .header {
+	margin-top: 0px;
+	margin-bottom: 0.5em;
+}
+ 
+.block .fields {
+	margin-top: 2mm;
+	margin-bottom: 2mm;
+}
+
+.block .fields .comment {
+	padding-bottom: 0.5em;
+}
+
+.block p.help {
+	margin-top: 0px;
+	margin-bottom: 0px;
+}
+ 
+.block .fields th {
+	vertical-align: middle;
+}
+ 
+/*************************************************************************************************
+ * Horizontal layout
+ ************************************************************************************************/
+ 
+.block {
+	padding-left: 0px;
+	padding-right: 0px;
+	width: 700px;
+}
+
+.block .body {
+	margin-left: 1.58em /* = BLOCKQUOTE/margin-left */;
+}
+
+.block .header {
+	width: 80%;
+}
+
+.block TABLE.fields {
+	margin-left: 0px;
+	margin-right: 0px;
+	width: 45em;
+}
+
+.block TABLE.fields .col1 {
+    width: 15em;
+}
+
+.block input, .block select, .block textarea {
+	width: 99%; /* 100% triggers a bug in IE */
+}
+
+.block input.narrow, .block select.narrow, .block textarea.narrow {
+	width: auto;
+}
+
+.block .fields th, .block .fields td {
+	text-align: left;
+}
+ 

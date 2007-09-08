@@ -1,0 +1,54 @@
+3:
+  id: 3
+  display_name: Visual C++
+  type: Compiler
+  extensions: cpp
+  executable: ..\..\compiler\vcc.bat [source] [target]
+  fixed_source_name: 
+  platform: 
+
+4:
+  id: 4
+  display_name: FreePascal
+  type: Compiler
+  extensions: pp
+  executable: ..\..\compiler\fpas.bat [source] [target]
+  fixed_source_name: 
+  platform: 
+
+5:
+  id: 5
+  display_name: GNU C++ (MinGW)
+  type: Compiler
+  extensions: cpp
+  executable: ..\..\compiler\mingw.bat [source] [target]
+  fixed_source_name: 
+  platform: 
+
+6:
+  id: 6
+  display_name: GNU C++ (MacOS X)
+  type: Compiler
+  extensions: cpp
+  executable: g++ -O2 -o [target] [source]
+  fixed_source_name: 
+  platform: 
+
+7:
+  id: 7
+  display_name: Delphi 7
+  type: Compiler
+  extensions: pas
+  executable: ..\..\compiler\delphi.bat [source] [target]
+  fixed_source_name: 
+  platform: 
+
+8:
+  id: 8
+  display_name: Java 5.0
+  type: Compiler
+  extensions: java
+  executable: ..\..\compiler\java.bat [source] [target]
+  fixed_source_name: task.java
+  platform: 
+

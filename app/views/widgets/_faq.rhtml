@@ -1,0 +1,8 @@
+<dl>
+<% for q in data.elements(:question) %>
+ <dt><%=h q.text.strip %></dt>
+  <% for a in q.elements(:answer) %>
+		<dd><%= h a.text %>
+  <% end %>
+<% end %>
+</dl>

@@ -1,0 +1,36 @@
+.humanized_msg {
+    position: absolute;
+    left: 25%;
+    width: 50%;
+    background-color: transparent; /*#8CC63F;*/
+    /* background-color: #8CC63F; */
+    font-size: 36pt; 
+    line-height: 38pt;
+    text-align: center; 
+}
+
+.humanized_msg .r1 {
+    margin-left: 1px;
+    margin-right: 1px;
+}
+
+.humanized_msg .r2 {
+    margin-left: 2px;
+    margin-right: 2px;
+}
+
+.humanized_msg .r1, .humanized_msg .r2 {
+    height: 1px;
+    font-size: 1px;
+    line-height: 1px;
+}
+
+.humanized_msg p {
+    padding: .3em !important;
+    margin: 0px !important;
+    color: white !important;
+}
+
+.humanized_msg p, .humanized_msg .r1, .humanized_msg .r2 {
+    background-color: #CCC63F !important; /* #8CC63F */
+}

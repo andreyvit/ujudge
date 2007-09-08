@@ -1,0 +1,9 @@
+    <div>Закачать тесты:</div>
+    <%= form_tag tests_uploads_url(@contest, @problem),
+                :method => 'post',
+                :multipart => true,
+ 								:target => '_new' %>
+    <%= file_field_tag "file" %>
+    <input type='submit' value="Закачать" />
+    <%= image_tag 'indicator-small.gif', :alt => '', :style => 'display: none;' %>
+     </form>

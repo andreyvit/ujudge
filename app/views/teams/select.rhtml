@@ -1,0 +1,102 @@
+<%
+  @page_title = "Выборка по командам"
+-%>
+
+<p>Может, вы хотите <%= link_to "зарегистрировать новую команду", :action => "register" %>?
+
+<%= form_tag %>
+
+<div style="float: left; margin-right: 1em; vertical-align: baseline;">
+<div>Показать:</div>
+</div>
+<div style="float: left;">
+<% for table in @listing.tables %>
+<div><b><%= table.caption %></b></div>
+<% for col in table.columns %>
+<div><%= listing_column_checkbox col %> <label style="cursor: pointer;" for="<%= "show_#{col.unique_id}" %>"><%= col.caption %></label></div>
+<% end %>
+<% end %>
+<p><%= submit_tag "Обновить таблицу" %>&nbsp;&nbsp;
+      <%= submit_tag "Открыть в Microsoft Excel", :name => 'export' %></p>
+</div>
+<br clear="both">
+
+<script type="text/javascript" charset="utf-8">
+	function doTeamCommand(name, teamId) {
+		if (name == "-1") return false;
+		if (!confirm("Are you sure you wanna " + name + "?"))
+			return false;
+		eval(name + "(" + teamId + ")");
+		return false;
+	}
+</script>
+<% end_form_tag %>
+
+<table id="data_table" width="100%" cellspacing="2">
+
+<tr>
+<% for table in @listing.tables %>
+  <% for col in table.columns %>
+    <% next unless col.show? %>
+    <th><% if table.derived? %><%= table.caption%> - <% end %><%= col.caption %></th>
+  <% end %>
+<% end %>
+<th>&nbsp;</th>
+</tr>
+
+<% for team in @teams %>
+  <tr id="team_<%= team.id %>" <% unless team.last_login_at.nil? %>class="login_verified"<% end %>>
+  <% for table in @listing.tables %>
+    <% for col in table.columns %>
+      <% next unless col.show? %>
+      <td><%=h col.value_of(team) %></td>
+    <% end %>
+  <% end %>
+	<td>
+	  <select onclick="doTeamCommand<%= team.id %>(this.value)">
+		  <option value="-1">-- Для жюри --</option>
+		  <option value="editTeam">Редактировать сведения о команде</option>
+		  <option value="resetPassword">Создать и выслать новый пароль</option>
+		  <option value="adminLogin">Войти под именем этой команды</option>
+		  <option value="deleteTeam">Удалить команду</option>
+	  </select>
+	  <%= content_tag "span", image_tag("indicator.gif"), :id => "indicator_team#{team.id}", :style => 'display: none;' %>
+	</td>
+  </tr>
+	<%=
+		update_page_tag do |page|
+			page.function "doTeamCommand#{team.id}", [:name] do
+				page << %q/if(name == "-1") return false;/
+				# page << "alert(name);"
+				page << %Q/eval(name + "#{team.id}()");/
+				page << 'return false;'
+			end
+			page.function "resetPassword#{team.id}", [] do
+				page.confirm "Вы уверены, что хотите создать и выслать новый пароль этой команде?"
+				page.show "indicator_team#{team.id}"
+				page.redirect_to :action => 'reset_password', :team_id => team.id
+			end
+			page.function "deleteTeam#{team.id}", [] do
+				page.confirm "Вы уверены, что хотите удалить эту команду?"
+				page.show "indicator_team#{team.id}"
+				page.redirect_to :action => 'delete', :team_id => team.id
+			end
+			page.function "adminLogin#{team.id}", [] do
+				page.show "indicator_team#{team.id}"
+				page.redirect_to :action => 'admin_login', :team_id => team.id
+			end
+			page.function "editTeam#{team.id}", [] do
+				page.show "indicator_team#{team.id}"
+				page.redirect_to :action => 'edit', :id => team.id
+			end
+		end
+	%>
+<% end %>
+
+</table>
+
+<% if flash[:highlight_team] %>
+<%= javascript_tag visual_effect(:highlight, "team_#{flash[:highlight_team]}", :duration => 2) %>
+<% end %>
+
+<%= javascript_tag "ts_makeSortable($('data_table'))" %>

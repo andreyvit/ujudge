@@ -1,0 +1,29 @@
+<%
+	#@page_title = "Информация о Всесибирской олимпиаде 2006 года"
+-%>
+
+<div class="mb">
+  <h1 class="section">Добавить вопрос</h1>
+<%= form_tag(team_questions_url(@contest, @team), :method => 'post') %>
+  <div><%= text_area :question, :question, :rows => 6, :style => 'width: 400px;' %></div>
+  <div><%= submit_tag "Добавить вопрос" %></div>
+</form>  
+
+  <h1 class="section">Список вопросов</h1>
+
+  <% if @questions.blank? %>
+  <p>Еще ни одного вопроса не задано.</p>
+  <% else %>
+  <% @questions.each_with_index do |question, questions_counter| %>
+    <div style="margin-top: 20px;"><b><%= question.asked_at.strftime("%d.%m.%Y") %></b> — 
+      <%= question.question %>
+      <% unless question.answer.nil? %><div style="margin-left: 40px; margin-top: 0px; padding-top: 0px;">Ответ жюри: <%= question.answer %></div><% end %>
+    </div>
+  <% end %>
+  <% end %>
+
+</div>
+  
+<% content_for(:hint) do %>
+	<%= render :partial => 'contests/overview', :locals => {:contest => @contest} %>
+<% end %>	

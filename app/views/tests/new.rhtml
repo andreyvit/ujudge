@@ -1,0 +1,31 @@
+<h1>New tests</h1>
+
+<%= error_messages_for :tests %>
+
+<% form_for(:tests, :url => tests_path) do |f| %>
+  <p>
+    <b>Problem</b><br />
+    <%= f.text_field :problem_id %>
+  </p>
+
+  <p>
+    <b>Position</b><br />
+    <%= f.text_field :position %>
+  </p>
+
+  <p>
+    <b>Input file</b><br />
+    <%= f.text_field :input_file %>
+  </p>
+
+  <p>
+    <b>Answer file</b><br />
+    <%= f.text_field :answer_file %>
+  </p>
+
+  <p>
+    <%= submit_tag "Create" %>
+  </p>
+<% end %>
+
+<%= link_to 'Back', tests_path %>

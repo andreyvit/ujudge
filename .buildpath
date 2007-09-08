@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<buildpath>
+	<buildpathentry kind="src" path="app/controllers"/>
+	<buildpathentry kind="src" path="app/models"/>
+	<buildpathentry kind="src" path="app/helpers"/>
+	<buildpathentry kind="src" path="lib"/>
+	<buildpathentry kind="con" path="org.eclipse.dltk.launching.INTERPRETER_CONTAINER"/>
+</buildpath>

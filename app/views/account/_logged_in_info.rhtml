@@ -1,0 +1,8 @@
+<a href="<%=h contests_url %>">« Вернуться к списку олимпиад</a> |
+<b><% case current_user    
+   when User -%>
+<%= current_user.full_name %>
+<% when Team -%>
+<%= current_user.name %>
+<% end %></b>
+| <%= link_to "Выйти", :controller => "account", :action => "logout" %>

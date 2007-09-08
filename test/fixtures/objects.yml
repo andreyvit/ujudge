@@ -1,0 +1,26 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+team:
+  id: 1
+  short_name: team
+  display_name: Команда
+
+university:
+  id: 2
+  short_name: university
+  display_name: ВУЗ
+  
+school:
+  id: 3
+  short_name: school
+  display_name: Школа
+
+member:
+  id: 4
+  short_name: member
+  display_name: Участник команды
+
+faculty:
+  id: 5
+  short_name: faculty
+  display_name: Факультет ВУЗа
+

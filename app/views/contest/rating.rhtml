@@ -1,0 +1,129 @@
+<%
+	@page_title = "Рейтинг по задаче Unicode"
+-%>
+
+<style>
+table {border-collapse: collapse;}
+td, th {border:  1px solid black; padding: 1px 3px;}
+</style>
+
+<h2>Общий рейтинг</h2>
+
+<table border="2" cellspacing="3" cellpadding="2">
+	<tr>
+		<th>&nbsp;</th>
+		<% for problem in @grand_results.problems %>
+			<th>Сумма мест по тестам</th>
+			<th>Итоговое место по задаче</th>
+		<% end %>
+		<!-- <th>Sum</th> -->
+	</tr>
+	<% for run in @grand_results.runs.sort {|a,b| 
+		  if @grand_results.runres[a].nil? && @grand_results.runres[b].nil?
+			  0
+		  elsif @grand_results.runres[a].nil?
+			  1
+			elsif @grand_results.runres[b].nil?
+				-1
+			else
+				@grand_results.runres[a].probres[problem].place <=> @grand_results.runres[b].probres[problem].place
+		  end
+		} %>
+		<tr>
+			<td><%= run.team.name %></td>
+			<% for problem in @grand_results.problems %>
+			  <% if @grand_results.runres[run].nil? %>
+			    <td>UNKNOWN</td>
+			    <td>UNKNOWN</td>
+				<%else%>
+					<td><%=h @grand_results.runres[run].probres[problem].points %></td>
+					<td><%=h @grand_results.runres[run].probres[problem].place %></td>
+				<% end %>
+			<% end %>
+		</tr>
+	<% end %>
+</table>
+<!-- <table border="2" cellspacing="3" cellpadding="2">
+	<tr>
+		<th>&nbsp;</th>
+		<% for problem in @grand_results.problems %>
+			<th><%=h problem.name %></th>
+		<% end %>
+		<th>Sum</th>
+	</tr>
+	<% for run in @grand_results.runs %>
+		<tr>
+			<td><%= run.team.name %></td>
+			<% for problem in @grand_results.problems %>
+			  <% if @grand_results.runres[run].nil? %>
+			    <td>UNKNOWN</td>
+				<%else%>
+					<td><%=h @grand_results.runres[run].probres[problem].place %></td>
+				<% end %>
+			<% end %>
+			<% if @grand_results.runres[run].nil? %>
+			  <td>UNKNOWN</td>
+			<% else %>
+				<td><%=h @grand_results.runres[run].place %></td>
+			<% end %>
+		</tr>
+	<% end %>
+</table> -->
+
+<h2>Рейтинг по каждому тесту</h2>
+
+<%
+	def foo_func(test, a,b)
+	  return 0 if @grand_results.runres[a].nil? && @grand_results.runres[b].nil?
+	  return 1 if @grand_results.runres[a].nil?
+	  return -1 if @grand_results.runres[b].nil?
+	  adata = @grand_results.runres[a].probres[@prob].tests[test]
+	  bdata = @grand_results.runres[b].probres[@prob].tests[test]
+	  return 0 if adata.nil? && bdata.nil?
+		return 1 if adata.nil?
+		return -1 if bdata.nil?
+		aans = adata.test.partial_answer
+		bans = bdata.test.partial_answer
+		return 0 if aans.nil? && bans.nil?
+		return 1 if aans.nil?
+		return -1 if bans.nil?
+		return aans.to_f <=> bans.to_f
+	end
+%>
+
+<% @prob = @grand_results.problems.find {|p| p.id == 1} %>
+
+<% unless @grand_results.problem_tests[@prob].nil? %>
+
+<table border="2" cellspacing="3" cellpadding="2">
+	<tr>
+		<% for test in @grand_results.problem_tests[@prob].sort %>
+			<th><%=h test %></th>
+		<% end %>
+	</tr>
+	<%
+	@test_runs = {}
+	for test in @grand_results.problem_tests[@prob]
+	  @test_runs[test] = @grand_results.runs.dup.sort {|a,b| foo_func(test,a,b)}
+	end
+	%>
+	<% for i in (0..(@grand_results.runs.size-1)) %>
+		<tr>
+			<% for test in @grand_results.problem_tests[@prob].sort %>
+			  <% run = @test_runs[test][i] %>
+				<% if @grand_results.runres[run].nil? %>
+			    <td><%= run.team.name %><br>UNKNOWN</td>
+			  <% else %>
+				  <% data = @grand_results.runres[run].probres[@prob].tests[test] %>
+					<% if data.nil? %>
+					<td><%= run.team.name %><br>ERR</td>
+					<% else %>
+					<td><%= run.team.name %><br><%=h data.pts %> / <%=h data.test.partial_answer && sprintf("%0.1f", data.test.partial_answer) || data.test.outcome %></td>
+				  <% end %>
+				<% end %>
+			<% end %>
+		</tr>
+	<% end %>
+</table>
+
+<% end %>

@@ -1,0 +1,70 @@
+<%
+    @page_title = "Жюри олимпиады"
+-%>
+
+<h2>Существующие члены жюри</h2>
+
+<% for user in @users %>
+	<p><%= user.full_name %>
+<% end %>
+
+<h2>Пригласить нового члена жюри</h2>
+
+<%= form_tag :action => 'invite' %>
+<table cellspacing="5">
+<tr>
+  <td>Фамилия:
+  <td><%= text_field :newuser, :last_name, :size => 50 %>
+  <% if @newuser.errors.on :last_name %>
+    <tr>
+      <td>&nbsp;
+      <td><p class="warning"><%= @newuser.errors.on :last_name %>
+    </tr>
+  <% end %>
+<tr>
+  <td>Имя:
+  <td><%= text_field :newuser, :first_name, :size => 50 %>
+  <% if @newuser.errors.on :first_name %>
+    <tr>
+      <td>&nbsp;
+      <td><p class="warning"><%= @newuser.errors.on :first_name %>
+    </tr>
+  <% end %>
+<tr>
+  <td>Отчество:
+  <td><%= text_field :newuser, :middle_name, :size => 50 %>
+  <% if @newuser.errors.on :middle_name %>
+    <tr>
+      <td>&nbsp;
+      <td><p class="warning"><%= @newuser.errors.on :middle_name %>
+    </tr>
+  <% end %>
+<tr>
+  <td>E-mail:
+  <td><%= text_field :newuser, :email, :size => 50 %>
+  <% if @newuser.errors.on :email %>
+    <tr>
+      <td>&nbsp;
+      <td><p class="warning"><%= @newuser.errors.on :email %>
+    </tr>
+  <% end %>
+<tr>
+  <td>&nbsp;
+  <td><%= submit_tag "Отправить приглашение по почте" %>
+</table>
+<%= end_form_tag %>
+
+<h2>Тестовое сообщение</h2>
+
+<p>Отправьте тестовое сообщение, чтобы убедиться, что почта работает.
+
+<%= form_tag :action => 'test_message' %>
+<table cellspacing="5">
+<tr>
+  <td>E-mail:
+  <td><%= text_field_tag :email, "", :size => 50 %>
+<tr>
+  <td>&nbsp;
+  <td><%= submit_tag "Отправить сообщение" %>
+</table>
+<%= end_form_tag %>

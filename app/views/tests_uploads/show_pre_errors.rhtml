@@ -1,0 +1,14 @@
+<p><b>Получение тестов для задачи <%= @problem.display_name %> из файла <%= @tests_upload.original_filename %>.</b></p>
+
+<% @errors.each do |error| %>
+<p><span style="color: red; font-weight: bold;">Ошибка:</span> <%= error %></p>
+<% end %>
+
+<% @warnings.each do |warning| %>
+<p><span style="font-weight: bold;">Внимание:</span> <%= warning %></p>
+<% end %>
+
+<%= render :partial => 'mappings', :locals => { :mappings => @mappings } %>
+
+<button onclick="window.close()">Закрыть окно</button>
+<%# = link_to "Угу, вернуться назад", problems_url(@contest) %>

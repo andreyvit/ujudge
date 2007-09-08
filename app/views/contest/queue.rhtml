@@ -1,0 +1,42 @@
+<%
+	@page_title = @contest.name + " — очередь тестирования"
+	@page_header = "Очередь тестирования"
+-%>
+<p><%= link_to "Отправить решение", :action => 'submit', :contest_name => @contest.short_name %></p>
+<p>Протестировано <%= @stats.done %>, тестируется <%= @stats.testing %>, ожидают <%= @stats.queued %>, отложено <%= @stats.postponed %>.</p>
+<table id="data_table" width="100%" cellspacing="2">
+<thead>
+<tr>
+	<th>&nbsp;</th>
+	<th>Участник</th>
+	<th>Задача / Язык</th>
+	<th>Состояние</th>
+	<th>Для жюри</th>
+</tr>
+<tbody>
+<% order_num = 0 %>
+<% for run in @runs %>
+  <tr id="run_<%= run.id %>">
+	  <td><%= order_num += 1  %></td>
+	  <td>(<%= run.team.id %>) <%=h run.team.name %></td>
+	  <td><a target="_new" href="<%=h url_for :contest_name => @contest, :action => 'view_source', :id => run %>"><%=h run.problem.display_name %></a> (<%=h run.compiler.display_name %>)</td>
+	  <td>
+			<% if (3..4) === run.state && run.outcome == 'compilation-error' %>
+				<%= link_to run.display_status, {:action => 'details', :contest_name => @contest.short_name, :run_id => run.id}, {:target => 'new'}  %>
+			<% elsif (3..4) === run.state && run.outcome == 'tested' %>
+				<%= link_to run.display_status, {:action => 'run_results', :contest_name => @contest.short_name, :run_id => run.id }, {:target => 'new'} %>
+			<% else %>
+				<%= run.display_status %>
+			<% end %>
+		</td>
+		<td><%= link_to "Перетестировать", :action => 'retest', :contest_name => @contest.short_name, :run_id => run.id %></td>
+  </tr>
+<% end %>
+
+</table>
+
+<% if flash[:highlight] %>
+<%= javascript_tag visual_effect(:highlight, "run_#{flash[:highlight]}", :duration => 2) %>
+<% end %>
+
+<%= javascript_tag "ts_makeSortable($('data_table'))" %>

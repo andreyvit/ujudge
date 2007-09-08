@@ -1,0 +1,21 @@
+<% if not statement.new_record? %>
+  <div>
+    <div>Текущее условие задачи: <%= link_to statement.filename, statement_file_path(statement)%> —
+    его можно <%= link_to "удалить", 
+                    statement_path(@contest, @problem, @statement),
+                     :method => 'delete' %>.</div>
+  </div>
+  <div>
+    <div>Закачать новую версию условия задачи:</div>
+<% else %>
+    <div>Закачать условие задачи:</div>
+<% end %>
+    <%= form_tag statements_url(@contest, @problem),
+                :method => 'post',
+                :multipart => true %>
+    <%= file_field_tag "file" %>
+    <input type='submit' value="Закачать" />
+    <%= image_tag 'indicator-small.gif', :alt => '', 
+     :style => 'display: none;' %>
+     </form>
+  </div>

@@ -1,0 +1,5 @@
+# prefix = if problem.new_record? then "new_problem" else "problem_#{problem.id}" end
+prefix = "new_problem"
+# page << %Q! Editor.get("#{prefix}").close(); alert("3"); !
+page['problems_table_container'].replace_html :partial => 'problems_table',
+  :locals => {:problems => problems}

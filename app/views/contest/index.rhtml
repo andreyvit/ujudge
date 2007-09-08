@@ -1,0 +1,47 @@
+<%
+    @page_title = @contest.name
+-%>
+
+<% if current_user.is_a?(Team) %>
+<h2>Ваша команда</h2>
+
+<p>Вы можете
+<%= link_to "просмотреть или изменить сведения о вашей команде", :controller => 'teams', :action => 'edit', :id => current_user.id %>.
+
+<% end %>
+
+<h2>Регистрация</h2>
+
+<p>Регистрация доступна со
+<%= link_to "страницы регистрации", :controller => 'teams', :action => 'register', :contest_name => @contest.short_name %>.
+
+<% if @teams.empty? %>
+<p>Еще ни одна команда не зарегистрировалась.</p>
+<% else %>
+<p>
+  <% if @teams.size == 1  %>
+    Пока зарегистрировалась только одна команда &mdash; <%= @teams.first.name %>.
+  <% elsif @teams.size <= 5 %>
+    <p>Уже <%= @teams.size.russian('зарегистрирована # команда', 'зарегистрировано # команды',
+      'зарегистрировано # команд') %>, а именно:
+      <%= @teams.collect { |t| t.name }.join(", ") %>.
+  <% else %>
+    <p>Уже <%= @teams.size.russian('зарегистрирована # команда', 'зарегистрировано # команды',
+      'зарегистрировано # команд') %>.
+  <% end %>
+</p>
+<p>Более подробную информацию о зарегистрированных командах можно получить
+со <%= link_to "страницы зарегистрированных команд", 
+     :controller => 'teams', :action => 'index', :contest_name => @contest.short_name %>.
+</p>
+<% if current_user.allow?(:select_teams) %>
+<p>
+<b>Для жюри:</b> Выборку нужных данных можно сделать на
+<%= link_to "странице выборки данных", :controller => 'teams', :action => 'select', :contest_name => @contest.short_name %>.
+<% end %>
+</p>
+<% end %>
+
+<% if current_user.allow?(:submit) %>
+<p><%= link_to "Сдать решение", :action => 'submit', :contest_name => @contest.short_name %></p>
+<% end %>

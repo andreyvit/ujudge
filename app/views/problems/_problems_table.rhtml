@@ -1,0 +1,25 @@
+<table id="problems_table" width="100%" class="tickets form" cellspacing="0" cellpadding="0">
+    <tr>
+        <th>&nbsp;</th>
+        <th>&nbsp;</th>
+        <th>Задача</th>
+        <th>Условие</th>
+        <th>Тесты</th>
+    </tr>
+
+		<% problems.each_with_index do |problem, problem_counter| %>
+		<%= render :partial => 'problem_row',
+					:locals => {:problem => problem, :problem_counter => problem_counter} %>
+		<% end %>
+    
+    <tr id="new_problem">
+      <td colspan="2">&nbsp;</td>
+      <td class="editable-cell" editor="new_problem"><a href="#">Добавить задачу<span> »</span></a></td>
+      <td colspan="5">&nbsp;</td>
+    </tr>
+
+</table>
+
+<script>
+uJudge_onload();
+</script>

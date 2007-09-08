@@ -1,0 +1,138 @@
+
+#leftnav {
+    float: left;
+    margin: 0px 0px 0px 2em;
+    font-size: smaller;
+    line-height: 115%;
+}
+
+#leftnav a {
+    background: transparent;
+    color: black;
+    font-weight: normal;
+}
+
+#data_table {
+    border-collapse: collapse;
+}
+
+#data_table th {
+    font-weight: bold;
+    color: darkblue;
+}
+
+#data_table th, #data_table td {
+    padding: 0.1em;
+}
+
+#data_table, #data_table th, #data_table td {
+    border: 1px solid black;
+}
+
+TR.login_verified, TR.login_verified TD {
+	background: #bfb;
+}
+
+/*************************************************************************************************
+ * Глобальные настройки
+ ************************************************************************************************/
+
+/*
+html, body {
+	padding: 5px 10px;
+	background: #F0F8FF;
+}
+
+p, body, td, th, h1 {
+	font-family: Verdana, sans-serif;
+}
+p, body, td, th {
+	font-size: normal;
+}
+h1 {
+	font-size: large;
+}
+*/
+/*************************************************************************************************
+ * Основная разметка страницы
+ ************************************************************************************************/
+
+/*
+#top_bar {
+}
+
+#top_logo {
+	position: absolute;
+	left: 1px;
+	width: 100px;
+	height: 75px;
+}
+
+#top_line_1 {
+	margin-left: 100px;
+	height: 32px;
+	background: #0000cc;
+}
+
+#top_line_2 {
+	margin-left: 100px;
+	height: 50px;
+}
+
+#top_search {
+	color: white;
+}
+
+#top_login {
+	text-align: right;	
+	color: white;
+	font-size: 80%;
+}
+
+#top_login a, #top_login a:link, #top_login a:visited {
+	color: white;
+}
+
+#top_header {
+	font-size: 140%;
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+#top_zoomout {
+	padding-top: 4px;
+	text-align: right;
+	font-size: 90%;
+	line-height: 90%;
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+#top_login, #top_zoomout {
+	padding-right: 1ex;
+}
+
+#page_body {
+	margin: 1ex;
+}
+*/
+
+p#page_footer {
+	font-size: smaller;
+	text-align: center;
+	margin-top: 5ex;
+	margin-bottom: 2ex;
+}
+
+
+/*
+form li p {
+	color: black;
+	font-weight: normal;
+}
+
+form li div {
+	color: black;
+	font-weight: normal;
+	background: #eeeeee;
+	padding: 4px 8px;
+}
+*/

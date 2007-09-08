@@ -1,0 +1,13 @@
+<%
+	@page_title = @contest.name + " — отправка решения"
+	@page_header = "Отправка решения на проверку"
+-%>
+<p><%= link_to "Очередь тестирования", :action => 'queue', :contest_name => @contest.short_name %></p>
+<%= form_tag %>
+<p>Задача: <%= collection_select :submittion, :problem_id, @problems, :id, :display_name %>&nbsp;&nbsp;&nbsp;&nbsp;
+Язык: <%= collection_select :submittion, :compiler_id, @compilers, :id, :display_name%></p>
+<p><textarea id="submittion_text" name="submittion[text]" rows="25" cols="80"><%=h @submittion.text %></textarea></p>
+<p><%= submit_tag "Отправить решение на проверку" %></p>
+
+<%= end_form_tag %>
+

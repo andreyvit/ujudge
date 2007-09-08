@@ -1,0 +1,25 @@
+<%
+	@page_title = "Общий рейтинг"
+-%>
+
+<style>
+table {border-collapse: collapse;}
+td, th {border:  1px solid black; padding: 1px 3px;}
+</style>
+
+<p><a href="<%h url_for(:action => 'recalc', :id => @ratingdef) %>">Обновить рейтинги</a></p>
+
+<table border="2" cellspacing="3" cellpadding="2">
+	<tr>
+		<th>&nbsp;</th>
+		<th>Сумма мест</th>
+		<th>Итоговое место</th>
+	</tr>
+	<% for team in @rating.teams %>
+	<tr>
+		<td><%= team.name %></td>
+		<td><%=h @rating.result(team.id).points %></td>
+		<td><%=h @rating.result(team.id).place %></td>
+	</tr>
+	<% end %>
+</table>

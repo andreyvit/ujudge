@@ -1,0 +1,26 @@
+<%
+	@page_title = @contest.name + " — очередь тестирования"
+	@page_header = "Подробные результаты"
+-%>
+<p><%= link_to "Отправить решение", :action => 'submit', :contest_name => @contest.short_name %></p>
+<p><%= link_to "Очередь тестирования", :action => 'queue', :contest_name => @contest.short_name %></p>
+<table id="data_table" width="100%" cellspacing="2">
+<thead>
+<tr>
+	<th>Тест</th>
+	<th>Результат</th>
+	<th>Для жюри</th>
+</tr>
+<tbody>
+<% for test in @tests %>
+  <tr id="team_<%= test.id %>">
+	  <td><%=h test.test_ord %></td>
+	  <td><%=h test.display_outcome %></td>
+		<td><%= link_to "Перетестировать", :action => 'retest_test', :contest_name => @contest.short_name, :test_id => test.id %></td>
+  </tr>
+<% end %>
+
+</table>
+
+<%= javascript_tag "ts_makeSortable($('data_table'))" %>
+

@@ -1,0 +1,12 @@
+1:
+  id: 1
+  contest_id: 0
+  scope_type: test
+  parent_scope_id: 1
+  options: 
+  sorting: lesseq
+  invalid_policy: skip
+  method: sort_by_partial_ans
+  created_at: 2006-09-26 08:53:33 +07:00
+  updated_at: 2006-09-26 09:01:25 +07:00
+

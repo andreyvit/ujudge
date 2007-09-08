@@ -1,0 +1,272 @@
+/* ----------------------------
+FORMS 
+---------------------------- */
+
+TABLE.form {
+}
+
+TABLE.form TD {
+    vertical-align: top;
+}
+
+
+.data_table {
+    border-collapse: collapse;
+}
+
+.data_table tr.even td {
+    background-color: #eeeeee;
+}
+
+.data_table th {
+    font-weight: bold;
+    color: darkblue;
+    text-align: center;
+}
+
+.data_table td.position {
+    text-align: center;
+/*    background: black !important;
+    color: white !important;
+    border-top: 1px solid white !important;
+    border-bottom: 1px solid white !important;
+*/
+}
+
+.data_table td.penalty, .data_table td.solved {
+    text-align: center;
+/*    background: #eeeeee;*/
+    font-weight: bold;
+}
+
+.data_table th, #data_table td {
+    padding: 0.1em;
+}
+
+.data_table, .data_table th, .data_table td {
+    border: 1px solid black;
+}
+
+
+.error_row TD {
+    color: red;
+    font-size: 95%;
+    padding-top: 0px;
+    padding-bottom: 40px;
+    margin: 0px;
+}
+
+SPAN.form_error {
+    color: red;
+    font-size: 95%;
+}
+
+div.green {
+	background: #E4F0E0;
+	padding: 10px;
+	border: 1px solid #CBE6B3;
+}
+
+div.f6f6f6 {
+	background: #f6f6f6;
+	padding: 8px 10px;
+	border: 1px solid #eee;
+}
+
+form dt {
+	clear: both;
+	/* float: left; */
+	/* width: 100px; */
+	margin: 0;
+	padding: 0;
+	color: #333;
+	/* margin-right: 15px; */
+}
+
+form dd {
+	margin: 0;
+	padding: 0;
+	/* color: #999; */
+	/* margin-bottom: 7px; */
+}
+
+/*
+label {
+	display: block;
+	margin-bottom: 1px;
+	color: #888;
+}
+*/
+
+label span {
+	color: #aaa;
+}
+
+label.cb {
+	display: inline;
+	margin-left: 5px;
+}
+
+fieldset input[type=text], input[type=password] {
+	font-size: 1.1em;
+	background: #fff;
+	border: 1px solid #ccc;
+	padding: 4px;
+	margin-right: 10px;
+}
+
+/*
+input {
+	color: #333;
+	margin-bottom: 7px;
+	background: #fff;
+	border: 1px solid #ccc;
+	padding: 4px;
+} 
+
+input[type=submit] {
+	background: #eee;
+	border: 3px double #ccc;
+	padding: 3px;
+	font-size: 1em;
+}
+
+*/
+
+* input:focus {
+	background-color: #FFFFEE !important;
+}
+
+select {
+	margin-bottom: 8px;
+	background: #fff;
+	border: 1px solid #ccc;
+	padding: 2px;
+	font-size: 1em;
+	width: 200px;
+}
+
+textarea {
+	margin-bottom: 8px;
+	background: #fff;
+	border: 1px solid #ccc;
+	padding: 4px;
+	font-size: 1em;
+	/* width: 95%;
+	height: 160px; */
+}
+
+fieldset {
+	background: #f6f6f6;
+	padding: 10px 15px;
+	border: 1px solid #eee;
+	margin-bottom: 2.5em;
+}
+
+fieldset.white {
+	background: #fff;
+	border: none;
+}
+
+legend {
+	padding: 3px 10px;
+	background: #f6f6f6;
+	border: 1px solid #ccc;
+	font-weight: bold;
+	color: #666;
+}
+
+fieldset.optional {
+	background: #f6f6f6;
+}
+
+fieldset.optional legend {
+	color: #999;
+}
+
+form div.column {
+	float: left;
+	margin-right: 20px;
+	width: 46%;
+}
+
+form br {
+	clear: left;
+	display: block;
+	margin-bottom: 10px;
+}
+
+#right input[type=text], #right textarea {
+	width: 90%;
+	padding: 5px;
+	font-size: 11px;
+}
+
+#right textarea {
+	padding: 5px;
+	height: 100px;
+	font-family: "Lucida Grande", Verdana, Arial, Helvetica, sans-serif;
+	font-size: 11px;
+}
+
+#right select {
+	width: 90%;
+}
+
+/* ----------------------------
+FORM SPECIAL CASES 
+---------------------------- */
+
+form.inplaceeditor-form {
+	font-size: 11px;
+}
+
+form.inplaceeditor-form input {
+	margin: 0;
+	margin-right: 5px;
+}
+
+form.inplaceeditor-form input[type=submit] {
+	border: 1px solid #ccc;
+}
+
+#project_tasks input {
+	margin: 0;
+	margin-right: 10px;
+}
+
+#header form, #project_members form {
+	display: inline;
+}
+
+#header form input, #date_ranges form input {
+	margin: 0;
+	padding: 2px;
+	font-size: 1em;
+}
+
+#date_ranges form input[type=text] {
+	width: 50px;
+}
+
+#project_members input[type=submit] {
+	border: 1px solid #ccc;
+}
+
+#project_members select {
+	width: 100px;
+}
+
+#project_members input, #project_members select {
+	margin: 0;
+}
+
+form input.black {
+	background: #fff;
+	border: 1px solid #ddd;
+	color: #999;
+}
+
+form.inline {
+	display: inline;
+}

@@ -1,0 +1,27 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+nsu1_1:
+  id: 1
+  team_id: 1
+  first_name: Семен
+  middle_name: Семенович
+  last_name: Дятлов
+  year_id: 4
+  faculty: foo
+
+nsu1_2:
+  id: 2
+  team_id: 1
+  first_name: Андрей
+  middle_name: Витальевич
+  last_name: Таранцов
+  year_id: 5
+  faculty: bar
+
+nsu1_3:
+  id: 3
+  team_id: 1
+  first_name: Вячеслав
+  middle_name: Вячеславович
+  last_name: Токарев
+  year_id: 21
+  faculty: foo

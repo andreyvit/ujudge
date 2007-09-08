@@ -1,0 +1,105 @@
+<%
+	@page_title = "Управление соревнованиями"
+	@page_heading = "Олимпиадная система"
+	@current_tab = :contests
+
+-%>
+<!-- project activity -->
+
+<%
+  case @server_status[:status]
+  when :ok
+-%>
+<h1 class="section">Всё работает</h1>
+<div class="mb clearfix">
+  Тестирующий сервер работает.
+</div>
+<%
+  when :cannot_connect
+%>
+<h1 class="section">Сервер не запущен</h1>
+<div class="mb clearfix">
+  Тестирование выполняться не будет, т.к. серверная часть не запущена.
+</div>
+<%
+  else
+%>
+<h1 class="section">Неизвестный статус сервера</h1>
+<div class="mb clearfix">
+  Сервер вернул статус <%= @server_status[:status] %>, который не был понят системой.
+</div>
+<%
+  end
+%>
+
+<h1 class="section">Продолжим подготовку мероприятия?</h1>
+
+<div class="mb clearfix">
+<table width="100%" class="tickets">
+	<% for contest in @contests %>
+  <tr>
+      <td class="icon">
+          <img alt="" src="/images/icons/note.png" title="" />
+      </td>
+      <td class="item_number">
+          <span class="grey"><%= contest_kind(contest) %></span>
+      </td>
+      <td>
+          <a href="<%=h edit_contest_url(contest) %>"><%= contest_name(contest) %></a>
+      </td>
+      <td><%#= time_ago_in_words(contest.created_at) %></td>
+  </tr>
+	<% end %>
+
+</table>
+</div>
+
+<h1 class="section">Проведем тренировку?</h1>
+
+<div class="mb clearfix">
+<dl>
+<!-- 
+	<dt><%= image_tag 'icons/note.png', :style => 'position: relative; top: 4px; margin-right: 1em;' %> <a href="#">Пополнить или посмотреть <b>банк задач</b> »</a></dt>
+	<dd>&nbsp;</dd>
+ -->
+	<dt><%= image_tag 'icons/note.png', :style => 'position: relative; top: 4px; margin-right: 1em;' %> <a href="<%=h url_for :action => 'create_training' %>">Организовать <b>тренировку</b> »</a></dt>
+	<dd></dd>
+<!-- 
+	<dt><%= image_tag 'icons/note.png', :style => 'position: relative; top: 4px; margin-right: 1em;' %> <a href="#">Открыть <b>дорешивание</b> задач »</a></dt>
+	<dd>&nbsp;</dd>
+
+	<dt><%= image_tag 'icons/note.png', :style => 'position: relative; top: 4px; margin-right: 1em;' %> <a href="#">Объединить <b>регулярные тренировки</b> в одну серию »</a></dt>
+ -->
+</dl>
+</div>
+
+<!-- 
+<h1 class="section">Поэкспериментируем?</h1>
+
+<div class="mb clearfix">
+<dl>
+	<dt><%= image_tag 'icons/note.png', :style => 'position: relative; top: 4px; margin-right: 1em;' %> <a href="#">Войти в лабораторию »</a></dt>
+	<dd>Поработайте над новыми задачами. Или узнайте, что было бы, если поменять правила,
+		настройки или тесты.</dd>
+
+</dl>
+</div>
+
+<h1 class="section">Предстоит официальная олимпиада?</h1>
+
+<div class="mb clearfix">
+<dl>
+	<dt><%= image_tag 'icons/note.png', :style => 'position: relative; top: 4px; margin-right: 1em;' %> <a href="#">Начать подготовку »</a></dt>
+	<dd>Получите серьезную веб-страницу, гибкую регистрацию, несколько туров и другое.</dd>
+
+	<dt><%= image_tag 'icons/note.png', :style => 'position: relative; top: 4px; margin-right: 1em;' %> <a href="#">Провести Интернет-копию олимпиады »</a></dt>
+	<dd>Проведите олимпиаду, подготовленную в другом месте. Можно синхронизировать результаты.</dd>
+</dl>
+</div>
+ -->
+
+<% content_for(:hint) do %>
+  <h2><img alt="" class="icon" src="/images/icons/lightbulb.png?1163815094" /> Новости</h2>
+  <p>(Здесь будут новости.)</p>
+  <p><img src="/images/icons/feed.png" class="icon" alt="Feed"> RSS</p>
+<% end %>

@@ -1,0 +1,47 @@
+1:
+  id: 1
+  contest_id: 1
+  name: unicode
+  display_name: Unicode Art
+  input_file: input.txt
+  output_file: output.txt
+  scoring_method: partial_answers
+  time_limit: 30000
+  memory_limit: 80m
+  check_method: 4
+
+3:
+  id: 3
+  contest_id: 1
+  name: aon
+  display_name: Определитель номера
+  input_file: input.txt
+  output_file: output.txt
+  scoring_method: points
+  time_limit: 3000
+  memory_limit: 80m
+  check_method: 2
+
+4:
+  id: 4
+  contest_id: 1
+  name: impulse
+  display_name: Импульсный бардак
+  input_file: input.txt
+  output_file: output.txt
+  scoring_method: points
+  time_limit: 5000
+  memory_limit: 80m
+  check_method: 3
+
+# 5:
+#   id: 5
+#   contest_id: 1
+#   name: crazy
+#   display_name: Crazy Jury
+#   input_file: input.txt
+#   output_file: output.txt
+#   scoring_method: acm
+#   time_limit: 30000
+#   memory_limit: 80m
+#   check_method: 2

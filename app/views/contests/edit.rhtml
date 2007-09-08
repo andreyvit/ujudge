@@ -1,0 +1,134 @@
+<%
+	@page_title = "Информация о Всесибирской олимпиаде 2006 года"
+	@current_tab = :dashboard
+
+-%>
+
+<%= form_tag(contest_url(@contest), :method => 'put') %>
+<div class="mb">
+  <h1 class="section">Название</h1>
+  <dl>
+  <dt>Название для строки адреса браузера:</dt>
+  <dd><%= text_field :contest, :short_name, :style => 'width: 400px;' %></dd>
+  <dt>Краткое название:</dt>
+  <dd><%= text_field :contest, :display_name, :style => 'width: 400px;' %></dd>
+  <dt>Текст приветствия для страницы олимпиады:</dt>
+  <dd><%= text_area :contest, :welcome_message, :rows => 4, :style => 'width: 400px;' %></dd>
+  <dt>Текст для формы регистрации:</dt>
+  <dd><%= text_area :contest, :reg_message, :rows => 4, :style => 'width: 400px;' %></dd>
+  </dl>
+  
+  <h1 class="section">Управление</h1>
+  <dl class="timeline">
+	  <dt>Состояние:</dt>
+	  <dd>
+	    <div><input id="state_not_started" type="radio" name="contest[state]" value="0" <%= checked_text(@contest.state == 0) %>>
+	    	<label for="state_not_started"> еще не началась</label>
+	    </div>
+	    <div><input id="state_running" type="radio" name="contest[state]" value="2" <%= checked_text(@contest.state == 2) %>>
+	    	<label for="state_running"> идет в данный момент</label>
+	   	</div>
+	    <div><input id="state_finished" type="radio" name="contest[state]" value="3" <%= checked_text(@contest.state == 3) %>>
+	    	<label for="state_finished"> окончена</label>
+	   	</div>
+	  </dd>
+  <dt>Показывать эту олимпиаду в списке:</dt>
+  <dd>
+    <div><input id="visibility_hidden" type="radio" name="contest[publicly_visible]" value="0" <%= checked_text(@contest.publicly_visible == 0) %>>
+    	<label for="visibility_hidden"> только членам жюри</label>
+    </div>
+    <div><input id="visibility_all" type="radio" name="contest[publicly_visible]" value="1" <%= checked_text(@contest.publicly_visible == 1) %>>
+    	<label for="visibility_all"> всем посетителям сервера</label>
+   	</div>
+  </dd>
+  <dt>Регистрация новых участников:</dt>
+  <dd>
+    <div><input id="registration_closed" type="radio" name="contest[registration_open]" value="0" <%= checked_text(@contest.registration_open == 0) %>>
+    	<label for="registration_closed"> недоступна</label>
+    </div>
+    <div><input id="registration_open" type="radio" name="contest[registration_open]" value="1" <%= checked_text(@contest.registration_open == 1) %>>
+    	<label for="registration_open"> доступна участникам со страницы олимпиады</label>
+   	</div>
+  </dd>
+  <dt>Условия задач:</dt>
+  <dd>
+    <div><input id="statement_closed" type="radio" name="contest[statements_available]" value="0" <%= checked_text(@contest.statements_available == 0) %>>
+    	<label for="statement_closed"> не доступны никому, кроме членов жюри</label>
+    </div>
+    <div><input id="statement_open" type="radio" name="contest[statements_available]" value="1" <%= checked_text(@contest.statements_available == 1) %>>
+    	<label for="statement_open"> доступны для участников олимпиады</label>
+   	</div>
+    <div><input id="statement_openall" type="radio" name="contest[statements_available]" value="2" <%= checked_text(@contest.statements_available == 2) %>>
+    	<label for="statement_openall"> доступны для участников олимпиады и всем желающим со страницы олимпиады</label>
+   	</div>
+  </dd>
+
+  <h1 class="section"></h1>
+  <div>
+  	<%= submit_tag "Сохранить изменения" %>
+  </div>
+</div>
+</form>
+  
+<!-- 
+	<div id="testrbox" style="border: 1px solid black; padding: 10px; display: none;">
+		Соревнование завершено.
+		<p style="text-align: center;">
+			<%= button_to_close_redbox 'Восхитительно' %>
+		</p>
+	</div>
+
+  <h1 class="section">Что нового за последнюю неделю?</h1>
+
+  <dl class="timeline">
+    <dt><img alt="Project" class="icon" src="/images/icons/project.png?1163815094"> Изменены правила тестирования</dt>
+
+    <dd>Change by <span title="Andrey Tarantsov (andreyvit@gmail.com)">andrey_tarantsov</span>, <span title="Sun Dec 03 00:30:47 UTC 2006" class="date_ago">Sun Dec 03 00:30:47 UTC 2006</span></dd>
+
+    <dt><img alt="Chat" class="icon" src="/images/icons/chat.png?1163815094"> <a href="/fignya/chat/view/45">7 новых вопросов от участников</a></dt>
+
+    <dt><img alt="Chat" class="icon" src="/images/icons/chat.png?1163815094"> <a href="/fignya/chat/view/45">Письмо от Андрея Лопатина</a></dt>
+
+    <dd>Change by <span title="Andrey Tarantsov (andreyvit@gmail.com)">andrey_tarantsov</span>, <span title="Sat Dec 02 18:39:01 UTC 2006" class="date_ago">Sat Dec 02 18:39:01 UTC 2006</span></dd>
+
+    <dt><img alt="Note" class="icon" src="/images/icons/note.png?1163815094"> <a href="/fignya/note/view/1">Еще какая-то поебень изменилась</a></dt>
+
+    <dd>Change by <span title="Andrey Tarantsov (andreyvit@gmail.com)">andrey_tarantsov</span>, <span title="Sat Dec 02 18:35:44 UTC 2006" class="date_ago">Sat Dec 02 18:35:44 UTC 2006</span></dd>
+
+    <dt><img alt="Task" class="icon" src="/images/icons/task.png?1163815094"> <a href="/fignya/task/view/2">Раздавлен один таракан</a></dt>
+
+    <dd>Change by <span title="Andrey Tarantsov (andreyvit@gmail.com)">andrey_tarantsov</span>, <span title="Sat Dec 02 18:33:09 UTC 2006" class="date_ago">Sat Dec 02 18:33:09 UTC 2006</span></dd>
+  </dl>
+</div>
+
+<h1 class="section">Project statistics</h1>
+<%= link_to_redbox 'Вызвать красный ящик', 'testrbox' %>
+<div id="project_statistics" class="haslayout clearfix f6f6f6 mb">
+  <div class="column">
+    <ul>
+      <li><img alt="Ticket" class="icon" src="/images/icons/ticket.png?1163815094">0 open tickets of 0 total</li>
+
+      <li><img alt="Note" class="icon" src="/images/icons/note.png?1163815094">1 notes posted</li>
+
+      <li><img alt="Tasks" class="icon" src="/images/icons/tasks.png?1163815094">2 tasks open of 2 total</li>
+
+      <li><img alt="Calendar" class="icon" src="/images/icons/calendar.png?1163815094">0 events in the calendar</li>
+    </ul>
+  </div>
+
+  <div class="column">
+    <ul>
+      <li><img alt="Dashboard" class="icon" src="/images/icons/dashboard.png?1163815094">Project started <span title="Sat Dec 02 18:30:55 UTC 2006" class="date_ago">Sat Dec 02 18:30:55 UTC 2006</span></li>
+
+      <li><img alt="User" class="icon" src="/images/icons/user.png?1163815094">1 active users</li>
+
+      <li><img alt="Comment" class="icon" src="/images/icons/comment.png?1163815094">1 existing chat rooms</li>
+
+      <li><img alt="Docs" class="icon" src="/images/icons/docs.png?1163815094">0 uploaded files</li>
+    </ul>
+  </div>
+</div>
+ -->
+<% content_for(:hint) do %>
+	<%= render :partial => 'contests/overview', :locals => {:contest => @contest} %>
+<% end %>

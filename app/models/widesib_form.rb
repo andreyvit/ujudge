@@ -1,0 +1,2 @@
+class WidesibForm < Form
+end

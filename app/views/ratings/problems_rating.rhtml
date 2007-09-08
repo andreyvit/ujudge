@@ -1,0 +1,23 @@
+<%
+	@page_title = "Рейтинг по задачам"
+-%>
+
+<style>
+table {border-collapse: collapse;}
+td, th {border:  1px solid black; padding: 1px 3px;}
+</style>
+
+<p><a href="<%h url_for(:action => 'recalc', :id => @ratingdef) %>">Обновить рейтинги</a></p>
+
+<% for rating in @ratingdef.ratings %>
+<% problem = Problem.find(rating.item_id) %>
+<% if problem.scoring_method == 'partial_answers' %>
+<h2>Общий рейтинг по задаче <%= problem.display_name %></h2>
+<%= render :partial => 'problem_rating', :locals => {:rating => rating, :problem => problem} %>
+<h2>Рейтинг по тестам по задаче <%= problem.display_name %></h2>
+<%= render :partial => 'tests_ratings', :locals => {:rating => rating, :problem => problem} %>
+<% else %>
+<h2>Рейтинг по задаче <%= problem.display_name %></h2>
+<%= render :partial => 'problem_rating', :locals => {:rating => rating, :problem => problem} %>
+<% end %>
+<% end %>

@@ -1,0 +1,41 @@
+<%
+  innerdefs = rating.inner_rating_definitions
+  inners = []
+  innerdefs.first.ratings.each do |r| inners << r end
+	inners.sort! { |x,y| x.item_id <=> y.item_id }
+	teams = @contest.teams.find(:all)
+	teams_by_id = {}
+	teams.each { |t| teams_by_id[t.id] = t }
+	d = {}
+	for r in inners
+		d[r] = {}
+    RAILS_DEFAULT_LOGGER.debug "processing rating #{r.item_id}..."
+		for i in (0..(teams.size-1))
+			team = teams_by_id[r.team_ids[i]]
+	    info = r.fast_result(team.id)
+			d[r][i] = "#{team.name}<br>#{info[:place]} / #{info[:partial_answer] && sprintf("%0.1f", info[:partial_answer]) || info[:outcome]}"
+		end
+		r.trash!
+	end
+	
+%>
+<table border="2" cellspacing="3" cellpadding="2">
+	<tr>
+		<% for r in inners %>
+			<th><%=h r.item_id %></th>
+		<% end %>
+	</tr>
+	<%
+	# @test_runs = {}
+	# for test in @grand_results.problem_tests[@prob]
+	#   @test_runs[test] = @grand_results.runs.dup.sort {|a,b| foo_func(test,a,b)}
+	# end
+	%>
+	<% for i in (0..(teams.size-1)) %>
+		<tr>
+			<% for r in inners %>
+				<td><%= d[r][i] %></td>
+			<% end %>
+		</tr>
+	<% end %> 
+</table>

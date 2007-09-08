@@ -1,0 +1,7 @@
+<p><b>Успешно получены тесты из файла <%= @tests_upload.original_filename %>.</b></p>
+
+<p>Записаны тесты для следующих задач:</p>
+<%= render :partial => 'mappings', :locals => { :mappings => @mappings } %>
+
+<button onclick="window.close()">Закрыть окно</button>
+<%# = link_to "Угу, вернуться назад", problems_url(@contest) %>

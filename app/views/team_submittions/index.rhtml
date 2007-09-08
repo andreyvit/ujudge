@@ -1,0 +1,54 @@
+<%
+	@page_title = "Задачи Всесибирской олимпиады 2006 года"
+	@current_tab = :submittions
+-%>
+
+<% content_for(:head) do %>
+<style>
+.editor, .editor TD { background: #FFEB99 !important; }
+.editable-cell { cursor: pointer;  }
+.editable-cell A { border-bottom: 1px dashed black; }
+.edited-cell {
+		background: #FFEB99 !important;
+		border: 1px solid black !important;
+		border-bottom: 1px solid #FFEB99 !important;
+}
+.editor {
+		border: 1px solid black !important;
+}
+.editable-cell, .edited-cell { padding: 1px 5px !important; }
+</style>
+<% end %>
+
+<%= form_tag %>
+<p>Задача: <%= collection_select :submittion, :problem_id, @problems, :id, :display_name %>&nbsp;&nbsp;&nbsp;&nbsp;
+Язык: <%= collection_select :submittion, :compiler_id, @compilers, :id, :display_name%></p>
+<p><textarea id="submittion_text" name="submittion[text]" rows="25" cols="80"><%=h @submittion.text %></textarea></p>
+<p><%= submit_tag "Отправить решение на проверку" %></p>
+
+</form>
+
+<table id="submittions_table" width="100%" class="tickets form" cellspacing="0" cellpadding="0">
+    <tr>
+        <th>&nbsp;</th>
+        <th>Задача</th>
+        <th>Язык</th>
+        <th>Статус</th>
+    </tr>
+
+		<% @submittions.each_with_index do |submittion, submittion_counter| %>
+		<%= render :partial => 'submittion_row',
+					:locals => {:submittion => submittion, :submittion_counter => submittion_counter} %>
+		<% end %>
+    </tr>
+
+</table>
+
+<% content_for(:hint) do %>
+	<%= render :partial => 'contests/overview', :locals => {:contest => @contest} %>
+<% end %>
+
+<script>
+uJudge_onload();
+</script>
+

@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+pottosin_reg:
+  id: 1
+  data: !ruby/object:Foo::Bar
+    intro: Добренько пожаловать!
+    groups:
+      - title: Первая нах
+        groups:
+          - help: Это реально, блин, первая группа.
+            items:
+              - !ruby/objects:
+               
+

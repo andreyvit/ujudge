@@ -1,0 +1,14 @@
+<table border="2" cellspacing="3" cellpadding="2">
+	<tr>
+		<th>&nbsp;</th>
+		<th>Сумма мест по тестам</th>
+		<th>Итоговое место по задаче</th>
+	</tr>
+	<% for team in rating.teams %>
+	<tr>
+		<td><%= team.name %></td>
+		<td><%=h rating.result(team.id).points %></td>
+		<td><%=h rating.result(team.id).place %></td>
+	</tr>
+	<% end %>
+</table>

@@ -1,0 +1,28 @@
+<%
+	@current_tab = :news
+-%>
+
+<div class="mb">
+  <h1 class="section">Добавить новость</h1>
+<%= form_tag(messages_url(@contest), :method => 'post') %>
+  <div><%= text_area :message, :text, :rows => 6, :style => 'width: 400px;' %></div>
+  <div><%= submit_tag "Опубликовать новость" %></div>
+</form>  
+
+  <h1 class="section">Опубликованные новости</h1>
+
+  <% if @messages.blank? %>
+  <p>Еще ни одной новости не опубликовано.</p>
+  <% else %>
+  <% @messages.each_with_index do |news, news_counter| %>
+    <p><b><%= news.created_at.strftime("%d.%m.%Y") %></b>
+        (<%= link_to "удалить", message_url(@contest, news), :method => 'delete' %>) — 
+        <%= news.text %></p>
+  <% end %>
+  <% end %>
+    
+</div>
+  
+<% content_for(:hint) do %>
+	<%= render :partial => 'contests/overview', :locals => {:contest => @contest} %>
+<% end %>

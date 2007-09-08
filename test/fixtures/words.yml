@@ -1,0 +1,20 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+<%
+  cats = {:noun => 1, :color => 2}
+  ru_words = %w(
+    красный
+    зеленый
+    синий
+    черный
+    алый
+    бархатный
+    веселый
+    забавный
+    прекрасный
+    обаятельный
+  )
+%>
+<% ru_words.each_with_index do |w, i| %>w<%= i+1 %>:
+  id: <%= i+1 %>
+  text: <%= w %>
+<% end %>

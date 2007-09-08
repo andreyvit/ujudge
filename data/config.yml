@@ -1,0 +1,7 @@
+--- !ruby/object:GlobalSettings 
+bgcolor: A6792C
+dark_tab_color: a4d767
+light_tab_color: f6f6f6
+sidebar_color: "000"
+top_line_color: "036"
+top_text_color: "000"

@@ -1,0 +1,43 @@
+<%
+	@page_title = "Управление соревнованиями"
+	@page_heading = "Олимпиадная система"
+	@current_tab = :contests
+
+-%>
+<!-- project activity -->
+
+<h1 class="section">Олимпиады</h1>
+
+<% if @contests.empty? %>
+<p>В данный момент не доступно ни одной олимпиады.</p>
+<% else %>
+<div class="mb clearfix">
+<table width="100%" class="tickets">
+	<% for contest in @contests %>
+  <tr>
+      <td class="icon">
+          <img alt="" src="/images/icons/note.png" title="" />
+      </td>
+      <td class="item_number">
+          <span class="grey"><%= contest_kind(contest) %></span>
+      </td>
+      <td>
+          <a href="<%=h contest_url(contest) %>"><%= contest_name(contest) %></a>
+      </td>
+      <td><%#= time_ago_in_words(contest.created_at) %></td>
+  </tr>
+	<% end %>
+
+</table>
+</div>
+<% end %>
+
+<% content_for(:hint) do %>
+  <% if current_user.allow?(:manage_contests) %>
+  <h2>Для жюри</h2>
+  <p><a href="<%=h manage_contests_url %>">Управление олимпиадами »</a></p>
+  <% end %>
+  <h2><img alt="" class="icon" src="/images/icons/lightbulb.png?1163815094" /> Новости</h2>
+  <p>(Здесь когда-нибудь будут новости олимпиадного сервера.)</p>
+  <p><img src="/images/icons/feed.png" class="icon" alt="Feed"> RSS</p>
+<% end %>

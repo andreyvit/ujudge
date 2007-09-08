@@ -1,0 +1,18 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+pottosin:
+  id: 1
+  short_name: pottosin
+  name: Всесибирская олимпиада имени Поттосина
+  reg_message: Зарегистрированные команды примут участие в I и II Интернет-турах Всесибирской олимпиады.
+
+imaginecup:
+  id: 2
+  short_name: imaginecup
+  name: Microsoft Imagine Cup
+  reg_message: Зарегистрированные команды примут участие в турнире Microsoft Imagine Cup.
+
+pottosin_final:
+  id: 3
+  short_name: widesiberia_finals
+  name: Очный тур Всесибирской олимпиады имени Поттосина
+  reg_message: Вы должны иметь право участвовать в очном туре Всесибирской олимпиады. Заполняя эту форму, вы подтверждаете свое участие.

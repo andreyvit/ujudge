@@ -1,0 +1,43 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+	"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html lang="en">
+<head>
+  <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+
+  <title><%= @page_title %></title>
+  <%= stylesheet_link_tag 'screen' %>
+  <%= stylesheet_link_tag 'forms' %>
+  <%= stylesheet_link_tag 'redbox' %>
+  <%= stylesheet_link_tag 'humanized' %>
+  <%= javascript_include_tag :defaults %>
+  <%= javascript_include_tag 'redbox' %>
+  <%= javascript_include_tag 'placeholder' %>
+  <%= javascript_include_tag 'humanized' %>
+  <link rel="stylesheet" type="text/css" href="/stylesheets/print.css" media="print">
+	<%= yield(:head) %>
+</head>
+
+<body>
+  <div id="wrap" class="clearfix">
+    <div id="content" class="clearfix">
+      <div id="left" class="clearfix" style="clear: both;">
+        <div id="left_container">
+          <%= yield %>
+        </div>
+      </div>
+    </div>
+
+    <div id="footer">
+      © Разработчики открытой тестирующей системы <a href="http://code.google.com/p/ujudge/">ujudge</a>. Вы можете <a href="mailto:">написать нам письмо</a>.
+    </div>
+  </div>
+
+  <div id="overlay" style="display:none;" onclick="close_modal();"></div>
+<% if flash[:message] || flash[:warning] || flash[:notice] %>
+<% msg = flash[:warning] || flash[:message] || flash[:notice] %>
+<script>
+Humanized.showMessage("<%=h msg %>");
+</script>
+<% end %>
+</body>
+</html>

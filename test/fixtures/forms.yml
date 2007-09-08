@@ -1,0 +1,9 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+pottosin_reg:
+  id: 1
+  contest_id: 1
+  type: WidesibForm
+imaginecup_reg:
+  id: 2
+  contest_id: 2
+  type: ImagineCupForm

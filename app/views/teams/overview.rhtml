@@ -1,0 +1,47 @@
+<%
+  @page_title = "Зарегистрированные команды"
+-%>
+
+
+<% content_for(:head) do %>
+<%= javascript_include_tag 'editor' %>
+<style>
+.editor, .editor TD { background: #FFEB99 !important; }
+.editable-cell { cursor: pointer;  }
+.editable-cell A { border-bottom: 1px dashed black; }
+.edited-cell {
+		background: #FFEB99 !important;
+		border: 1px solid black !important;
+		border-bottom: 1px solid #FFEB99 !important;
+}
+.editor {
+		border: 1px solid black !important;
+}
+.editable-cell, .edited-cell { padding: 1px 5px !important; }
+</style>
+<% end %>
+
+
+<h1 class="section">Команды</h1>
+
+<% if current_user.is_a?(User) %>
+	<p>Регистрация сейчас <% if @contest.registration_open > 0 %>открыта<% else %>закрыта<% end %>.
+Зарегистрировано команд: <%= @teams.size %>.
+
+	<p>Может, вы хотите <%= link_to "зарегистрировать новую команду", new_team_path(@contest) %>?
+
+	<p><%= link_to "Список зарегистрированных команд", teams_path(@contest) %> (для участников).
+
+	<p><%= link_to "Выборка зарегистрированных команд", select_teams_path(@contest) %> (только для жюри).
+<% else %>
+	<% if @contest.registration_open > 0 %>
+		<p>Вы можете <%= link_to "зарегистрировать команду", new_team_path(@contest) %>.</p>
+	<% end %>
+	<p><%= link_to "Список зарегистрированных команд", teams_path(@contest) %>.
+<% end %>
+
+<% content_for(:hint) do %>  
+	<%= render :partial => 'contests/overview', :locals => {:contest => @contest} %>
+<% end %>
+
+

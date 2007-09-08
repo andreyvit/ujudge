@@ -1,0 +1,7 @@
+<% form_tag(contest_question_url(@contest, @question), :method => 'put') do %>
+  <div>Вопрос:</div>
+  <div><%= text_area :question, :question, :rows => 6, :style => 'width: 400px;' %></div>
+  <div>Ответ:</div>
+  <div><%= text_area :question, :answer, :rows => 6, :style => 'width: 400px;' %></div>
+  <div><%= submit_tag "Сохранить изменения" %></div>
+<% end %>

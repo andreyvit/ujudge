@@ -1,0 +1,28 @@
+<%
+	@page_title = "Задачи"
+-%>
+<ul>
+<% for problem in @problems %>
+<%= render :partial => 'view', :locals => {:problem => problem} %>
+<% end %>
+</ul>
+<style>
+	TABLE.exp { border-collapse: collapse; }
+	TABLE.exp TD, TABLE.exp TH { border: 1px solid silver; padding: 1px 3px; }
+	TABLE.exp TD.expander { padding-left: 5px; padding-right: 2px; text-align: center; background: silver; }
+</style>
+
+<table class="exp">
+	<tr>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+		<th>Название задачи</th>
+	</tr>
+	<% for problem in @problems %>
+	<tr>
+		<td class="expander"><img src="<%= image_path 'collapsed.png' %>" width="9" height="9"></td>
+		<td class="check"><input type="checkbox"></td>
+		<td><%= problem.display_name %></td>
+	</tr>
+	<% end %>
+</table>

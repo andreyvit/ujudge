@@ -1,0 +1,529 @@
+22:
+  id: 22
+  team_id: 3
+  problem_id: 1
+  submitted_at: 2006-09-10 12:47:23 +07:00
+  file_name: potossin-team3-unicode-run22.cpp
+  compiler_id: 3
+  state: 3
+  state_assigned_at: 2006-09-10 13:51:43 +07:00
+  outcome: tested
+  test_outcomes: 
+  details: |
+  
+  C:\temp\InstantRails\rails_apps\ujudgew\tmp\wd1>SET PATH=C:\temp\InstantRails\ruby\bin;C:\temp\InstantRails\mysql\bin;C:\Program Files\Far;C:\Program Files\Borland\Delphi7\Bin;C:\Program Files\Borland\Delphi7\Projects\Bpl\;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\Program Files\Common Files\Adobe\AGL;C:\Program Files\Rational\common;compiler\vcc\Bin 
+  
+  C:\temp\InstantRails\rails_apps\ujudgew\tmp\wd1>compiler\vcc\Bin\cl.exe /EHsc /Icompiler\vcc\INCLUDE /Feexecutable.exe\ C:/temp/InstantRails/rails_apps/ujudgew/tmp/wd1/potossin-team3-unicode-run22.cpp /link/LIBPATH:compiler\vcc\LIB  1>compile.err 2>&1 
+  
+  C:\temp\InstantRails\rails_apps\ujudgew\tmp\wd1>rem @compiler\BCC\BIN\cl.exe -ml -Icompiler\BCC\INCLUDE -Lcompiler\BCC\LIB -nexecutable.exe C:/temp/InstantRails/rails_apps/ujudgew/tmp/wd1/potossin-team3-unicode-run22.cpp >compile.err 
+
+
+23:
+  id: 23
+  team_id: 3
+  problem_id: 1
+  submitted_at: 2006-09-10 12:56:27 +07:00
+  file_name: potossin-team3-unicode-run23.cpp
+  compiler_id: 3
+  state: 3
+  state_assigned_at: 2006-09-10 12:56:31 +07:00
+  outcome: tested
+  test_outcomes: 
+  details: 
+
+24:
+  id: 24
+  team_id: 3
+  problem_id: 1
+  submitted_at: 2006-09-10 12:57:35 +07:00
+  file_name: potossin-team3-unicode-run24.cpp
+  compiler_id: 3
+  state: 3
+  state_assigned_at: 2006-09-10 12:57:39 +07:00
+  outcome: tested
+  test_outcomes: 
+  details: 
+
+25:
+  id: 25
+  team_id: 3
+  problem_id: 1
+  submitted_at: 2006-09-10 12:59:52 +07:00
+  file_name: potossin-team3-unicode-run25.cpp
+  compiler_id: 3
+  state: 3
+  state_assigned_at: 2006-09-10 12:59:56 +07:00
+  outcome: tested
+  test_outcomes: 
+  details: 
+
+26:
+  id: 26
+  team_id: 3
+  problem_id: 1
+  submitted_at: 2006-09-10 13:00:55 +07:00
+  file_name: potossin-team3-unicode-run26.cpp
+  compiler_id: 3
+  state: 3
+  state_assigned_at: 2006-09-10 13:51:45 +07:00
+  outcome: tested
+  test_outcomes: 
+  details: 
+
+27:
+  id: 27
+  team_id: 3
+  problem_id: 1
+  submitted_at: 2006-09-10 13:03:36 +07:00
+  file_name: potossin-team3-unicode-run27.cpp
+  compiler_id: 3
+  state: 3
+  state_assigned_at: 2006-09-10 13:04:55 +07:00
+  outcome: tested
+  test_outcomes: 
+  details: 
+
+28:
+  id: 28
+  team_id: 3
+  problem_id: 1
+  submitted_at: 2006-09-10 13:15:54 +07:00
+  file_name: potossin-team3-unicode-run28.cpp
+  compiler_id: 3
+  state: 3
+  state_assigned_at: 2006-09-10 13:15:58 +07:00
+  outcome: tested
+  test_outcomes: 
+  details: 
+
+29:
+  id: 29
+  team_id: 3
+  problem_id: 1
+  submitted_at: 2006-09-10 13:16:16 +07:00
+  file_name: potossin-team3-unicode-run29.cpp
+  compiler_id: 3
+  state: 3
+  state_assigned_at: 2006-09-10 13:16:22 +07:00
+  outcome: tested
+  test_outcomes: 
+  details: 
+
+30:
+  id: 30
+  team_id: 3
+  problem_id: 1
+  submitted_at: 2006-09-10 13:19:06 +07:00
+  file_name: potossin-team3-unicode-run30.cpp
+  compiler_id: 3
+  state: 3
+  state_assigned_at: 2006-09-10 13:19:20 +07:00
+  outcome: tested
+  test_outcomes: 
+  details: 
+
+31:
+  id: 31
+  team_id: 3
+  problem_id: 1
+  submitted_at: 2006-09-10 13:20:38 +07:00
+  file_name: potossin-team3-unicode-run31.cpp
+  compiler_id: 3
+  state: 3
+  state_assigned_at: 2006-09-10 13:20:43 +07:00
+  outcome: tested
+  test_outcomes: 
+  details: 
+
+32:
+  id: 32
+  team_id: 3
+  problem_id: 1
+  submitted_at: 2006-09-10 13:21:35 +07:00
+  file_name: potossin-team3-unicode-run32.cpp
+  compiler_id: 3
+  state: 3
+  state_assigned_at: 2006-09-10 13:21:49 +07:00
+  outcome: tested
+  test_outcomes: 
+  details: 
+
+33:
+  id: 33
+  team_id: 3
+  problem_id: 1
+  submitted_at: 2006-09-10 13:23:28 +07:00
+  file_name: potossin-team3-unicode-run33.cpp
+  compiler_id: 3
+  state: 3
+  state_assigned_at: 2006-09-10 13:23:43 +07:00
+  outcome: tested
+  test_outcomes: 
+  details: 
+
+34:
+  id: 34
+  team_id: 3
+  problem_id: 1
+  submitted_at: 2006-09-10 13:30:09 +07:00
+  file_name: potossin-team3-unicode-run34.cpp
+  compiler_id: 3
+  state: 3
+  state_assigned_at: 2006-09-10 13:30:22 +07:00
+  outcome: tested
+  test_outcomes: 
+  details: 
+
+35:
+  id: 35
+  team_id: 3
+  problem_id: 1
+  submitted_at: 2006-09-10 13:30:09 +07:00
+  file_name: potossin-team3-unicode-run35.cpp
+  compiler_id: 3
+  state: 3
+  state_assigned_at: 2006-09-10 13:30:24 +07:00
+  outcome: tested
+  test_outcomes: 
+  details: 
+
+36:
+  id: 36
+  team_id: 3
+  problem_id: 1
+  submitted_at: 2006-09-10 13:38:02 +07:00
+  file_name: potossin-team3-unicode-run36.cpp
+  compiler_id: 3
+  state: 3
+  state_assigned_at: 2006-09-10 13:38:38 +07:00
+  outcome: tested
+  test_outcomes: 
+  details: 
+
+37:
+  id: 37
+  team_id: 3
+  problem_id: 1
+  submitted_at: 2006-09-10 13:39:47 +07:00
+  file_name: potossin-team3-unicode-run37.cpp
+  compiler_id: 3
+  state: 3
+  state_assigned_at: 2006-09-10 13:39:52 +07:00
+  outcome: tested
+  test_outcomes: 
+  details: 
+
+38:
+  id: 38
+  team_id: 3
+  problem_id: 1
+  submitted_at: 2006-09-10 13:40:23 +07:00
+  file_name: potossin-team3-unicode-run38.cpp
+  compiler_id: 3
+  state: 3
+  state_assigned_at: 2006-09-10 13:40:29 +07:00
+  outcome: tested
+  test_outcomes: 
+  details: 
+
+39:
+  id: 39
+  team_id: 3
+  problem_id: 1
+  submitted_at: 2006-09-10 13:40:23 +07:00
+  file_name: potossin-team3-unicode-run39.cpp
+  compiler_id: 3
+  state: 3
+  state_assigned_at: 2006-09-10 13:50:33 +07:00
+  outcome: tested
+  test_outcomes: 
+  details: 
+
+40:
+  id: 40
+  team_id: 3
+  problem_id: 1
+  submitted_at: 2006-09-10 13:41:17 +07:00
+  file_name: potossin-team3-unicode-run40.cpp
+  compiler_id: 3
+  state: 3
+  state_assigned_at: 2006-09-10 13:41:22 +07:00
+  outcome: tested
+  test_outcomes: 
+  details: 
+
+41:
+  id: 41
+  team_id: 3
+  problem_id: 1
+  submitted_at: 2006-09-10 13:55:07 +07:00
+  file_name: potossin-team3-unicode-run41.cpp
+  compiler_id: 5
+  state: 3
+  state_assigned_at: 2006-09-10 13:55:47 +07:00
+  outcome: tested
+  test_outcomes: 
+  details: 
+
+42:
+  id: 42
+  team_id: 3
+  problem_id: 1
+  submitted_at: 2006-09-10 13:56:42 +07:00
+  file_name: potossin-team3-unicode-run42.cpp
+  compiler_id: 4
+  state: 3
+  state_assigned_at: 2006-09-10 13:56:46 +07:00
+  outcome: compilation-error
+  test_outcomes: 
+  details: |
+  
+  C:\temp\InstantRails\rails_apps\ujudgew\tmp\wd1>SET PATH=C:\temp\InstantRails\ruby\bin;C:\temp\InstantRails\mysql\bin;C:\Program Files\Far;C:\Program Files\Borland\Delphi7\Bin;C:\Program Files\Borland\Delphi7\Projects\Bpl\;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\Program Files\Common Files\Adobe\AGL;C:\Program Files\Rational\common;C:\temp\InstantRails\rails_apps\ujudgew\compiler\pp\bin\win32 
+  
+  C:\temp\InstantRails\rails_apps\ujudgew\tmp\wd1>ppc386 -FuC:\temp\InstantRails\rails_apps\ujudgew\compiler\pp\units\win32\rtl -FiC:\temp\InstantRails\rails_apps\ujudgew\compiler\pp\units\win32\rtl -IC:\temp\InstantRails\rails_apps\ujudgew\compiler\pp\units\win32\rtl -eexecutable.exe C:/temp/InstantRails/rails_apps/ujudgew/tmp/wd1/potossin-team3-unicode-run42.cpp 
+  potossin-team3-unicode-run42.cpp(5,1) Error: Util asw.exe not found, switching to external linking
+
+
+43:
+  id: 43
+  team_id: 3
+  problem_id: 1
+  submitted_at: 2006-09-10 13:59:57 +07:00
+  file_name: potossin-team3-unicode-run43.pp
+  compiler_id: 4
+  state: 3
+  state_assigned_at: 2006-09-10 14:00:02 +07:00
+  outcome: compilation-error
+  test_outcomes: 
+  details: |
+  
+  C:\temp\InstantRails\rails_apps\ujudgew\tmp\wd1>SET PATH=C:\temp\InstantRails\ruby\bin;C:\temp\InstantRails\mysql\bin;C:\Program Files\Far;C:\Program Files\Borland\Delphi7\Bin;C:\Program Files\Borland\Delphi7\Projects\Bpl\;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\Program Files\Common Files\Adobe\AGL;C:\Program Files\Rational\common;C:\temp\InstantRails\rails_apps\ujudgew\compiler\pp\bin\win32 
+  
+  C:\temp\InstantRails\rails_apps\ujudgew\tmp\wd1>ppc386 -FuC:\temp\InstantRails\rails_apps\ujudgew\compiler\pp\units\win32\rtl -FiC:\temp\InstantRails\rails_apps\ujudgew\compiler\pp\units\win32\rtl -IC:\temp\InstantRails\rails_apps\ujudgew\compiler\pp\units\win32\rtl -eexecutable.exe C:/temp/InstantRails/rails_apps/ujudgew/tmp/wd1/potossin-team3-unicode-run43.pp 
+  potossin-team3-unicode-run43.pp(5,1) Error: Util asw.exe not found, switching to external linking
+
+
+44:
+  id: 44
+  team_id: 3
+  problem_id: 1
+  submitted_at: 2006-09-10 14:25:47 +07:00
+  file_name: potossin-team3-unicode-run44.pas
+  compiler_id: 7
+  state: 3
+  state_assigned_at: 2006-09-10 14:25:52 +07:00
+  outcome: compilation-error
+  test_outcomes: 
+  details: |
+  
+  C:\temp\InstantRails\rails_apps\ujudgew\tmp\wd1>SET PATH=C:\temp\InstantRails\ruby\bin;C:\temp\InstantRails\mysql\bin;C:\Program Files\Far;C:\Program Files\Borland\Delphi7\Bin;C:\Program Files\Borland\Delphi7\Projects\Bpl\;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\Program Files\Common Files\Adobe\AGL;C:\Program Files\Rational\common 
+  
+  C:\temp\InstantRails\rails_apps\ujudgew\tmp\wd1>"C:\Program Files\Borland\Delphi7\Bin\dcc32.exe" -CC -Eexecutable.exe C:/temp/InstantRails/rails_apps/ujudgew/tmp/wd1/potossin-team3-unicode-run44.pas 
+  Borland Delphi Version 15.0
+  Copyright (c) 1983,2002 Borland Software Corporation
+  potossin-team3-unicode-run44.pas(1) potossin-team3-unicode-run44.pas(1) potossin-team3-unicode-run44.pas(1) potossin-team3-unicode-run44.pas(3) 
+  Fatal: Could not create output file 'executable.exe\/temp/InstantRails/rails_apps/ujudgew/tmp/wd1/potossin-team3-unicode-run44.exe'
+
+
+45:
+  id: 45
+  team_id: 3
+  problem_id: 1
+  submitted_at: 2006-09-10 14:27:39 +07:00
+  file_name: potossin-team3-unicode-run45.pp
+  compiler_id: 4
+  state: 3
+  state_assigned_at: 2006-09-10 14:27:46 +07:00
+  outcome: compilation-error
+  test_outcomes: 
+  details: |
+  
+  C:\temp\InstantRails\rails_apps\ujudgew\tmp\wd1>SET PATH=C:\temp\InstantRails\ruby\bin;C:\temp\InstantRails\mysql\bin;C:\Program Files\Far;C:\Program Files\Borland\Delphi7\Bin;C:\Program Files\Borland\Delphi7\Projects\Bpl\;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\Program Files\Common Files\Adobe\AGL;C:\Program Files\Rational\common;C:\temp\InstantRails\rails_apps\ujudgew\compiler\pp\bin\win32 
+  
+  C:\temp\InstantRails\rails_apps\ujudgew\tmp\wd1>ppc386 -FuC:\temp\InstantRails\rails_apps\ujudgew\compiler\pp\units\win32\rtl -FiC:\temp\InstantRails\rails_apps\ujudgew\compiler\pp\units\win32\rtl -IC:\temp\InstantRails\rails_apps\ujudgew\compiler\pp\units\win32\rtl -eexecutable.exe C:/temp/InstantRails/rails_apps/ujudgew/tmp/wd1/potossin-team3-unicode-run45.pp 
+  potossin-team3-unicode-run45.pp(5,1) Error: Util asw.exe not found, switching to external linking
+
+
+46:
+  id: 46
+  team_id: 3
+  problem_id: 1
+  submitted_at: 2006-09-10 14:28:06 +07:00
+  file_name: potossin-team3-unicode-run46.pas
+  compiler_id: 7
+  state: 3
+  state_assigned_at: 2006-09-10 14:28:16 +07:00
+  outcome: compilation-error
+  test_outcomes: 
+  details: |
+  
+  C:\temp\InstantRails\rails_apps\ujudgew\tmp\wd1>SET PATH=C:\temp\InstantRails\ruby\bin;C:\temp\InstantRails\mysql\bin;C:\Program Files\Far;C:\Program Files\Borland\Delphi7\Bin;C:\Program Files\Borland\Delphi7\Projects\Bpl\;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\Program Files\Common Files\Adobe\AGL;C:\Program Files\Rational\common 
+  
+  C:\temp\InstantRails\rails_apps\ujudgew\tmp\wd1>"C:\Program Files\Borland\Delphi7\Bin\dcc32.exe" -CC -EC:\temp\InstantRails\rails_apps\ujudgew\tmp\wd1\ C:/temp/InstantRails/rails_apps/ujudgew/tmp/wd1/potossin-team3-unicode-run46.pas 
+  Borland Delphi Version 15.0
+  Copyright (c) 1983,2002 Borland Software Corporation
+  potossin-team3-unicode-run46.pas(1) potossin-team3-unicode-run46.pas(1) potossin-team3-unicode-run46.pas(1) potossin-team3-unicode-run46.pas(4) 
+  Fatal: Could not create output file 'C:\temp\InstantRails\rails_apps\ujudgew\tmp\wd1\/temp/InstantRails/rails_apps/ujudgew/tmp/wd1/potossin-team3-unicode-run46.exe'
+
+
+47:
+  id: 47
+  team_id: 3
+  problem_id: 1
+  submitted_at: 2006-09-10 14:31:03 +07:00
+  file_name: potossin-team3-unicode-run47.pas
+  compiler_id: 7
+  state: 3
+  state_assigned_at: 2006-09-10 14:31:06 +07:00
+  outcome: compilation-error
+  test_outcomes: 
+  details: |
+  
+  C:\temp\InstantRails\rails_apps\ujudgew\tmp\wd1>SET PATH=C:\temp\InstantRails\ruby\bin;C:\temp\InstantRails\mysql\bin;C:\Program Files\Far;C:\Program Files\Borland\Delphi7\Bin;C:\Program Files\Borland\Delphi7\Projects\Bpl\;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\Program Files\Common Files\Adobe\AGL;C:\Program Files\Rational\common 
+  
+  C:\temp\InstantRails\rails_apps\ujudgew\tmp\wd1>"C:\Program Files\Borland\Delphi7\Bin\dcc32.exe" -CC -EC:\temp\InstantRails\rails_apps\ujudgew\tmp\wd1\ C:\temp\InstantRails\rails_apps\ujudgew\tmp\wd1\potossin-team3-unicode-run47.pas 
+  Borland Delphi Version 15.0
+  Copyright (c) 1983,2002 Borland Software Corporation
+  potossin-team3-unicode-run47.pas(1) potossin-team3-unicode-run47.pas(1) potossin-team3-unicode-run47.pas(1) potossin-team3-unicode-run47.pas(4) 
+  5 lines, 0.12 seconds, 10440 bytes code, 1801 bytes data.
+
+
+48:
+  id: 48
+  team_id: 3
+  problem_id: 1
+  submitted_at: 2006-09-10 14:35:43 +07:00
+  file_name: potossin-team3-unicode-run48.pas
+  compiler_id: 7
+  state: 3
+  state_assigned_at: 2006-09-10 14:35:46 +07:00
+  outcome: compilation-error
+  test_outcomes: 
+  details: |
+  
+  C:\temp\InstantRails\rails_apps\ujudgew\tmp\wd1>SET PATH=C:\temp\InstantRails\ruby\bin;C:\temp\InstantRails\mysql\bin;C:\Program Files\Far;C:\Program Files\Borland\Delphi7\Bin;C:\Program Files\Borland\Delphi7\Projects\Bpl\;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\Program Files\Common Files\Adobe\AGL;C:\Program Files\Rational\common 
+  
+  C:\temp\InstantRails\rails_apps\ujudgew\tmp\wd1>"C:\Program Files\Borland\Delphi7\Bin\dcc32.exe" -CC -EC:\temp\InstantRails\rails_apps\ujudgew\tmp\wd1\ C:\temp\InstantRails\rails_apps\ujudgew\tmp\wd1\potossin-team3-unicode-run48.pas 
+  Borland Delphi Version 15.0
+  Copyright (c) 1983,2002 Borland Software Corporation
+  potossin-team3-unicode-run48.pas(1) potossin-team3-unicode-run48.pas(1) potossin-team3-unicode-run48.pas(1) potossin-team3-unicode-run48.pas(4) 
+  5 lines, 0.06 seconds, 10440 bytes code, 1801 bytes data.
+  
+  C:\temp\InstantRails\rails_apps\ujudgew\tmp\wd1>pushd C:\temp\InstantRails\rails_apps\ujudgew\tmp\wd1\ 
+  
+  C:\temp\InstantRails\rails_apps\ujudgew\tmp\wd1>ren potossin-team3-unicode-run48 executable 
+  The system cannot find the file specified.
+  
+  C:\temp\InstantRails\rails_apps\ujudgew\tmp\wd1>popd
+
+
+49:
+  id: 49
+  team_id: 3
+  problem_id: 1
+  submitted_at: 2006-09-10 14:36:49 +07:00
+  file_name: potossin-team3-unicode-run49.pas
+  compiler_id: 7
+  state: 3
+  state_assigned_at: 2006-09-10 14:36:54 +07:00
+  outcome: tested
+  test_outcomes: 
+  details: 
+
+50:
+  id: 50
+  team_id: 3
+  problem_id: 1
+  submitted_at: 2006-09-10 15:03:29 +07:00
+  file_name: potossin-team3-unicode-run50.pas
+  compiler_id: 7
+  state: 3
+  state_assigned_at: 2006-09-10 15:03:33 +07:00
+  outcome: tested
+  test_outcomes: 
+  details: 
+
+51:
+  id: 51
+  team_id: 3
+  problem_id: 1
+  submitted_at: 2006-09-10 15:03:40 +07:00
+  file_name: potossin-team3-aon-run51.pas
+  compiler_id: 7
+  state: 3
+  state_assigned_at: 2006-09-10 15:03:46 +07:00
+  outcome: tested
+  test_outcomes: 
+  details: 
+
+52:
+  id: 52
+  team_id: 3
+  problem_id: 3
+  submitted_at: 2006-09-10 15:06:39 +07:00
+  file_name: potossin-team3-aon-run52.pas
+  compiler_id: 7
+  state: 3
+  state_assigned_at: 2006-09-10 15:40:47 +07:00
+  outcome: tested
+  test_outcomes: 
+  details: 
+
+53:
+  id: 53
+  team_id: 3
+  problem_id: 3
+  submitted_at: 2006-09-10 15:42:28 +07:00
+  file_name: potossin-team3-aon-run53.pas
+  compiler_id: 7
+  state: 3
+  state_assigned_at: 2006-09-10 15:58:39 +07:00
+  outcome: tested
+  test_outcomes: 
+  details: 
+
+54:
+  id: 54
+  team_id: 3
+  problem_id: 3
+  submitted_at: 2006-09-10 16:07:47 +07:00
+  file_name: potossin-team3-aon-run54.cpp
+  compiler_id: 3
+  state: 3
+  state_assigned_at: 2006-09-10 16:08:49 +07:00
+  outcome: tested
+  test_outcomes: 
+  details: 
+
+55:
+  id: 55
+  team_id: 3
+  problem_id: 4
+  submitted_at: 2006-09-10 16:31:44 +07:00
+  file_name: potossin-team3-impulse-run55.java
+  compiler_id: 8
+  state: 3
+  state_assigned_at: 2006-09-10 16:32:21 +07:00
+  outcome: compilation-error
+  test_outcomes: 
+  details: "C:/temp/InstantRails/rails_apps/ujudgew/tmp/wd1/potossin-team3-impulse-run55.java:929: warning: unmappable character for encoding Cp1251\n\
+  \t\t// "
+
+56:
+  id: 56
+  team_id: 3
+  problem_id: 4
+  submitted_at: 2006-09-10 16:35:15 +07:00
+  file_name: potossin-team3-impulse-run56.java
+  compiler_id: 8
+  state: 3
+  state_assigned_at: 2006-09-10 16:35:41 +07:00
+  outcome: compilation-error
+  test_outcomes: 
+  details: |
+  C:/temp/InstantRails/rails_apps/ujudgew/tmp/wd1/potossin-team3-impulse-run56.java:1: class Sol is public, should be declared in a file named Sol.java
+  public class Sol {
+         ^
+  1 error
+
+

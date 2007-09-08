@@ -1,0 +1,11 @@
+<% run = submittion.runs.last %>
+<tr id="submittion_<%= submittion.id %>" submittion_id="<%= submittion.id %>">
+    <td class="icon">
+        <%= image_tag 'icons/note.png', :alt => "" %>
+    </td>
+    <td>
+        <a href="#"><%=h submittion.problem.display_name %><span> »</span></a>
+    </td>
+    <td><a href="<%=h '#' %>"><%=h submittion.compiler.display_name %></span></a></td>
+	<td><%= run_status(run) %></td>
+</tr>

@@ -1,0 +1,20 @@
+<table class="data_table">
+<% @runs.each_with_index do |run, run_counter| %>
+<tr id="run_<%= run.id %>" run_id="<%= run.id %>" class="<%= if run_counter % 2 == 0 then "odd" else "even" end %>">
+		<td align="center"><%= run.submitted_at.strftime("%H:%M") %></td>
+		<td align="center"><%= ((run.submitted_at - @contest.started_at) / 60).to_i %></td>
+    <td>
+      <%= image_tag 'icons/note.png', :alt => "" %>
+      <a href="<%= if run.submittion then team_submittion_url(@contest, run.submittion.team, run.submittion) else "#" end %>" target="_new"><% unless run.problem.letter.empty? %><%= run.problem.letter %> — <% end %><%=h run.problem.display_name %><span></span></a>
+    </td>
+		<td>
+			<%= run.team.id %> — <%= run.team.name %>
+		</td>
+    <td><%=h run.compiler.display_name %></td>
+	<td><%= run_status(run) %></td>
+</tr>
+<% end %>
+</table>
+<% content_for(:hint) do %>
+	<%= render :partial => 'contests/overview', :locals => {:contest => @contest} %>
+<% end %>

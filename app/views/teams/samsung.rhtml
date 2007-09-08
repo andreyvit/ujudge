@@ -1,0 +1,97 @@
+<%
+  @page_title = "Регистрация команды"
+-%>
+
+<p>Пожалуйста, заполните следующую анкету от компании Samsung для каждого участника.
+<b>Внимание, все поля нужно заполнять по-английски.</b></p>
+
+<% grouped_form(:team_id => @team.id) do |form| %>
+
+<% @members.each_with_index do |member, index| %>
+<% member_postback_hint = [:members, index] -%>
+
+  <% form.group "Информация о #{(index+1).to_russian_ordinal(:p)} участнике команды" do |group| %>
+    <% group.help do %>
+      Personal information
+    <% end %>
+    <% group.field(:member, :fname, :label => "Name") do |f| %>
+      <%= f.text_field %>
+    <% end %>
+    <% group.field(:member, :pname, :label => "Patronymic") do |f| %>
+      <%= f.text_field %>
+    <% end %>
+    <% group.field(:member, :sname, :label => "Surname") do |f| %>
+      <%= f.text_field %>
+    <% end %>
+    <% group.field(:member, :gender, :label => "Gender") do |f| %>
+       <%= f.select_tag(options_for_select([["Male", "male"], ["Female", "female"]], f.postback_value)) %>
+    <% end %>
+
+    <% group.field(:member, :birth_date, :label => "Date of birth") do |f| %>
+      <%= f.date_field %>
+    <% end %>
+    <% group.field(:member, :birth_place, :label => "Place of birth",
+            :comment => "(please specify the city and the country)") do |f| %>
+      <%= f.text_field %>
+    <% end %>
+    <% group.field(:member, :marital_status, :label => "Marital status") do |f| %>
+       <%= f.select_tag(options_for_select([["Single", "single"], ["Married", "married"],
+            ["Divorced", "divorced"], ["Widowed", "widowed"]], f.postback_value)) %>
+    <% end %>
+    <% group.field(:member, :children, :label => "Children") do |f| %>
+       <%= f.select_tag(options_for_select([["No children", "0"], ["1 child", "1"]] +
+            (2..16).collect {|x| ["#{x} children", "#{x}"]}, f.postback_value)) %>
+    <% end %>
+    
+    <% group.help do %>
+      Contact information
+    <% end %>
+    
+    <% group.field(:member, :mailing_address, :label => "Mailing address",
+            :comment => "(Apartment, Street, House, City, Zip Code, Country)") do |f| %>
+      <%= f.textarea_field %>
+    <% end %>
+    <% group.field(:member, :home_phone, :label => "Home phone",
+            :comment => "(please include <b>city code</b>)") do |f| %>
+      <%= f.text_field %>
+    <% end %>
+    <% group.field(:member, :work_phone, :label => "Work phone",
+            :comment => "(please include <b>city code</b>)") do |f| %>
+      <%= f.text_field %>
+    <% end %>
+    <% group.field(:member, :mobile_phone, :label => "Mobile phone") do |f| %>
+      <%= f.text_field %>
+    <% end %>
+    
+    <% group.help do %>
+      Educational background
+    <% end %>
+    
+    <% group.field(:member, :edu_spec, :label => "Major/Speciality") do |f| %>
+      <%= f.text_field %>
+    <% end %>
+    <% group.field(:member, :edu_period, :label => "Period") do |f| %>
+      <%= f.text_field %>
+    <% end %>
+    <% group.field(:member, :edu_university, :label => "University") do |f| %>
+      <%= f.text_field %>
+    <% end %>
+    <% group.field(:member, :edu_courses, :label => "Additional courses",
+            :comment => "(additional courses and trainings)") do |f| %>
+      <%= f.textarea_field %>
+    <% end %>
+    <% group.field(:member, :edu_awards, :label => "Awards",
+            :comment => "(awards, prizes, scholarsips or grants)") do |f| %>
+      <%= f.textarea_field %>
+    <% end %>
+  <% end %>
+<% end %>
+
+  <% form.group "Готово?" do |group| %>
+    <% group.field do |f| %>
+      <%= submit_tag "Зарегистрировать команду" %>
+    <% end %>
+  <% end %>
+
+<% end %>
+

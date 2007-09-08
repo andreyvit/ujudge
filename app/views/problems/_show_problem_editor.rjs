@@ -1,0 +1,3 @@
+prefix = if @problem.new_record? then "new_problem" else "problem_#{problem.id}" end
+page["#{prefix}_editor_body"].replace_html :partial => 'problem_editor',
+  :locals => {:problem => problem, :prefix => prefix}

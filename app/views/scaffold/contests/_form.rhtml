@@ -1,0 +1,22 @@
+<fieldset>
+	<div class="row">
+		<!--[form:contest]-->
+<div class="form-element">
+  <label for="contest_short_name">Short name</label>
+  <%= text_field 'contest', 'short_name' , {:class=>"text-input"} %>
+</div>
+
+<div class="form-element">
+  <label for="contest_name">Name</label>
+  <%= text_field 'contest', 'name' , {:class=>"text-input"} %>
+</div>
+
+<div class="form-element">
+  <label for="contest_reg_message">Reg message</label>
+  <%= text_area 'contest', 'reg_message'  %>
+</div>
+
+<!--[eoform:contest]-->
+
+	</div>
+</fieldset>

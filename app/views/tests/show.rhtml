@@ -1,0 +1,23 @@
+<p>
+  <b>Problem:</b>
+  <%=h @tests.problem_id %>
+</p>
+
+<p>
+  <b>Position:</b>
+  <%=h @tests.position %>
+</p>
+
+<p>
+  <b>Input file:</b>
+  <%=h @tests.input_file %>
+</p>
+
+<p>
+  <b>Answer file:</b>
+  <%=h @tests.answer_file %>
+</p>
+
+
+<%= link_to 'Edit', edit_tests_path(@tests) %> |
+<%= link_to 'Back', tests_path %>

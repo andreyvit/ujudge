@@ -1,0 +1,41 @@
+<% if contest.state == 0 %>
+	<h2>Олимпиада не началась</h2>
+	<p>После начала олимпиады здесь будет отображаться оставшееся время.</p>
+<% elsif contest.state == 2 %>
+	<h2>Олимпиада идет</h2>
+	<p><%= ((Time.now - contest.started_at)/60).to_i.russian("Прошла # минута", "Прошло # минуты", "Прошло # минут") %>.</p>
+<% elsif contest.state == 3 %>
+	<h2>Олимпиада завершена</h2>
+	<% if current_user.is_a?(Team) %>
+		<p>
+		Спасибо за участие!
+		Не забудьте рассказать нам своё мнение о новой системе.
+		</p>
+	<% end %>
+<% end %>
+<p>В очереди тестирования <%= Server.queue_size.russian("# решение", "# решения", "# решений") %>.</p>
+<p>Используется <%= Server.clients_count.russian("# тестирующий сервер", "# тестирующих сервера", "# тестирующих серверов") %>.</p>
+<% if current_user.is_a?(User) %>
+<% unanswered_count = Question.count(:conditions => "answer IS NULL") %>
+<% if unanswered_count == 0 %>
+<p>Нет неотвеченных вопросов.</p>
+<% else %>
+<p>У вас есть <%= unanswered_count.russian("# неотвеченный вопрос", "# неотвеченных вопроса", "# неотвеченных вопросов") %>.</p>
+<% end %>
+<% end %>
+<h2>Новости</h2>
+<% recent_messages = contest.recent_messages.find(:all) %>
+<% if recent_messages.empty? %>
+	<p>(Как только будет опубликована хоть одна новость, она появится здесь.)</p>
+<% else %>
+	<% recent_messages.each_with_index do |news, news_counter| %>
+	  <p><b><%= news.created_at.strftime("%d.%m.%Y %H:%M")%></b> — <%= news.text %></p>
+	<% end %>
+<% end %>
+<% if current_user.is_a?(Team) %>
+	<h2>Ваше мнение?</h2>
+	<p>Что вы думаете о новой системе тестирования? Отправьте ваш отзыв на <a href="mailto:andreyvit@gmail.com">andreyvit@gmail.com</a>.
+<% end %>
+<!--
+<p><img src="/images/icons/feed.png" class="icon" alt="Feed"> RSS</p>
+-->

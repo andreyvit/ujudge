@@ -1,0 +1,138 @@
+<% 
+  @page_tabs ||= []
+  @page_links ||= []
+-%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+	"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+
+  <title><%= @page_title %></title>
+  <%= stylesheet_link_tag 'screen' %>
+  <%= stylesheet_link_tag 'forms' %>
+  <%= stylesheet_link_tag 'redbox' %>
+  <%= stylesheet_link_tag 'humanized' %>
+  <%= javascript_include_tag :defaults %>
+  <%= javascript_include_tag 'redbox' %>
+  <%= javascript_include_tag 'placeholder' %>
+  <%= javascript_include_tag 'humanized' %>
+  <link rel="stylesheet" type="text/css" href="/stylesheets/print.css" media="print">
+  <link rel="icon" href="/favicon.ico">
+  <link rel="alternate" type="application/rss+xml" title="Ochen Ochen Dlinnoe Figovoe Prefigovoe Neinteresoye Nazvanie timeline feed" href="http://sandbox.goplan.org/fignya/rss/timeline?hash=3d5fb82fafcb283b2c4bf5f53dd0043c50d5a0dc">
+  <link rel="alternate" type="application/rss+xml" title="Ochen Ochen Dlinnoe Figovoe Prefigovoe Neinteresoye Nazvanie blog feed" href="http://sandbox.goplan.org/fignya/blog/rss">
+	<%= yield(:head) %>
+</head>
+
+<body>
+  <div id="wrap" class="clearfix">
+	
+    <!-- HEADER -->
+
+    <div id="header" class="clearfix">
+      <h1 id="project_title">
+        <span class="left clearfix">
+          <img src="/images/goplan_logo_imageonly.gif" alt="Goplan" id="goplan_logo" class="icon" name="goplan_logo" /><%= @page_heading %>
+        </span>
+      </h1>
+
+<!-- project search -->
+
+        <span class="right clearfix">
+					<% if false # serving_safari? %>
+          <input accesskey="S" class="black" id="search_string" name="search_string" type="search" placeholder="Найти" results="10" value="" />
+					<% else %>
+          <!-- <img alt="Magnifier" class="icon" src="/images/icons/magnifier.png?1163815094" /> -->
+          <% if logged_in? %>
+		<%= render :partial => 'account/logged_in_info' %>
+		<% else %>
+		<%= render :partial => 'account/login_form' %>
+		<% end %>
+          
+          <!-- <input accesskey="S" class="black" id="search_string" name="search_string" type="text" value="" placeholder="Search ..." placeholder-class="black" /> -->
+					<% end %>
+        </span>
+    </div>
+
+		<!-- CONTENT -->
+
+    <div id="content" class="clearfix">
+      <div id="project_navigation" class="clearfix">
+        <ul>
+	        <% for tab in @page_tabs %>
+	          <li<% if @current_tab == tab.key %> class="current"<% end %>><a href="<%=h tab.generator.call %>"><%= image_tag "icons/tabs/#{tab.key}.png", :alt => '' %> <%= tab.title %></a></li>
+					<% end %>
+        </ul>
+      </div>
+
+      <div id="left" class="clearfix" style="clear: both;">
+        <div id="left_container">
+          <div id="action_nav_container">
+            <div id="action_nav">
+              <ul>
+								<% for link in @page_links %>
+	                <li><a href="<%=h link.generator.call %>"><%= image_tag "icons/links/#{@current_tab}/#{link.key}.png", :alt => '' %> <%= link.title %></a></li>
+								<% end %>
+              </ul>
+            </div>
+          </div>
+
+          <%= yield %>
+
+        </div>
+      </div>
+
+      <div id="right" class="clearfix">
+        <div id="projectsmenu" class="hint" style="display: none;">
+          <h2><img src="/images/icons/project.png" class="icon"> Project list</h2>
+
+          <div id="projectslistmenu">
+            <ul>
+              <li><a href="/fignya">fignya</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div id="feedback" class="rightspecial" style="display: none">
+          <h2><img src="/images/icons/wrench.png" alt="" class="icon"> Send us feedback</h2>
+
+          <form action="/fignya/help/sendfeedback" method="post">
+            <label for="feedback_title">Feedback title</label> <input id="feedback_title" name="feedback[title]" size="30" type="text" value=""><label for="feedback_text">Tell us about it!</label> 
+            <textarea cols="40" id="feedback_text" name="feedback[text]" rows="20"> 
+</textarea> <input name="commit" type="submit" value="Send feedback">
+          </form>
+        </div>
+
+        <div id="feedback_thanks" style="display: none">
+          <img src="/images/icons/tick.png" class="icon" alt="">Thank you for your feedback!
+        </div>
+
+        <div id="flash">
+          <div id="ajax_message" class="sidebar" style="display: none;">
+            <span id="amsg"></span>
+          </div>
+        </div>
+
+        <div class="hint">
+		  <%= yield :hint %>
+        </div>
+
+        <div id="chatrooms"></div>
+      </div>
+    </div>
+
+    <div id="footer">
+      © Разработчики открытой тестирующей системы <a href="http://code.google.com/p/ujudge/">ujudge</a>. Вы можете <a href="mailto:">написать нам письмо</a>.
+    </div>
+  </div>
+
+  <div id="overlay" style="display:none;" onclick="close_modal();"></div>
+<% if flash[:message] || flash[:warning] || flash[:notice] %>
+<% msg = flash[:warning] || flash[:message] || flash[:notice] %>
+<script>
+Humanized.showMessage("<%=h msg %>");
+</script>
+<% end %>
+</body>
+</html>

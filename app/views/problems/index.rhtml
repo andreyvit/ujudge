@@ -1,0 +1,84 @@
+<%
+	@page_title = "Задачи Всесибирской олимпиады 2006 года"
+	@current_tab = :problems
+
+-%>
+
+<% content_for(:head) do %>
+<%= javascript_include_tag 'editor' %>
+<style>
+.editor, .editor TD { background: #FFEB99 !important; }
+.editable-cell { cursor: pointer;  }
+.editable-cell A { border-bottom: 1px dashed black; }
+.edited-cell {
+		background: #FFEB99 !important;
+		border: 1px solid black !important;
+		border-bottom: 1px solid #FFEB99 !important;
+}
+.editor {
+		border: 1px solid black !important;
+}
+.editable-cell, .edited-cell { padding: 1px 5px !important; }
+</style>
+<% end %>
+
+
+<script>
+var Problems = {};
+
+Problems.editorTypes = {
+	problem: function(table, el, type) {
+		var row = Element.ancestor(el, "TR");
+		var problemId = parseInt(row.getAttribute("problem_id"));
+		new uJudge.Editors.Editor(table, el, type, 8, "editor", "edited-cell",
+		  "<%= edit_problem_url(@contest, 999) %>".replace(/999/, "" + problemId));
+	},
+
+	new_problem: function(table, el, type) {
+		new uJudge.Editors.Editor(table, el, type, 8, "editor", "edited-cell",
+		  "<%= new_problem_url(@contest) %>");
+	},
+	
+	tests: function(table, el, type) {
+		var row = Element.ancestor(el, "TR");
+		var problemId = parseInt(row.getAttribute("problem_id"));
+		new uJudge.Editors.Editor(table, el, type, 8, "editor", "edited-cell",
+		  "<%= tests_url(@contest, 999) %>".replace(/999/, "" + problemId));
+	},
+	
+	statement: function(table, el, type) {
+		var row = Element.ancestor(el, "TR");
+		var problemId = parseInt(row.getAttribute("problem_id"));
+		new uJudge.Editors.Editor(table, el, type, 8, "editor", "edited-cell",
+		  "<%= statements_url(@contest, 999) %>".replace(/999/, "" + problemId));
+	}
+}
+
+var uJudge_onload = function() {
+	var table = new uJudge.Editors.Table('problems_table');
+	table.registerEditorTypes(Problems.editorTypes);
+	table.install();
+};
+uJudge_onload = uJudge_onload.safe();
+</script>
+
+<h1 class="section">Задачи:</h1>
+<div class="mb clearfix" id="problems_table_container">
+<%= render :partial => 'problems_table', :locals => {:problems => @problems} %>
+</div>
+
+<% content_for(:hint) do %>
+<%= render :partial => 'contests/overview', :locals => {:contest => @contest} %>
+<% end %>
+
+<script>
+function init() {
+	var f = window.onload;
+	window.onload = function() {
+		if (f != null)
+			f();
+		uJudge_onload();
+	}
+}
+init();
+</script>

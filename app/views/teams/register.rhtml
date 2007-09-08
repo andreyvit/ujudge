@@ -1,0 +1,119 @@
+<%
+  @page_title = "Регистрация команды"
+  @current_tab = :teams
+-%>
+<%
+  @page_title = if @is_editing then "Редактирование информации о команде" else "Регистрация команды" end
+-%>
+
+<p><%= @contest.reg_message %></p>
+
+<%
+    if @is_editing
+        url, method = team_url(@contest, @team), 'put'
+    else
+        url, method = teams_url(@contest), 'post'
+    end
+%>
+
+<% grouped_form url, :method => method do |form| %>
+
+  <% form.group "Ваша команда" do |group| %>
+    <% group.help do %>
+      Название команды фигурирует в таблице результатов и видно другим участникам.
+    <% end %>
+    <% group.field(:team, :name, :label => "Название команды", :comment => "(например, Novosibirsk SU #1)") do |f| %>
+      <%= f.text_field %>
+    <% end %>
+    <% group.field(:team, :email, :label => "Электронная почта", :comment => "(по этому адресу мы вышлем вам пароль для входа)") do |f| %>
+      <%= f.text_field %>
+    <% end %>
+  <% end %>
+
+  <% form.group "Учебное заведение", :id => 'university_group' do |group| %>
+    <% group.help do %>
+      Выберите, к какому учебному заведению относится команда. Если вашего учебного заведения в списке нет,
+    пометьте пункт «добавить новый ВУЗ или школу» и внесите необходимые сведения.
+    <% end %>
+    <% group.field(:team, :university_id, :label => "Учебное заведение") do |f| %>
+       <%= f.select_tag(options_for_select([["--- выберите учебное заведение ---", -1],
+          ["(добавить новый ВУЗ или школу...)", 0]] + 
+          @universities.collect {|u| [u.name, u.id]}, f.postback_value)) %>
+    <% end %>
+    <!-- the following field is a bug workaround for IE: without it the select box above is
+         removed when all the following rows are removed -->
+    <% group.wide_field do %><% end %>
+    <%= track_appendable_field 'team_university_id', '#university_group .show_for_university' %>
+    <% group.field(:university, :name, :label => "Название", :klass => 'show_for_university',
+            :comment => "(например, «Новосибирский государственный университет»;<br>" +
+            "внимание: такие слова, как «государственный» и «университет», по правилам пишутся с маленькой буквы)") do |f| %>
+      <%= f.text_field %>
+    <% end %>
+    <% group.field(:university, :city, :label => "Город", :klass => 'show_for_university',
+            :comment => "(например, «Новосибирск»)") do |f| %>
+      <%= f.text_field %>
+    <% end %>
+  <% end %>
+
+  <% form.group "Тренеры" do |group| %>
+    <% group.help do %>
+      Тренер(ы) — это люди, ответственные за подготовку вашей команды к соревнованиям. 
+      Их имена фигурируют в получаемых дипломах.
+    <% end %>
+    <% group.field(:team, :coach_names, :label => "Тренеры команды",
+        :comment => "(пожалуйста, указывайте ФИО полностью;<br>" +
+               "например, Иванов Петр Александрович, Петрова Александра Ивановна)") do |f| %>
+      <%= f.text_field %>
+    <% end %>
+    <% group.field(:team, :coach_email, :label => "Электронная почта",
+        :comment => "(укажите <em>один</em> адрес, по которому можно связаться с тренерами)") do |f| %>
+      <%= f.text_field %>
+    <% end %>
+  <% end %>
+
+  <% form.group "Участники команды" do |group| %>
+    <% @members.each_with_index do |member, index| %>
+        <% member_postback_hint = [:members, index] -%>
+        <% group.help do %>
+          Информация о <%= (index+1).to_russian_ordinal(:p) %> участнике команды.
+        <% end %>
+        <% group.field(:member, :last_name, :label => "Фамилия") do |f| %>
+          <%= f.text_field %>
+        <% end %>
+        <% group.field(:member, :first_name, :label => "Имя") do |f| %>
+          <%= f.text_field %>
+        <% end %>
+        <% group.field(:member, :middle_name, :label => "Отчество") do |f| %>
+          <%= f.text_field %>
+        <% end %>
+        <% group.field(:member, :email, :label => "Электронная почта") do |f| %>
+          <%= f.text_field %>
+        <% end %>
+        <% group.field(:member, :faculty, :label => "Факультет") do |f| %>
+          <%= f.text_field %>
+        <% end %>
+        <% group.field(:member, :year_id, :label => "Курс") do |f| %>
+           <%= f.select_tag(options_for_select([["1 курс", 1], ["2 курс", 2], ["3 курс", 3],
+              ["4 курс", 4], ["5 курс", 5], ["1 курс магистратуры", 11],
+              ["2 курс магистратуры", 12], ["1 курс аспирантуры", 21],
+              ["2 курс аспирантуры", 22],
+              ["8 класс школы", 108],
+              ["9 класс школы", 109],
+              ["10 класс школы", 110],
+              ["11 класс школы", 111]
+              ], f.postback_value)) %>
+        <% end %>
+    <% end %>
+  <% end %>
+
+  <% form.group "Готово?" do |group| %>
+    <% group.field do |f| %>
+      <%= submit_tag(if @is_editing then "Сохранить изменения" else "Зарегистрировать команду" end) %>
+    <% end %>
+  <% end %>
+
+<% end %>
+
+<% content_for(:hint ) do %>
+	<%= render :partial => 'contests/overview', :locals => {:contest => @contest} %>
+<% end %>

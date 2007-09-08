@@ -1,0 +1,9 @@
+<p><b>Получение тестов для задачи <%= @problem.display_name %> из файла <%= @tests_upload.original_filename %>.</b></p>
+
+<p><%= image_tag 'indicator.gif' %> Идет обработка…</p>
+<%= javascript_tag(update_page do |page|
+		page.delay(2) do
+			page << "window.location = window.location;"
+		end
+	end)
+%>

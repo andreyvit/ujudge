@@ -1,0 +1,5 @@
+check_method:
+            1 => 'chetvertakov.checkres',
+            3 => 'chetvertakov.truefalse',
+            4 => 'dyatlov.partialans',
+        when 2 # internal diff checker

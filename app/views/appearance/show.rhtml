@@ -1,0 +1,180 @@
+  <script type="text/javascript">
+//<![CDATA[
+function changeColorScheme(top_line, top_text, bgcolor, rightcolor, dark_tab) {
+    $('top_line_input').value = top_line;
+      $('top_line_preview').style.backgroundColor = '#' + top_line;
+    $('top_text_input').value = top_text;
+      $('top_text_preview').style.color = '#' + top_text;
+    $('bgcolor_input').value = bgcolor;
+      $('bgcolor_preview').style.backgroundColor = '#' + bgcolor;
+    $('rightcolor_input').value = rightcolor;
+      $('rightcolor_preview').style.backgroundColor = '#' + rightcolor;
+    $('dark_tab_input').value = dark_tab;
+      $('dark_tab_preview').style.backgroundColor = '#' + dark_tab;
+}
+
+function initializeSchemePreview() {
+      $('top_line_preview').style.backgroundColor =
+        '#' + $('top_line_input').value;
+      $('top_text_preview').style.color =
+        '#' + $('top_text_input').value;
+      $('bgcolor_preview').style.color =
+        '#' + $('bgcolor_input').value;
+      $('rightcolor_preview').style.color =
+        '#' + $('rightcolor_input').value;
+}
+    
+function customScheme() {
+  $('custom_scheme_selector').checked='checked';
+}
+
+function setHexColor(elementId, hexValue) {
+  $(elementId).style.color='#' + hexValue;
+}
+
+function setHexBackgroundColor(elementId, hexValue) {
+  $(elementId).style.backgroundColor='#' + hexValue
+}
+
+//]]>
+</script>
+  
+		<p><strong>Выберите цветовую схему</strong>. Если вы знаете
+		<a href="http://www.colorschemer.com/online.html" target=_blank>шестнадцатиричную запись цветов</a>,
+		вы можете изменить значения справа для создания своей цветовой схемы.</p>
+
+		<% form_tag(appearance_url(), :method => 'put') do %>
+      <div class="Preview">
+      <table>
+			<tr height="15px">
+				<td class="Header" bgcolor="#000000">
+					<p class="FauxH1"><font color="#779999">"Текст на верхней полосе"</font></p>
+				</td>
+			</tr>
+			<tr height="15px">
+				<td class="FauxH1" id="bgcolor_preview">
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<table>
+						<tr>
+							<td width="15%" height="60px" id="bgcolor_preview">&nbsp;
+							</td>
+							<td width="45%">
+								<table width="100%">
+									<tr height="20px">
+										<td width="33%" bgcolor="#f6f6f6">nththchbdh
+										</td>
+										<td width="33%" id="dark_tab_preview">dhb hdcbc
+										</td>
+										<td id="bgcolor_preview">ycb ch cbc
+										</td>
+									</tr>
+									<tr height="20px" bgcolor="#f6f6f6">
+										<td colspan="3" height="10px">&nbsp; 
+										</td>
+									</tr>
+									<tr height="20px" bgcolor="#ffffff">
+										<td colspan="3">   dhb hdcbc ycb ch cbc cbduc buc cn    dhb hdcbc ycb ch cbc cbduc buc cn    dhb hdcbc ycb ch cbc cbduc buc cn    dhb hdcbc ycb ch cbc cbduc buc cn    dhb hdcbc ycb ch cbc cbduc buc cn    dhb hdcbc ycb ch cbc cbduc buc cn    dhb hdcbc ycb ch cbc cbduc buc cn    dhb hdcbc ycb ch cbc cbduc buc cn    dhb hdcbc ycb ch cbc cbduc buc cn    dhb hdcbc ycb ch cbc cbduc buc cn 
+										</td>
+									</tr>
+								</table>
+							</td>
+							<td width="15%" height="60px" id="bgcolor_preview">nththchbdh dhb hdcbc ycb ch cbc cbduc buc cn
+							</td>
+							<td width="15%" height="60px" id="rightcolor_preview">nththchbdh dhb hdcbc ycb ch cbc cbduc buc cn
+							</td>
+							<td height="40px" id="bgcolor_preview">nththchbdh dhb hdcbc ycb ch cbc cbduc buc cn
+							</td>
+						</tr>
+						<tr height="20px">
+							<td>
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr height="15px">
+				<td class="FauxH1" id="bgcolor_preview">
+				</td>
+			</tr>
+			</table>
+      </div>
+        
+      <table id="schemes_and_custom">
+        <tr>
+          <td id="schemes">
+              <p>
+                <input type="radio" name="scheme" id="classic_scheme_selector"
+                   
+                   onClick="changeColorScheme('000', 'CCC', '7ccc5c', 'FF0')" />
+
+                   <span class="swatches" style="background: #000000;">&nbsp;
+                   <span class="client" style="background: #cccccc;">&nbsp;&nbsp;&nbsp;</span>
+                   <span style="background: #7ccc5c;">&nbsp;&nbsp;&nbsp;</span>
+                   <span style="background: #FF0;">&nbsp;&nbsp;&nbsp;</span>
+                   &nbsp;</span>
+              </p>
+            
+              <p>
+                <input type="radio" name="scheme" id="roseblue_scheme_selector"
+                   checked="checked"
+                   onClick="changeColorScheme('036', 'fc0', 'fff', '090')" />
+
+                   <span class="swatches" style="background: #036">&nbsp;
+                   <span class="client" style="background: #fc0;">&nbsp;&nbsp;&nbsp;</span>
+                   <span style="background: #fff;">&nbsp;&nbsp;&nbsp;</span>
+                   <span style="background: #1A4F85;">&nbsp;&nbsp;&nbsp;</span>
+                   &nbsp;</span>
+
+              </p>
+            
+              <p>
+                <input type="radio" name="scheme" id="rose_scheme_selector"
+                   
+                   onClick="changeColorScheme('E8D5B4', '000', 'A6792C', '000')" />
+
+                   <span class="swatches" style="background: #E8D5B4">&nbsp;
+                   <span class="client" style="background: #000;">&nbsp;&nbsp;&nbsp;</span>
+                   <span style="background: #A6792C;">&nbsp;&nbsp;&nbsp;</span>
+                   <span style="background: #937233;">&nbsp;&nbsp;&nbsp;</span>
+                   &nbsp;</span>
+              </p>
+            
+            <p>
+            <input type="radio" name="scheme" id="custom_scheme_selector" 
+             />
+            Custom
+            </p>
+
+          </td>
+          <td id="custom">
+
+      <div id="basic_form">
+
+        <div class="block" style="background: none;">
+            <p>Цвет верхней полосы: #<input type="text" size="7" maxlength="6" name="color_scheme[top_line]" id="top_line_input" value="000" onChange="customScheme(); setHexBackgroundColor('top_line_preview', this.value)" /></p>
+            <p>Цвет текста на верхней полосе: #<input type="text" size="7" maxlength="6" name="color_scheme[top_text]" id="top_text_input" value="779999" onChange="customScheme(); setHexColor('top_text_preview', this.value)" /></p>
+            <p>Цвет фона: #<input type="text" size="7" maxlength="6" name="color_scheme[bgcolor]" id="bgcolor_input" value="7ccc5c" onChange="customScheme(); setHexColor('bgcolor_preview', this.value)" /></p>
+            <p>Цвет правой панели: #<input type="text" size="7" maxlength="6" name="color_scheme[rightcolor]" id="rightcolor_input" value="ffeb99" onChange="customScheme(); setHexColor('rightcolor_preview', this.value)" /></p>
+            <p>Цвет активной вкладки: #<input type="text" size="7" maxlength="6" name="color_scheme[light_tab_color]" id="light_tab_color_input" value="f6f6f6" onChange="customScheme(); setHexColor('rightcolor_preview', this.value)" /></p>
+            <p>Цвет неактивной вкладки: #<input type="text" size="7" maxlength="6" name="color_scheme[dark_tab_color]" id="dark_tab_color_input" value="a4d767" onChange="customScheme(); setHexColor('rightcolor_preview', this.value)" /></p>
+        </div>
+      </div>
+          </td>
+
+        </tr>
+      </table>
+
+
+      <div class="submit">
+        <script language="JavaScript">initializeSchemePreview()</script>
+        <input type="submit" value="Save changes" /> or <a href="/global/appearance" class="admin">Revert changes</a>
+      </div>
+
+  <% end %>
+
+<% content_for(:hint) do %>
+<%= render :partial => 'sidebar/global' %>
+<% end %>

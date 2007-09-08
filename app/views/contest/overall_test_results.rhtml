@@ -1,0 +1,44 @@
+<%
+	@page_title = "Результаты всех тестов"
+-%>
+
+<style>
+table, td, th {border:  1px solid black;}
+</style>
+
+<% for problem in @problems %>
+<h2>Задача <%= problem.display_name %></h2>
+<table border="2" cellspacing="3" cellpadding="2" style="border-collapse: no;">
+	<tr>
+		<th>&nbsp;</th>
+		<th>&nbsp;</th>
+		<% for test in @tests[problem.id] %>
+			<th><%=h test %></th>
+		<% end %>
+	</tr>
+	<% for run in @runs[problem.id] %>
+		<tr>
+			<td><% if @info[:show_team_id] %>(<%= run.team.id %>) <% end %><%= run.team.name %></td>
+			<% if run.points.nil? %>
+			<td>&nbsp;</td>
+			<% else %>
+			<td><%= run.points %></td>
+			<% end %>
+			<% if run.outcome == 'compilation-error' %>
+			  <td colspan="<%= @tests[problem.id].size %>">Compilation Error</td>
+			<% else %>
+			  <% tests = run.tests.find(:all) %>
+			  <% for test in @tests[problem.id] %>
+			    <% run_test = tests.find {|t| t.test_ord == test} %>
+			    <% if run_test.nil? %>
+						<td>&mdash;</td>
+					<% else %>
+					  <% color = run_test.outcome_info.color; color = color && %Q/ style="background: #{color}"/ || "" %>
+				    <td align="center" <%= color %>><%= run_test.short_display_outcome %></td>
+					<% end %>
+			  <% end %>
+			<% end %>
+		</tr>
+	<% end %>
+</table>
+<% end %>

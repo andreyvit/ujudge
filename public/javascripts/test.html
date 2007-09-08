@@ -1,0 +1,37 @@
+<html>
+<head>
+	<title>Prototype</title>
+	<script src="prototype.js"></script>
+	<style>
+		TABLE.data {}
+	</style>
+	<script type="text/javascript" charset="utf-8">
+		function editRow(id) {
+			var row = $('data_row' + id);
+			var rowEditor = $('data_row' + id + "_edit");
+			Element.show(rowEditor);
+			Element.hide(row);
+		}
+		function endEdit(id) {
+			var row = $('data_row' + id);
+			var rowEditor = $('data_row' + id + "_edit");
+			Element.hide(rowEditor);
+			Element.show(row);
+		}
+	</script>
+</head>
+<body>
+	<table class="data">
+		<tr id="data_row1">
+			<td>Cell1</td>
+			<td>Cell2</td>
+			<td><button onclick="editRow(1)">Edit</button></td>
+		</tr>
+		<tr id="data_row1_edit" style="display: none;">
+			<td><input value="Cell1"></td>
+			<td><input value="Cell2"></td>
+			<td><button onclick="endEdit(1)">Save</button></td>
+		</tr>
+	</table>	
+</body>
+</html>

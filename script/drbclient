@@ -1,0 +1,54 @@
+#!/usr/bin/env ruby
+puts "Loading general libraries..."
+require 'optparse'
+require 'ostruct'
+require 'drb'
+require 'socket'
+require 'monitor'
+require 'timeout'
+require 'yaml'
+require 'pathname'
+require 'ftools'
+require 'logger'
+require 'rubygems'
+
+puts "Loading database libraries..."
+require 'active_support'
+#require 'active_record'
+
+puts "Loading Rails libraries..."
+require File.dirname(__FILE__) + '/../config/boot'
+require_gem 'rails'
+
+#puts "Loading database libraries..."
+#require 'cached_model'
+
+Dependencies.load_paths << File.join(RAILS_ROOT, 'lib')
+
+options = OpenStruct.new
+OptionParser.new do |opts|
+  opts.banner = "Usage: script/drbclient [options]"
+  
+  opts.on( "-h", "--host HOST", String,
+           "IP or name of the server" ) do |opt|
+    options.host = opt
+  end
+  
+  opts.on( "-p", "--port PORT", Integer,
+           "port number of the server" ) do |opt|
+    options.port = opt.to_i
+  end
+
+  opts.on_tail("-H", "--help", "Show this message") do
+    puts opts
+    exit
+  end
+
+  opts.on_tail("--version", "Show version") do
+    puts OptionParser::Version.join('.')
+    exit
+  end
+end.parse!
+
+Judge::Client::Client.start_client(options)
+

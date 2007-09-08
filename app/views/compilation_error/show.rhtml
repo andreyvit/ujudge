@@ -1,0 +1,25 @@
+<html>
+<head>
+<title>Ошибка компиляции: решение <%= @run.id %></title>
+<style>
+body { font: 9pt Verdana; }
+p { font-weight: bold; }
+</style>
+</head>
+<body>
+<pre>
+<b>Подробности об ошибке компиляции</b>
+
+<b>Решение номер:  <%= @run.id %></b>
+<b>Задача:         <%= @run.problem.display_name %></b>
+<b>Команда:        <%= @run.team.name %></b>
+
+<% if @run.details.nil? || @run.details.strip.empty? -%>
+<i>Извините, но сообщение об ошибке пустое. Возможно, возникла проблема с запуском
+компилятора. Пожалуйста, обратитесь к жюри.
+<%- else -%>
+<%= h @run.details %>
+<% end %>
+</pre>
+</body>
+</html>

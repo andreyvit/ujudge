@@ -1,0 +1,18 @@
+<html>
+<head>
+<title>Решение <%= @submittion.id %></title>
+<style>
+body { font: 9pt Verdana; }
+p { font-weight: bold; }
+</style>
+</head>
+<body>
+<pre>
+<b>Посылка номер:  <%= @submittion.id %></b>
+<b>Задача:         <% unless @submittion.problem.letter.empty? %><%= @submittion.problem.letter %> — <% end %><%= @submittion.problem.display_name %></b>
+<b>Команда:        <%= @submittion.team.id %> — <%= @submittion.team.name %></b>
+
+<%= h (@submittion.text || File.open(File.join(UJUDGE_ROOT, 'data', @contest.short_name, 'solutions', @submittion.runs.first.file_name)) { |f| f.read }) %>
+</pre>
+</body>
+</html>

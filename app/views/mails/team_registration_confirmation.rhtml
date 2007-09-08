@@ -1,0 +1,36 @@
+(English-language version is below. Russian text uses UTF-8 encoding.)
+
+Здравствуйте.
+
+Ваша команда <%= @team.name %> успешно зарегистрирована.
+
+Зайдите на сайт http://olimp.iis.nsk.su/ujudge/, введите один из приведенных ниже паролей в текстовое поле,
+находящееся в правом верхнем углу страницы, и нажмите клавишу ENTER. Вы окажетесь на странице олимпиады.
+
+Вот четыре пароля, которые мы вам предлагаем на выбор:
+
+<% for pwd in @password_set.passwords -%>
+* <%= pwd.text %>
+<% end -%>
+
+Все пароли работают одинаково, вы можете выбрать один из них или пользоваться каждым по очереди.
+Пожалуйста, войдите сейчас в систему, чтобы мы знали, что вы получили пароль.
+
+Hello.
+
+Your team <%= @team.name %> has been registered successfully.
+
+Here are the passwords for you to choose:
+
+<% for pwd in @password_set.passwords -%>
+* <%= pwd.text %>
+<% end -%>
+
+All these password work alike; you can choose one of them or even use different ones on different occasions.
+
+Now, please, login to the system to let us know you have received the passwords.
+
+
+--
+
+Олимпиада: <%= @team.contest.name %>.

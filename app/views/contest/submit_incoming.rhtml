@@ -1,0 +1,23 @@
+<%
+	@page_title = "Сдача решений"
+-%>
+<h2>Успешно пропарсены</h2>
+<ul>
+<% for s in @success %>
+<li><%=h s %></li>
+<% end %>
+</ul>
+
+<h2>Ошибки разбора</h2>
+<ul>
+<% for s in @unparsed %>
+<li><%=h s %></li>
+<% end %>
+</ul>
+
+<h2>Прочие проблемы</h2>
+<ul>
+<% for s in @problems %>
+<li><%=h s %></li>
+<% end %>
+</ul>

@@ -1,0 +1,9 @@
+<%
+	@page_title = @contest.name + " — очередь тестирования"
+	@page_header = "Подробно об ошибке"
+-%>
+<p><%= link_to "Отправить решение", :action => 'submit', :contest_name => @contest.short_name %></p>
+<p><%= link_to "Очередь тестирования", :action => 'queue', :contest_name => @contest.short_name %></p>
+
+<pre><%=h @details %></pre>
+

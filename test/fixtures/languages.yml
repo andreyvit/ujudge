@@ -1,0 +1,10 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+ru:
+  id: 1
+  display_name: Russian
+  iso_code_2: ru
+  
+en:
+  id: 2
+  display_name: English
+  iso_code_2: en

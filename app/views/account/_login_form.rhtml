@@ -1,0 +1,8 @@
+<%= form_tag({ :controller => "/account", :action => "login" },
+          :id => 'login_form', :style => "margin: 0px; padding: 0.7em 0px 1em 0px;" )
+ %>
+<a href="<%=h contests_url %>">« Вернуться к списку олимпиад</a> |
+<input type="password" name="password" size="20">
+<input type="submit" value="Войти">
+</div>
+<%= end_form_tag %>

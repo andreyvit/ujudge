@@ -1,0 +1,38 @@
+<h1>Перетестировать:</h1>
+
+<table>
+<tr>
+  <td width="30%" style="text-align: top;">
+  Задачи:
+  </td>
+  <td width="70%">
+  <% start_form_tag do %>
+  <% @problems.each do |problem| %>
+  <%= check_box_tag :name => #{problem.id}, :value => "0", :checked => false %>&nbsp;&nbsp;<%= problem.display_name %><br>
+  <% end %>
+  <% end %>
+  </td>
+</tr>
+<tr>
+  <td width="30%" align="top">
+  Участники:
+  </td>
+  <td width="70%">
+    <li> Все
+    <li> Отдельные участники
+  </td>
+</tr>
+<tr>
+  <td width="30%" text-align="top">
+  Языки программирования
+  </td>
+  <td width="70%">
+    <li> Все
+    <li> Решения на отдельных языках
+  </td>
+</tr>
+</table>
+
+<% content_for(:hint) do %>
+	<%= render :partial => 'contests/overview', :locals => {:contest => @contest} %>
+<% end %>

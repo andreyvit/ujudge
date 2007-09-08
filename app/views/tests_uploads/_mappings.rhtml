@@ -1,0 +1,15 @@
+<% unless mappings.empty? %>
+<p><b>Найденные тесты к задачам:</b></p>
+<table>
+	<tr>
+		<th>Задача</th>
+		<th>Директория с тестами</th>
+	</tr>
+	<% mappings.each do |mapping| %>
+		<tr>
+			<td><%=h mapping.problem.display_name %></td>
+			<td><%=h mapping.dir_name %></td>
+		</tr>
+	<% end %>
+</table>
+<% end %>

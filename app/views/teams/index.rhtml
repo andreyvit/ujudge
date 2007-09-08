@@ -1,0 +1,74 @@
+<%
+  @page_title = "Зарегистрированные команды"
+-%>
+
+
+<% content_for(:head) do %>
+<%= javascript_include_tag 'editor' %>
+<style>
+.editor, .editor TD { background: #FFEB99 !important; }
+.editable-cell { cursor: pointer;  }
+.editable-cell A { border-bottom: 1px dashed black; }
+.edited-cell {
+		background: #FFEB99 !important;
+		border: 1px solid black !important;
+		border-bottom: 1px solid #FFEB99 !important;
+}
+.editor {
+		border: 1px solid black !important;
+}
+.editable-cell, .edited-cell { padding: 1px 5px !important; }
+</style>
+<% end %>
+
+
+<h1 class="section">Команды</h1>
+
+
+<% if current_user.allow?(:select_teams) %>
+<p>
+<b>Для жюри:</b> Выборку нужных данных можно сделать на
+<%= link_to "странице выборки данных", :controller => 'teams', :action => 'select', :contest_name => @contest.short_name %>.
+<% end %>
+
+<table id="data_table" width="100%" cellspacing="2">
+<thead>
+<tr>
+	<th>&nbsp;</th>
+	<th>Название</th>
+	<th>Участники команды</th>
+	<th>Город</th>
+	<th>Университет</th>
+	<% if current_user.allow?(:delete_teams) %>
+	<th>Для жюри</th>
+	<% end %>
+	
+</tr>
+<tbody>
+<% order_num = 0 %>
+<% for team in @teams %>
+  <tr id="team_<%= team.id %>">
+	  <td><%= order_num += 1  %></td>
+	  <td><%=h team.name %></td>
+	  <td><%=h team.member_names %></td>
+	  <td><%=h team.university.city %></td>
+	  <td><%=h team.university.name %></td>
+		<% if current_user.allow?(:delete_teams) %>
+		<td><%= link_to "Удалить", :action => 'delete', :contest_name => @contest.short_name, :team_id => team.id %></td>
+		<% end %>
+  </tr>
+<% end %>
+
+</table>
+
+<% if flash[:highlight_team] %>
+<%= javascript_tag visual_effect(:highlight, "team_#{flash[:highlight_team]}", :duration => 2) %>
+<% end %>
+
+<%= javascript_tag "ts_makeSortable($('data_table'))" %>
+
+<p>Всего <%= @teams.size %>
+
+<% content_for(:hint) do %>  
+	<%= render :partial => 'contests/overview', :locals => {:contest => @contest} %>
+<% end %> 

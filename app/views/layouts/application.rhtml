@@ -1,0 +1,70 @@
+<%
+  @page_header ||= @page_title
+%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+<title><%= @page_title %></title>
+<!-- <link rel="stylesheet" href="http://www.w3.org/StyleSheets/Core/Steely" type="text/css"> -->
+<%= stylesheet_link_tag 'w3c-steely.css' %>
+<%= stylesheet_link_tag 'application' %>
+<%= stylesheet_link_tag 'grouped_form' %>
+<%# = ajax_scaffold_includes %>
+<script type="text/javascript">
+//<![CDATA[
+var onloads = [];
+function handle_load() {
+  for (var i in onloads) {
+    onloads[i]();
+  }
+  onloads = null;
+}
+function on_load(f) {
+  if (null != onloads)
+    onloads.push(f);
+  else
+    f();
+}
+//]]>
+</script>
+<%= javascript_include_tag :defaults %>
+<%# = javascript_include_tag 'sortable_table' %>
+</head>
+<body style="margin-top: 4.5em;" onload="handle_load()">
+<div id="login_container" style="background: #ddd; position: absolute; left: 0px; top: 0px; width: 100%; padding: 0px">
+<% if logged_in? %>
+<%= render :partial => 'account/logged_in_info' %>
+<% else %>
+<%= render :partial => 'account/login_form' %>
+<% end %>
+</div>
+
+<h1><%= @page_header %></h1>
+
+<div id="page_body">
+
+<% if flash[:message] || flash[:warning] || flash[:notice] %>
+<p id="flash" class="flash<%= if flash[:warning] then " flash_warn" else "" end %>">
+  <%= flash[:warning] || flash[:message] || flash[:notice] %>
+</p>
+<%=
+	update_page_tag do |page|
+		page.delay 5 do
+		  page.hide 'flash'
+		end
+	end
+%>
+<% end %>
+
+<%= @content_for_layout %>
+
+</div>
+
+<p id="page_footer" style="font-size: 7pt;">
+   <!-- Прототип системы проведения олимпиад<br> -->
+   <!-- &copy; 2006, Андрей Таранцов и Новосибирский государственный университет -->
+</p>
+
+</body>
+</html>

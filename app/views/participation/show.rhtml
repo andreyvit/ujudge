@@ -1,0 +1,49 @@
+<%
+	@page_title = "Информация о Всесибирской олимпиаде 2006 года"
+	@current_tab = :news
+
+-%>
+<!-- project activity -->
+
+<h1 class="section">Состояние</h1>
+
+<% if @contest.state == 0 %>
+<p>Олимпиада еще не началась.</p>
+<% elsif @contest.state == 2 %>
+<p>Олимпиада идет в данный момент.</p>
+<% elsif @contest.state == 3 %>
+<p>Олимпиада окончена. Благодарим за участие!</p>
+<% end %>
+
+
+<h1 class="section">Новости</h1>
+
+ <% if @messages.blank?%>
+  <p>Еще ни одной новости не опубликовано.</p>
+  <% else %>
+  <% @messages.each_with_index do |news, news_counter| %>
+    <p><b><%= news.created_at.strftime("%d.%m.%Y") %></b> — <%= news.text %></p>
+  <% end %>
+  <% end %>
+
+<h1 class="section">Условия задач</h1>
+
+<% if @contest.statements_available == 0 %>
+<p>Условия задач будут доступны на этой странице после начала олимпиады.</p>
+<% else %>
+<dl>
+<% for problem in @contest.problems %>
+<%
+     statement = problem.statements.last
+     next if statement.nil?
+%>
+<dt>Задача <%=h problem.display_name %></dt>
+<dd>Скачать условие: <%= link_to statement.filename, statement_file_path(statement)%>
+<% end %>
+<dt>
+</dl>
+<% end %>
+
+<% content_for(:hint) do %>
+	<%= render :partial => 'contests/overview', :locals => {:contest => @contest} %>
+<% end %>

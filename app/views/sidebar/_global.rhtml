@@ -1,0 +1,10 @@
+<p>В очереди тестирования <%= Server.queue_size.russian("# решение", "# решения", "# решений") %>.</p>
+<p>Используется <%= Server.clients_count.russian("# тестирующий сервер", "# тестирующих сервера", "# тестирующих серверов") %>.</p>
+<h2>Новости</h2>
+<% if current_user.is_a?(Team) %>
+	<h2>Ваше мнение?</h2>
+	<p>Что вы думаете о новой системе тестирования? Отправьте ваш отзыв на <a href="mailto:andreyvit@gmail.com">andreyvit@gmail.com</a>.
+<% end %>
+<!--
+<p><img src="/images/icons/feed.png" class="icon" alt="Feed"> RSS</p>
+-->
