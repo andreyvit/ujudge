@@ -3,3 +3,4 @@
 ^public/statements/
 ^log/.*\.log$
 ^dump$
+\.DS_Store$
