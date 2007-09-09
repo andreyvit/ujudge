@@ -1,5 +1,120 @@
-# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
-first:
+1:
   id: 1
-another:
+  form_id: 2
+  name: fname
+  data_type: string
+  choices: ""
+  required: true
+  label: Name
+  comment: ""
+
+2:
   id: 2
+  form_id: 2
+  name: pname
+  data_type: string
+  choices: ""
+  required: true
+  label: Patronymic
+  comment: ""
+
+3:
+  id: 3
+  form_id: 2
+  name: sname
+  data_type: string
+  choices: ""
+  required: true
+  label: Surname
+  comment: ""
+
+4:
+  id: 4
+  form_id: 2
+  name: gender
+  data_type: choice
+  choices: Male, Female
+  required: true
+  label: Gender
+  comment: ""
+
+5:
+  id: 5
+  form_id: 2
+  name: birth_date
+  data_type: date
+  choices: ""
+  required: true
+  label: Date of birth
+  comment: ""
+
+6:
+  id: 6
+  form_id: 2
+  name: birth_place
+  data_type: string
+  choices: ""
+  required: true
+  label: Place of birth
+  comment: (please specify the city and the country)
+
+7:
+  id: 7
+  form_id: 2
+  name: marital_status
+  data_type: choice
+  choices: Single, Married, Divorced, Widowed
+  required: true
+  label: Marital status
+  comment: ""
+
+8:
+  id: 8
+  form_id: 2
+  name: children
+  data_type: integer
+  choices: ""
+  required: true
+  label: Children
+  comment: ""
+
+9:
+  id: 9
+  form_id: 2
+  name: mailing_address
+  data_type: string
+  choices: ""
+  required: true
+  label: Mailing address
+  comment: (Apartment, Street, House, City, Zip Code, Country)
+
+10:
+  id: 10
+  form_id: 2
+  name: home_phone
+  data_type: string
+  choices: ""
+  required: true
+  label: Home phone
+  comment: (please include <b>city code</b>)
+
+11:
+  id: 11
+  form_id: 2
+  name: work_phone
+  data_type: string
+  choices: ""
+  required: false
+  label: Work phone
+  comment: (please include <b>city code</b>)
+
+12:
+  id: 12
+  form_id: 2
+  name: mobile_phone
+  data_type: string
+  choices: ""
+  required: true
+  label: Mobile phone
+  comment: ""
+

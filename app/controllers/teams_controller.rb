@@ -2,7 +2,7 @@ class TeamsController < ApplicationController
   
   before_filter :set_contest
   before_filter :find_or_initialize_team, :except => ['index', 'list']
-  before_filter :setup_team_info, :only => ['new', 'edit', 'create', 'update']
+  before_filter :setup_team_info, :only => ['new', 'edit', 'create', 'update', 'fill_forms']
   before_filter :set_tabs
   before_filter :set_current_tab
   
@@ -50,14 +50,56 @@ class TeamsController < ApplicationController
   def create
     assign_and_save_team_data
     
+    @form = @contest.forms.find(:first)
+    if @form.nil?
+      finish_team_creation
+    else
+      redirect_to fill_forms_team_url(@contest, @team)
+    end
+  rescue ActiveRecord::RecordInvalid
+    render_team_editor(:editing => false)
+  end
+  
+  def finish_team_creation
     ps = @team.create_passwords!(:registration)
     cookie = SecurityCookie.generate_new(:owner => @team, :usage => 'post_registration')
     cookie.save!
     result = @team.send_password!(:registration)
     
     redirect_to team_url(@contest, @team) + '?cookie=' + cookie.text
-  rescue ActiveRecord::RecordInvalid
-    render_team_editor(:editing => false)
+  end
+  
+  def fill_forms
+    # FIXME: currently supports max. one form per contest
+    @form = @contest.forms.find(:first)
+    @fields = @form.fields.find(:all)
+    
+    @values = PerMemberValue.find(:all, :conditions => {:member_id => @team.members.collect(&:id), 
+      :field_id => @fields.collect(&:id)}, :include => [:field])
+      
+    @members = []
+    @team.members.each do |member|
+      m = PerMemberInstance.new(member, @fields)
+      @fields.each { |f| m[:"#{f.name}"] = nil }
+      @values.select { |v| v.member_id == member.id }.each { |v| m[:"#{v.field.name}"] = v.value }
+      @members << m
+    end
+
+    if request.post?
+      for i, data in params[:members]
+        member = @members[i.to_i]
+        member.attributes = data unless member.nil?
+      end
+    end
+
+    if request.post?
+      objects = @members
+      if objects.reject {|r| r.valid?}.empty?
+        @members.each { |m| m.save! }
+        
+        return finish_team_creation
+      end
+    end
   end
   
   def update
