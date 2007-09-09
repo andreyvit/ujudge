@@ -1,4 +1,3 @@
-^compiler/.*/
 ^tmp/
 ^data/
 ^public/statements/
