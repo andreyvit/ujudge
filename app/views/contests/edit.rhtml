@@ -32,6 +32,12 @@
 	    	<label for="state_finished"> окончена</label>
 	   	</div>
 	  </dd>
+	<dt>Количество участников в команде:</dt>
+	<dd>
+	  <div>
+	    <%= select("contest", "team_members_count", [["один", 1], ["два", 2], ["три", 3]]) %>
+	  </div>
+  </dd>
   <dt>Показывать эту олимпиаду в списке:</dt>
   <dd>
     <div><input id="visibility_hidden" type="radio" name="contest[publicly_visible]" value="0" <%= checked_text(@contest.publicly_visible == 0) %>>

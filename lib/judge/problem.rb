@@ -24,14 +24,17 @@ class Judge::Problem
       @tests = []
       ans_map = {}
       # puts "searching in #{@fspath}"
-      Dir.foreach(File.join(UJUDGE_ROOT, 'data', @fspath)) do |file|
-        next if file == '.' || file == '..'
-        # puts "checking #{file}"
-        case file 
-        when /^(\d+)(\.in)?$/
-          @tests << [$1.to_i, file]
-        when /^(\d+)(\.out|\.ans|\.a)$/
-          ans_map[$1.to_i] = file
+      dir = File.join(UJUDGE_ROOT, 'data', @fspath)
+      if File.directory?(dir)
+        Dir.foreach(dir) do |file|
+          next if file == '.' || file == '..'
+          # puts "checking #{file}"
+          case file 
+          when /^(\d+)(\.in)?$/
+            @tests << [$1.to_i, file]
+          when /^(\d+)(\.out|\.ans|\.a)$/
+            ans_map[$1.to_i] = file
+          end
         end
       end
       @tests.sort { |a, b| a[0] <=> b[0] }

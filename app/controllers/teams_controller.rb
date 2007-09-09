@@ -125,7 +125,7 @@ private
   end
 
   def setup_team_info
-    @member_count = 1 # currently a constant
+    @member_count = @contest.team_members_count
     @members = @team.members
     (@member_count - @members.size).times { @members << Member.new } if @member_count > @members.size
     @university = @team.university || University.new
