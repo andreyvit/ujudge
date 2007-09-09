@@ -1,0 +1,22 @@
+<%= error_messages_for 'field' %>
+
+<!--[form:field]-->
+<p><label for="field_name">Название поля (так, как его увидят получатели формы):</label><br/>
+<%= text_field 'field', 'name'  %></p>
+
+<p><label for="field_label">Название поля (как его увидят участники):</label><br/>
+<%= text_field 'field', 'label'  %></p>
+
+<p><label for="field_comment">Дополнительные комментарии к полю (отображаются под полем):</label><br/>
+<%= text_field 'field', 'comment'  %></p>
+
+<p><label for="field_data_type">Тип данных:</label><br/>
+<%= select 'field', 'data_type', [["Строка", 'string'], ["Многострочный текст", 'text'], ["Целое число", 'integer'], ["Дробное число", 'float'], ['Дата', 'date'], ["Выпадающий список", 'choice']]  %></p>
+
+<p><label for="field_choices">Значения в выпадающем списке (через запятую, только для полей соответствующего типа):</label><br/>
+<%= text_field 'field', 'choices'  %></p>
+
+<p><label for="field_required">Обязательно заполнять?</label><br/>
+<select id="field_required" name="field[required]"><option value="false">Можно оставить пустым</option><option value="true">Обязательно требуется заполнить</option></select></p>
+<!--[eoform:field]-->
+

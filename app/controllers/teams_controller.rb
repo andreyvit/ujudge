@@ -14,6 +14,25 @@ class TeamsController < ApplicationController
   
   def overview
     find_all_teams
+    @forms = Form.find(:all, :select => 'id, title')
+    @contest_forms = @contest.forms.find(:all, :select => 'forms.id').collect {|f| f.id}
+  end
+  
+  def update_contest_forms
+    @forms = Form.find(:all, :select => 'id, title')
+    @contest_forms = @contest.forms.find(:all, :select => 'forms.id').collect {|f| f.id}
+    @forms.each do |form|
+      if params[:forms].nil? || params[:forms][form.id.to_s].nil?
+        if @contest_forms.include?(form.id)
+          @contest.forms.delete(form)
+        end
+      else
+        if !@contest_forms.include?(form.id)
+          @contest.forms.push(form)
+        end
+      end
+    end
+    redirect_to overview_teams_url(@contest)
   end
   
   def index

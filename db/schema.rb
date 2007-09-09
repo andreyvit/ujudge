@@ -2,7 +2,7 @@
 # migrations feature of ActiveRecord to incrementally modify your database, and
 # then regenerate this schema definition.
 
-ActiveRecord::Schema.define(:version => 31) do
+ActiveRecord::Schema.define(:version => 32) do
 
   create_table "compilers", :force => true do |t|
     t.column "display_name",   :string
@@ -32,6 +32,11 @@ ActiveRecord::Schema.define(:version => 31) do
     t.column "team_members_count",   :integer
   end
 
+  create_table "contests_forms", :force => true do |t|
+    t.column "contest_id", :integer
+    t.column "form_id",    :integer
+  end
+
   create_table "cookies", :force => true do |t|
     t.column "owner_type", :string,   :default => "", :null => false
     t.column "owner_id",   :integer,                  :null => false
@@ -45,9 +50,21 @@ ActiveRecord::Schema.define(:version => 31) do
     t.column "display_name", :string, :default => "", :null => false
   end
 
+  create_table "fields", :force => true do |t|
+    t.column "form_id",   :integer
+    t.column "name",      :string
+    t.column "data_type", :string
+    t.column "choices",   :text
+    t.column "required",  :boolean
+    t.column "label",     :string
+    t.column "comment",   :text
+  end
+
   create_table "forms", :force => true do |t|
-    t.column "type",       :string,  :default => "", :null => false
-    t.column "contest_id", :integer,                 :null => false
+    t.column "created_at", :datetime
+    t.column "updated_at", :datetime
+    t.column "title",      :string
+    t.column "comment",    :text
   end
 
   create_table "imagine_cup_recs", :force => true do |t|
@@ -89,6 +106,12 @@ ActiveRecord::Schema.define(:version => 31) do
   create_table "passwords", :force => true do |t|
     t.column "text",            :string
     t.column "password_set_id", :string
+  end
+
+  create_table "per_member_data", :force => true do |t|
+    t.column "member_id", :integer
+    t.column "field_id",  :integer
+    t.column "value",     :string
   end
 
   create_table "problems", :force => true do |t|

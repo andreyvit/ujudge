@@ -44,4 +44,19 @@
 	<%= render :partial => 'contests/overview', :locals => {:contest => @contest} %>
 <% end %>
 
-
+<% if current_user.is_a?(User) %>
+  <h1 class="section">Формы</h1>
+  <p>Следующие формы должны быть заполнены при регистрации на эту олимпиаду:</p>
+  <% if @forms.empty? %>
+    <div>(ни одной формы не определено — воспользуйтесь вкладкой «Формы» на списке олимпиад)</div>
+  <% else %>
+    <% form_tag update_contest_forms_teams_url(@contest) do %>
+      <% for form in @forms %>
+        <div><input type="checkbox" <% if @contest_forms.include?(form.id) %>checked="checked"<%end %>
+          name="forms[<%= form.id %>]" id="forms_<%= form.id %>">
+          <label for="forms_<%= form.id %>"><%=h form.title %></label></div>
+      <% end %>
+      <p><%= submit_tag "Сохранить изменения в списке форм" %>
+    <% end %>
+  <% end %>
+<% end %>

@@ -117,12 +117,17 @@ protected
   def set_general_tabs
     @page_tabs = []
     @page_tabs << Tab.new(:contests, 'Олимпиады', lambda { contests_url })
-    @page_tabs << Tab.new(:appearance, 'Настройки', lambda { appearance_url })
+    if current_user.is_a?(User)
+      @page_tabs << Tab.new(:forms, 'Формы', lambda { forms_url })
+      @page_tabs << Tab.new(:appearance, 'Настройки', lambda { appearance_url })
+    end
     @page_links = []
     case @current_tab
     when :appearance
       @page_links << PageLink.new(:texts, 'Тексты',lambda { texts_url() })
       @page_links << PageLink.new(:appearance, 'Внешний вид',lambda { appearance_url() })
+    when :forms
+      @page_links << PageLink.new(:forms, 'Список форм', lambda { forms_url })
     end
   end
   

@@ -1,0 +1,25 @@
+<%
+  @page_heading = @form.title
+-%>
+
+
+<table width="100%" border="1">
+  <tr>
+    <th>Внутреннее название</th>
+    <th>Заголовок</th>
+    <th>Тип данных</th>
+  </tr>
+  
+<% for field in @fields %>
+  <tr>
+    <td><%=h field.name %><% if field.required? %>*<% end %></td>
+    <td><%=h field.label %><% if field.required? %> (*)<% end %></td>
+    <td><%=h field.data_type %></td>
+    <td>(<%= link_to 'редактировать', :action => 'edit', :id => field %> | <%= link_to 'удалить', { :action => 'destroy', :id => field }, :confirm => 'Are you sure?', :method => :post %>)</td>
+  </tr>
+<% end %>
+</table>
+
+<p>Звёздочкой (*) отмечены обязательные поля.</p>
+
+<p><%= link_to "« Вернуться к списку форм", forms_url %> | <%= link_to 'Добавить поле', :action => 'new' %></p>

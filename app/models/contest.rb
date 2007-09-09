@@ -26,7 +26,9 @@ class Contest < CachedModel
   
   has_many :recent_messages, :class_name => 'Message', :order => 'id DESC', :limit => 5
   
-  has_one :form
+  #has_many :contests_forms
+  has_and_belongs_to_many :forms
+    
   has_many :runs, :through => :teams
   has_many :evaluated_runs, :through => :teams
   

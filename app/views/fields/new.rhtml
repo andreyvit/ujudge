@@ -1,0 +1,11 @@
+<%
+  @page_heading = "Создание поля"
+-%>
+
+
+<% form_tag :action => 'create' do %>
+  <%= render :partial => 'form' %>
+  <%= submit_tag "Создать поле" %>
+<% end %>
+
+<%= link_to 'Отмена', fields_url(@form) %>

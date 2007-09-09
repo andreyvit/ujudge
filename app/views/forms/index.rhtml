@@ -1,0 +1,19 @@
+<%
+  @page_heading = "Формы"
+-%>
+
+<table border="1">
+  <tr>
+    <th>Название</th>
+  </tr>
+  
+<% for form in @forms %>
+  <tr>
+    <td><%=h form.title %> (<%= link_to 'поля', fields_url(form) %> | <%= link_to 'редактировать', edit_form_url(form) %> | <%= link_to 'удалить', form_url(form), :confirm => 'Вы совсем-совсем уверены?', :method => :delete %>)</td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'Создать форму', new_form_url %>

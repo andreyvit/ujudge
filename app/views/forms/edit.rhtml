@@ -1,0 +1,12 @@
+<%
+  @page_heading = @form.title
+-%>
+
+
+<% form_tag :action => 'update', :id => @form do %>
+  <%= render :partial => 'form' %>
+  <%= submit_tag 'Сохранить изменения' %>
+<% end %>
+
+<%# = link_to 'Show', :action => 'show', :id => @form %> |
+<%= link_to '« Вернуться к списку форм', forms_url %>

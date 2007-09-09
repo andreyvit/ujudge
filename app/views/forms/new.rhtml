@@ -1,0 +1,11 @@
+<%
+  @page_heading = "Создание формы"
+-%>
+
+
+<% form_tag :action => 'create' do %>
+  <%= render :partial => 'form' %>
+  <%= submit_tag "Создать форму" %>
+<% end %>
+
+<%= link_to '« Отмена', forms_url %>

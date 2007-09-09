@@ -1,0 +1,11 @@
+<%
+  @page_heading = "Поле #{@field.name}"
+-%>
+
+
+<% form_tag :action => 'update', :id => @field do %>
+  <%= render :partial => 'form' %>
+  <%= submit_tag 'Сохранить изменения' %>
+<% end %>
+
+<%= link_to 'Отмена', fields_url(@form) %>

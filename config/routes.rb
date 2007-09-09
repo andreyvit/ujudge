@@ -1,4 +1,10 @@
 ActionController::Routing::Routes.draw do |map|
+
+  map.resources :forms do |forms|
+    forms.resources :fields
+  end
+  
+  
   map.resources :testing_queues
 
 
@@ -23,7 +29,7 @@ ActionController::Routing::Routes.draw do |map|
       problems.resources :tests
       problems.resources :tests_uploads, :member => { :accept => :post }
     end
-    contests.resources :teams, :collection => {:overview => :get, :select => :any} do |teams|
+    contests.resources :teams, :collection => {:overview => :get, :select => :any, :update_contest_forms => :post} do |teams|
       teams.resources :questions, :name_prefix => 'team_', :member => {} 
       teams.resource :participation, :name_prefix => 'team_'
       teams.resources :ratings, :controller => 'team_ratings', :name_prefix => 'team_'
