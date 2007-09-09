@@ -145,7 +145,7 @@ class Judge::Server::ProcessTestsUploadJob < Judge::Server::Job
             [test.input, test.answer].each do |file_name|
               file_name = File.split(file_name).last
               puts "Trying #{file_name} in #{path}, zip dir #{dir} (exists: #{File.directory?(path) ? "yes" : "no"})"
-              File.open(File.join(path, file_name), 'w') { |f| f.write(zip.read(dir.append(file_name))) }
+              File.open(File.join(path, file_name), 'wb') { |f| f.write(zip.read(dir.append(file_name))) }
             end
           end
         end
