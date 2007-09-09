@@ -1,0 +1,6 @@
+^compiler/.*/
+^tmp/
+^data/
+^public/statements/
+^log/.*\.log$
+^dump$
