@@ -18,7 +18,7 @@ ActionController::Routing::Routes.draw do |map|
    
     map.resource :texts
      
-    map.resources :contests, :collection => {:manage => :get} do |contests|
+    map.resources :contests, :collection => {:manage => :get, :import => :post}, :member => {:export => :any} do |contests|
     contests.resource :queue, :controller => 'testing_queue', :name_prefix => 'contest_'
     contests.resource :retesting, :controller => 'retesting', :name_prefix => 'contest_'
 	  contests.resources :ratings, :controller => 'team_ratings', :name_prefix => 'contest_'

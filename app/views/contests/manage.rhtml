@@ -73,6 +73,18 @@
 </dl>
 </div>
 
+<h1 class="section">Импортировать олимпиаду из файла</h1>
+<div class="mb clearfix">
+<%= form_tag import_contests_url(),
+            :method => 'post',
+            :multipart => true %>
+<%= file_field_tag "file" %>
+<input type='submit' value="Импортировать" />
+<%= image_tag 'indicator-small.gif', :alt => '', 
+ :style => 'display: none;' %>
+ </form>
+</div>
+
 <!-- 
 <h1 class="section">Поэкспериментируем?</h1>
 
