@@ -89,7 +89,7 @@ class Judge::Server::ProcessTestsUploadJob < Judge::Server::Job
         end
         
         if possible_problems.empty?
-          errors << "В директории #{dir.display_name} обнаружены тесты, но не получилось определить, к какой задачи они относятся. Пожалуйста, уточните путь к этой директории, чтобы в нем содержалось либо короткое название, либо буква ровно одной задачи."
+          errors << "В директории #{dir.display_name} обнаружены тесты, но не получилось определить, к какой задаче они относятся. Пожалуйста, уточните путь к этой директории, чтобы в нем содержалось либо короткое название, либо буква ровно одной задачи."
           next
         end
         (problem_id_to_tests_directories[possible_problems.first.id] ||= []) << dir and next if possible_problems.size == 1
