@@ -85,14 +85,14 @@ class TeamsController < ApplicationController
       @members << m
     end
 
-    if request.post?
+    if params[:members]
       for i, data in params[:members]
         member = @members[i.to_i]
         member.attributes = data unless member.nil?
       end
     end
 
-    if request.post?
+    if params[:members]
       objects = @members
       if objects.reject {|r| r.valid?}.empty?
         @members.each { |m| m.save! }
@@ -111,12 +111,24 @@ class TeamsController < ApplicationController
     flash[:message] = "Данные сохранены"
 
     if current_user.is_a?(User)
-      redirect_to teams_url(@contest)
+      redirect_to edit_team_url(@contest, @team)
     else
-      redirect_to teams_url(@contest)
+      redirect_to edit_team_url(@contest, @team)
     end
   rescue ActiveRecord::RecordInvalid
     render_team_editor(:editing => true)
+  end
+  
+  def destroy
+    return access_denied unless current_user.allow?(:delete_team)
+    @team.destroy
+    respond_to do |wants|
+      wants.html {
+        flash[:message] = "Команда #{@team.identifying_name} удалена"
+        redirect_to select_teams_url(@contest)
+      }
+      wants.js
+    end
   end
   
   def show
@@ -138,8 +150,8 @@ class TeamsController < ApplicationController
     return access_denied unless current_user.allow?(:access_team_details)
     
     @listing = Listing.new(current_user, [Team])
-    if request.post?
-      @listing.handle_postback(@params[:show]) 
+    if params[:show]
+      @listing.handle_postback(params[:show]) 
     else
       @listing.set_default_visibility
     end
@@ -199,7 +211,7 @@ private
   end
 
   def assign_and_save_team_data
-    @team.attributes = params[:team] if request.post?
+    @team.attributes = params[:team]
     @university = @team.university || University.new
     for i, data in params[:members]
       member = @members[i.to_i]
@@ -221,6 +233,7 @@ private
     end
     @team.save!
     @members.each { |m| m.team = @team; m.save! }
+    @university.save! if objects.include?(@university)
   end
 
   def find_all_teams

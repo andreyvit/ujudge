@@ -1,0 +1,2 @@
+page.visual_effect :squish, "team_#{@team.id}"
+#page.remove "team_#{@team.id}"

@@ -144,5 +144,9 @@ module ApplicationHelper
       run.display_status
     end
   end
+  
+  def small_indicator(params = {})
+    image_tag 'indicator-small.gif', {:alt => '', :style => 'display: none;'}.merge(params)
+  end
     
 end

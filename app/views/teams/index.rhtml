@@ -2,26 +2,6 @@
   @page_title = "Зарегистрированные команды"
 -%>
 
-
-<% content_for(:head) do %>
-<%= javascript_include_tag 'editor' %>
-<style>
-.editor, .editor TD { background: #FFEB99 !important; }
-.editable-cell { cursor: pointer;  }
-.editable-cell A { border-bottom: 1px dashed black; }
-.edited-cell {
-		background: #FFEB99 !important;
-		border: 1px solid black !important;
-		border-bottom: 1px solid #FFEB99 !important;
-}
-.editor {
-		border: 1px solid black !important;
-}
-.editable-cell, .edited-cell { padding: 1px 5px !important; }
-</style>
-<% end %>
-
-
 <h1 class="section">Команды</h1>
 
 
@@ -31,7 +11,7 @@
 <%= link_to "странице выборки данных", :controller => 'teams', :action => 'select', :contest_name => @contest.short_name %>.
 <% end %>
 
-<table id="data_table" width="100%" cellspacing="2">
+<table class="data_table" border="1" width="100%">
 <thead>
 <tr>
 	<th>&nbsp;</th>
@@ -46,15 +26,22 @@
 </tr>
 <tbody>
 <% order_num = 0 %>
-<% for team in @teams %>
-  <tr id="team_<%= team.id %>">
+<% @teams.each_with_index do |team, team_counter| %>
+  <tr id="team_<%= team.id %>" class="<%= if team_counter % 2 == 0 then "odd" else "even" end %>">
 	  <td><%= order_num += 1  %></td>
 	  <td><%=h team.name %></td>
 	  <td><%=h team.member_names %></td>
 	  <td><%=h team.university.city %></td>
 	  <td><%=h team.university.name %></td>
 		<% if current_user.allow?(:delete_teams) %>
-		<td><%= link_to "Удалить", :action => 'delete', :contest_name => @contest.short_name, :team_id => team.id %></td>
+  	<td>
+  	  <%= link_to "Правка", edit_team_url(@contest, team), :target => '_new' %> |
+  	  <%= link_to_remote "Уд.", :url => team_url(@contest, team), :method => 'delete',
+  	      :confirm => "Удалить команду «#{escape_javascript(team.identifying_name)}»?\n\nОтменить это действие невозможно.",
+  	      :loading => update_page { |page| page.show "team_#{team.id}_ind" },
+  	      :complete => update_page { |page| page.hide "team_#{team.id}_ind" } %>
+  	  <%= small_indicator :id => "team_#{team.id}_ind" %>
+  	</td>
 		<% end %>
   </tr>
 <% end %>

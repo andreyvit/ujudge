@@ -112,4 +112,8 @@ class Team < CachedModel
     Cache.delete(self.class.collection_cache_key(contest_id))
   end
   
+  def identifying_name
+    if name.empty? then "\##{id}" else name end
+  end
+  
 end
