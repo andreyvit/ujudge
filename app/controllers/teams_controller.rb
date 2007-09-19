@@ -36,7 +36,7 @@ class TeamsController < ApplicationController
   end
   
   def index
-    @teams = @contest.teams.find(:all, :include => [:university], :order => 'universities.name, teams.name')
+    @teams = @contest.teams.find(:all, :include => [:university], :order => 'universities.city, universities.name, teams.name')
   end
   
   def new
