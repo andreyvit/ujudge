@@ -1,38 +1,40 @@
-<h1>Перетестировать:</h1>
+<h1>Перетестировать</h1>
 
+<% start_form_tag do %>
 <table>
 <tr>
-  <td width="30%" style="text-align: top;">
+  <td width="30%" valign="top">
   Задачи:
   </td>
   <td width="70%">
-  <% start_form_tag do %>
   <% @problems.each do |problem| %>
-  <%= check_box_tag :name => #{problem.id}, :value => "0", :checked => false %>&nbsp;&nbsp;<%= problem.display_name %><br>
-  <% end %>
+  <%= check_box_tag :name => "#{problem.id}", :value => "0", :checked => false %>&nbsp;&nbsp;<%= problem.display_name %><br>
   <% end %>
   </td>
 </tr>
 <tr>
-  <td width="30%" align="top">
+  <td width="30%" valign="top">
   Участники:
   </td>
   <td width="70%">
-    <li> Все
-    <li> Отдельные участники
+    <div><input type="radio" name="participants" value="all"> Все</div>
+    <div><input type="radio" name="participants" value="some"> Отдельные участники</div>
   </td>
 </tr>
 <tr>
-  <td width="30%" text-align="top">
-  Языки программирования
+  <td width="30%" valign="top">
+  Языки программирования:
   </td>
   <td width="70%">
-    <li> Все
-    <li> Решения на отдельных языках
+    <% @compilers.each do |compiler| %>
+    <%= check_box_tag :name => "#{compiler.id}", :value => "0", :checked => false %>&nbsp;&nbsp;<%= compiler.display_name %><br>
+    <% end %>
   </td>
 </tr>
 </table>
+<% end %>
 
 <% content_for(:hint) do %>
 	<%= render :partial => 'contests/overview', :locals => {:contest => @contest} %>
 <% end %>
+

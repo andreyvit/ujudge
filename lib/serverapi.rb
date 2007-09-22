@@ -1,4 +1,6 @@
 
+x = Judge::Test
+
 module Server
   
   def self.connect
@@ -29,6 +31,14 @@ module Server
     @@server.clients_count
   #rescue
   #  0
+  end
+  
+  def self.get_tests_count(problem_id)
+    @@server.get_tests_count(problem_id)
+  end
+  
+  def self.get_tests(problem_id)
+    @@server.get_tests(problem_id)
   end
   
   def self.queue_size

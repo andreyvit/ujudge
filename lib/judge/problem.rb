@@ -36,10 +36,11 @@ class Judge::Problem
             ans_map[$1.to_i] = file
           end
         end
+
+        @tests.sort { |a, b| a[0] <=> b[0] }
+        @tests = @tests.collect { |info| Judge::Test.new(self, info[0], info[1], ans_map[info[0]]) }
+        read_points
       end
-      @tests.sort { |a, b| a[0] <=> b[0] }
-      @tests = @tests.collect { |info| Judge::Test.new(self, info[0], info[1], ans_map[info[0]]) }
-      read_points
     end
     @tests
   end
@@ -68,30 +69,44 @@ class Judge::Problem
 private
 
   def read_points
-    fn = File.join(@fspath, 'points.txt')
-    return unless File.file?(fn)
-    index = 1
-    File.open(fn, 'r') do |f| 
-      f.each_line do |line|
-        points, extra = line.split(' ', 2)
-        test_name = "#{index}"
-        index += 1
-        test_name = File.basename(test_name, '.*') if test_name.include?('.')
-        nr = test_name.to_i
-        @tests.each do |test|
-          next unless test.ord == nr
-          test.points = points # TODO: data type cast?
-          break true
-        end or throw "#{fn}: test #{test_name} (interpreted as test #{nr}) not found"
+    dir = File.join(UJUDGE_ROOT, 'data', @fspath)
+    fn = File.join(dir, 'points.txt')
+    if File.file?(fn)
+      index = 1
+      File.open(fn, 'r') do |f| 
+        f.each_line do |line|
+          points, extra = line.split(' ', 2)
+          test_name = "#{index}"
+          index += 1
+          test_name = File.basename(test_name, '.*') if test_name.include?('.')
+          nr = test_name.to_i
+          @tests.each do |test|
+            next unless test.ord == nr
+            test.points = points # TODO: data type cast?
+            break true
+          end or throw "#{fn}: test #{test_name} (interpreted as test #{nr}) not found"
+        end
       end
+    else
+      any_points = false
+      Dir.foreach(dir) do |file|
+        next if file == '.' || file == '..'
+        case file 
+        when /^(\d+)(\.pts)?$/
+          t = @tests.find { |t| t.ord == $1.to_i }
+          raise "points file #{file} does not correspond to any test" if t.nil?
+          pts_string = File.open(File.join(dir, file), 'r') { |f| f.read }
+          points, extra = pts_string.split(' ', 2)
+          t.points = points.to_i
+          any_points = true
+        end
+      end
+      return unless any_points
     end
     
     # now check for tests that weren't assigned any points
-    lost_tests = []
-    @tests.each do |test|
-      lost_tests << test.ord.to_s if test.points.nil?
-    end
-    throw "#{fn}: no points assigned to test(s) #{lost_tests.join(", ")}" unless lost_tests.empty?
+    lost_tests = @tests.select { |test| test.points.nil? }
+    raise "no points assigned to test(s) #{lost_tests.join(", ")}" unless lost_tests.empty?
   end
 
 end

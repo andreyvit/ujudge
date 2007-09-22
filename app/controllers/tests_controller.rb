@@ -4,7 +4,7 @@ class TestsController < ApplicationController
 
   def index
 #    @tests = Tests.find(:all)
-    
+    Judge::Test.name
     respond_to do |format|
       format.js  { 
         render :partial => 'show_tests_editor',

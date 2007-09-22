@@ -7,5 +7,6 @@ class RetestingController < ApplicationController
   def show
     @problems = @contest.problems.find(:all, :order => 'problems.letter,
       problems.created_at', :include => [:statements])
+    @compilers = Compiler.find(:all)
   end
 end

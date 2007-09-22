@@ -104,10 +104,15 @@ class Judge::Server::Server
     puts e.backtrace
   end
 
-  def get_tests(contest, problem)
-    
+  def get_tests(problem_id)
+    tests = Judge::Problem.new(::Problem.find(problem_id)).tests
+    tests.each { |t| t.problem = nil }
+    tests
   end
   
+  def get_tests_count(problem_id)
+    Judge::Problem.new(::Problem.find(problem_id)).tests.size
+  end
   
   def create_job(proxy)
     returning Judge::Solution.new(proxy.run) do |s|

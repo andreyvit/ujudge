@@ -1,7 +1,7 @@
 
 class Judge::Test
-  attr_reader :problem, :ord, :input_file, :answer_file
-  attr_accessor :points
+  attr_reader :ord, :input_file, :answer_file
+  attr_accessor :problem, :points
   
   def initialize(problem, ord, input_file_name, answer_file_name)
     @problem = problem

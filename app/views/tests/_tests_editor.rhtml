@@ -1,3 +1,8 @@
+Тестов всего у нас <%= Server.get_tests(@problem.id).size %>.
+<% Server.get_tests(@problem.id).sort { |a,b| a.ord <=> b.ord }.each do |test| %>
+  <p>Тест <%= test.ord %>, баллов за него дают <%= test.points || "ниичаво" %>.
+<% end %>
+
     <div>Закачать тесты:</div>
     <%= form_tag tests_uploads_url(@contest, @problem),
                 :method => 'post',

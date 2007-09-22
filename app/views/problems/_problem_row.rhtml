@@ -14,5 +14,12 @@
                 else "Добавить условие" end %>
         <span> »</span></a>
     </td>
-    <td class="editable-cell" editor="tests"><a href="#">Добавить тесты<span> »</span></a></td>
+    <td class="editable-cell" editor="tests">
+      <% tc = Server.get_tests_count(problem.id) %>
+      <% s = case tc
+              when -1 then "Тесты"
+              when 0 then "Добавить тесты"
+              else tc.russian("# тест", "# теста", "# тестов")
+              end %>
+      <%= link_to s + "<span> »</span>", '#' %></td>
 </tr>
