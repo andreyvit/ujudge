@@ -51,7 +51,7 @@ class Judge::Client::Tester
         output_file_path = @wdir2.path_of(problem.output_file_name)
         unless File.file?(output_file_path)
           reporter.checking_finished(:no_output_file, OpenStruct.new)
-          break #next
+          end_test(solution)
         end
       
         reporter.checking
@@ -61,12 +61,12 @@ class Judge::Client::Tester
         res = problem.checker.check(test, local_input_file, output_file_path, @wdir2, @invoker, vfs)
         unless res.status == :ok
           reporter.checking_problem(res.status)
-          throw :end_test, :break
+          end_test(solution)
         end
       
         reporter.checking_finished(res.outcome, res)
 
-        break unless res.outcome == :ok
+        end_test(solution) unless res.outcome == :ok
       end
       case id
       when :break then break
@@ -87,6 +87,5 @@ private
       throw :end_test, :next
     end
   end
-  
   
 end
