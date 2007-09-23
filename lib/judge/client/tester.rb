@@ -25,50 +25,68 @@ class Judge::Client::Tester
     
     problem = solution.problem
     problem.tests.sort { |a,b| a.ord <=> b.ord }.each do |test|
-      reporter.testing(test)
+      id = catch(:end_test) do
+        reporter.testing(test)
       
-      @wdir2.clean!
+        @wdir2.clean!
 
-      # copy input file to working dir
-      local_input_file = vfs.get(test.input_file)
-      File.copy(local_input_file, @wdir2.path_of(problem.input_file_name))
+        # copy input file to working dir
+        local_input_file = vfs.get(test.input_file)
+        File.copy(local_input_file, @wdir2.path_of(problem.input_file_name))
 
-      @invoker.reset!
-      # TODO: setup invoker for safe solution invokation
-      @invoker.time_limit = problem.time_limit
-      @invoker.memory_limit = problem.memory_limit
-      data = target_bundle.copy_runnable_to_wdir(@wdir2)
-      res = target_bundle.run_from_wdir(data, @wdir2, @invoker)
+        @invoker.reset!
+        # TODO: setup invoker for safe solution invokation
+        @invoker.time_limit = problem.time_limit
+        @invoker.memory_limit = problem.memory_limit
+        data = target_bundle.copy_runnable_to_wdir(@wdir2)
+        res = target_bundle.run_from_wdir(data, @wdir2, @invoker)
       
-      unless res.ok?
-        reporter.invokation_error(res.reason)
-        break #next
-      end
+        unless res.ok?
+          reporter.invokation_error(res.reason)
+          end_test(solution)
+        end
       
-      reporter.invokation_finished(res.stats)
+        reporter.invokation_finished(res.stats)
       
-      output_file_path = @wdir2.path_of(problem.output_file_name)
-      unless File.file?(output_file_path)
-        reporter.checking_finished(:no_output_file, OpenStruct.new)
-        break #next
-      end
+        output_file_path = @wdir2.path_of(problem.output_file_name)
+        unless File.file?(output_file_path)
+          reporter.checking_finished(:no_output_file, OpenStruct.new)
+          break #next
+        end
       
-      reporter.checking
+        reporter.checking
       
-      @invoker.reset!
-      # TODO: setup invoker for safe checker invokation
-      res = problem.checker.check(test, local_input_file, output_file_path, @wdir2, @invoker, vfs)
-      unless res.status == :ok
-        reporter.checking_problem(res.status)
-        break #next
-      end
+        @invoker.reset!
+        # TODO: setup invoker for safe checker invokation
+        res = problem.checker.check(test, local_input_file, output_file_path, @wdir2, @invoker, vfs)
+        unless res.status == :ok
+          reporter.checking_problem(res.status)
+          throw :end_test, :break
+        end
       
-      reporter.checking_finished(res.outcome, res)
+        reporter.checking_finished(res.outcome, res)
 
-      break unless res.outcome == :ok
+        break unless res.outcome == :ok
+      end
+      case id
+      when :break then break
+      when :next then next
+      end
     end
     
     reporter.finished
   end
+  
+private
+
+  def end_test(solution)
+    case solution.rules
+    when 'acm'
+      throw :end_test, :break
+    when 'ioi'
+      throw :end_test, :next
+    end
+  end
+  
   
 end

@@ -68,6 +68,20 @@
     	<label for="statement_openall"> доступны для участников олимпиады и всем желающим со страницы олимпиады</label>
    	</div>
   </dd>
+  </dl>
+
+  <h1 class="section">Правила</h1>
+  <dl class="timeline">
+  <dt>Тестирование и оценка:</dt>
+  <dd>
+    <div><input id="rules_acm" type="radio" name="contest[rules]" value="acm" <%= checked_text(@contest.rules == 'acm') %>>
+    	<label for="rules_acm"> по правилам ACM</label>
+    </div>
+    <div><input id="rules_ioi" type="radio" name="contest[rules]" value="ioi" <%= checked_text(@contest.rules == 'ioi') %>>
+    	<label for="rules_ioi"> по правилам международных индивидуальных школьных олимпиад</label>
+   	</div>
+  </dd>
+</dl>
 
   <h1 class="section"></h1>
   <div>

@@ -1,6 +1,6 @@
 
 class Judge::Solution
-  attr_reader :id, :source_file, :compiler, :problem
+  attr_reader :id, :source_file, :compiler, :problem, :rules
   attr_accessor :source_text
   
   def initialize(run)
@@ -8,6 +8,7 @@ class Judge::Solution
     contest = run.problem.contest
     @source_file = File.join(contest.short_name, 'solutions', run.file_name)
     @problem = ::Judge::Problem.new(run.problem)
+    @rules = contest.rules
     
     @compiler = Judge::Client::NativeExecutableCompiler.new(run.compiler)
   end
