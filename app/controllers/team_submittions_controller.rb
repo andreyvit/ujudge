@@ -22,6 +22,7 @@ class TeamSubmittionsController < ApplicationController
   end
   
   def show
+    access_denied unless current_user.allow?(:view_all_submittions) || current_user == @team
     render :layout => false
   end
   

@@ -4,8 +4,8 @@
         <%= image_tag 'icons/note.png', :alt => "" %>
     </td>
     <td>
-        <a href="#"><%=h submittion.problem.display_name %><span> »</span></a>
+        <a href="<%= team_submittion_url(@contest, @team, submittion) %>" target="_new"><%=h submittion.problem.display_name %><span> »</span></a>
     </td>
-    <td><a href="<%=h '#' %>"><%=h submittion.compiler.display_name %></span></a></td>
+    <td><%=h submittion.compiler.display_name %></td>
 	<td><%= run_status(run) %></td>
 </tr>
