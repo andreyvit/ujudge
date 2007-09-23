@@ -4,6 +4,7 @@ module ActualResults
 	  
 	  attr_reader :position
 	  attr_reader :outcome
+	  attr_reader :points
 	  
 	  def initialize(position)
 	    @position = position
@@ -12,6 +13,7 @@ module ActualResults
 	  
 	  def add_test(test) 
 	    @outcome = test.outcome.intern
+	    @points = test.points
 	  end
     
     def succeeded?

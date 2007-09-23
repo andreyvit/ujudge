@@ -8,6 +8,7 @@ module ActualResults
     attr_reader :attemps
     attr_reader :penalty_time
     attr_reader :last_run_time
+    attr_reader :points
     	  
 	  def initialize(problem_id)
 	    @problem_id = problem_id
@@ -15,6 +16,7 @@ module ActualResults
       @attemps = 0
       @last_run_time = 0
       @ignore_others = false
+      @points = 0
 	  end
 	  
 	  def add_run(run)
@@ -26,7 +28,7 @@ module ActualResults
 	      my_test = (@tests[test.test_ord] ||= TestState.new(test.test_ord))
 	      my_test.add_test(test)
 	    end
-      self.finalize!
+      #self.finalize!
       @ignore_others = true if @succeeded
 	  end
 	  
@@ -45,8 +47,10 @@ module ActualResults
         @result_known = true
         @attention_required = false
         sorted_tests = @tests.sort.collect {|pair| pair.last}
-        sorted_tests.each do |test|
+        sorted_tests.each_with_index do |test, test_index|
           @passed_tests += 1 if test.succeeded?
+          @points += test.points.to_i if test.succeeded? && !test.points.nil?
+          RAILS_DEFAULT_LOGGER.info "team #{self}, problem #{@problem_id}, ord #{test_index}, res #{test.succeeded? ? "ok" : "notok"}"
           @result_known = false unless !@succeeded || test.result_known?
           @succeeded = false unless test.succeeded?
           @attention_required = true if test.attention_required?

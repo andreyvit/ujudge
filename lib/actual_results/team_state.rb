@@ -5,10 +5,12 @@ module ActualResults
 	  attr_reader :submittions
     attr_reader :solved_problems
     attr_reader :penalty_time
+    attr_reader :points
 	  
 	  def initialize(team_id)
 	    @id = team_id
 	    @submittions = {}
+	    @points = 0
 	  end
 	  
 	  def add_run(run)
@@ -31,6 +33,7 @@ module ActualResults
         @penalty_time += submittion.penalty_time
         @result_known = false unless submittion.result_known?
         @attention_required = true if submittion.attention_required?
+        @points += submittion.points
 	    end
 	  end
 
