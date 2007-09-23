@@ -1,6 +1,7 @@
 class JuryController < ApplicationController
   
   before_filter :login_required
+  before_filter :set_new_user
   
   # ajax_scaffold :user,        :rows_per_page => 10, :suffix => true
   # ajax_scaffold :contest,     :rows_per_page => 10, :suffix => true
@@ -8,9 +9,6 @@ class JuryController < ApplicationController
   
   def index
     return access_denied unless current_user.allow?(:jury)
-
-    @users = User.find(:all)
-    @newuser = User.new
   end
   
   def invite
@@ -20,15 +18,19 @@ class JuryController < ApplicationController
     @user = User.new(params[:newuser])
     if @user.save
       ps = @user.create_passwords!(:invitation)
-      begin
-        Mails.deliver_jury_invitation(@user, ps, :invitation)
-      rescue Exception => e
-        flash[:message] = "Ошибка при отправке сообщения!"
-      else
-        flash[:message] = "Приглашение новому члену жюри отправлено на #{@user.email}"
+      if params[:invite]
+        begin
+          Mails.deliver_jury_invitation(@user, ps, :invitation)
+        rescue Exception => e
+          flash[:message] = "Ошибка при отправке сообщения!"
+        else
+          flash[:message] = "Приглашение новому члену жюри отправлено на #{@user.email}"
+        end
+        redirect_to :action => 'index'
+        return
       end
-      redirect_to :action => 'index'
-      return
+    else
+      @newuser, @user = @user, nil
     end
     
     render :action => 'index'
@@ -49,6 +51,13 @@ class JuryController < ApplicationController
   def admin
     return access_denied unless current_user.allow?(:jury)
     # render :layout => 'ajax_scaffold'
+  end
+  
+private
+  
+  def set_new_user
+    @users = User.find(:all)
+    @newuser = User.new
   end
   
 end

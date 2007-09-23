@@ -7,6 +7,10 @@ class User < CachedModel
 
   has_many :password_sets, :as => :principal
   
+  def active_password_set
+    password_sets.find(:first, :order => 'id desc')
+  end
+ 
   def create_passwords!(reason)
     PasswordSet.generate_new(4, :principal => self, :used => false, :reason => reason)
   end
@@ -29,6 +33,12 @@ class User < CachedModel
   # Possible values for +reason+ are: :initial, :change, :forgot
   def create_password!(reason)
     
+  end
+  
+  def passwords_text
+    ps = active_password_set
+    return '' if ps.nil?
+    ps.passwords.find(:all).collect {|p| p.text}.join ", "
   end
 
 #  def self.authenticate(login, pass)

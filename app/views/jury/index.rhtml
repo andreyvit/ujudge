@@ -8,6 +8,13 @@
 	<p><%= user.full_name %>
 <% end %>
 
+<% if @user %>
+<div id="new_user_div">
+<h2>Новый член жюри</h2>
+<p>Пароли: <%= @user.passwords_text %>.
+</div>
+<% end %>
+
 <h2>Пригласить нового члена жюри</h2>
 
 <%= form_tag :action => 'invite' %>
@@ -50,7 +57,7 @@
   <% end %>
 <tr>
   <td>&nbsp;
-  <td><%= submit_tag "Отправить приглашение по почте" %>
+  <td><%= submit_tag "Отправить приглашение по почте", :name => 'invite' %> | <%= submit_tag "Создать и показать пароли", :name => 'createnow' %>
 </table>
 <%= end_form_tag %>
 
