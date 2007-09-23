@@ -2,7 +2,7 @@ class TeamsController < ApplicationController
   
   before_filter :set_contest
   before_filter :find_or_initialize_team, :except => ['index', 'list']
-  before_filter :setup_team_info, :only => ['new', 'edit', 'create', 'update', 'fill_forms']
+  before_filter :setup_team_info, :only => ['new', 'edit', 'create', 'update', 'fill_forms', 'reset_password_for']
   before_filter :set_tabs
   before_filter :set_current_tab
   
@@ -45,6 +45,13 @@ class TeamsController < ApplicationController
   
   def edit
     render_team_editor(:editing => true)
+  end
+  
+  def reset_password_for
+    return access_denied unless current_user.allow?(:reset_all_passwords)
+    @team.create_passwords!(:reset)
+    flash[:message] = "Пароли для команды #{@team.identifying_name} успешно созданы. Добро пожаловать в базу!"
+    redirect_to select_teams_url(@contest)
   end
   
   def create

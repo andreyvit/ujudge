@@ -58,7 +58,9 @@
 	      :confirm => "Удалить команду «#{escape_javascript(team.identifying_name)}»?\n\nОтменить это действие невозможно.",
 	      :loading => update_page { |page| page.show "team_#{team.id}_ind" },
 	      :complete => update_page { |page| page.hide "team_#{team.id}_ind" },
-	      :title => "Удалить команду" %>
+	      :title => "Удалить команду" %> |
+	  <%= link_to "Пароль", reset_password_for_team_url(@contest, team),
+	    :confirm => "Вы уверены, что хотите сбросить пароль для команды «#{escape_javascript(team.identifying_name)}»?\n\nОтменить это действие невозможно." %>
 	  <%= small_indicator :id => "team_#{team.id}_ind" %>
 	</td>
   </tr>
