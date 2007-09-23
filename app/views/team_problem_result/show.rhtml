@@ -9,9 +9,9 @@
 <th>Результат</th>
 <th>Очки</th>
 </tr>
-<% @submittion.tests.each_with_index do |pair, test_counter| %>
+<% @submittion.tests.sort {|a,b| a.last.position <=> b.last.position}.each_with_index do |pair, test_counter| %>
   <% ord, test_state = *pair %>
-  <tr class="<%= if test_counter % 2 == 0 then "odd" else "even" end %>">
+  <tr class="<%= if test_counter % 2 == 0 then "odd" else "even" end %>" bgcolor="<%= TestOutcome.find_by_id(test_state.outcome).color %>">
   <td class="position"><%= ord %></td>
   <td><%=h test_state.outcome %></td>
   <td><%=h test_state.points %></td>
