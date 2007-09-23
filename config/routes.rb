@@ -33,6 +33,9 @@ ActionController::Routing::Routes.draw do |map|
       teams.resources :questions, :name_prefix => 'team_', :member => {} 
       teams.resource :participation, :name_prefix => 'team_'
       teams.resources :ratings, :controller => 'team_ratings', :name_prefix => 'team_'
+      teams.resources :problems, :controller => 'team_problems', :name_prefix => 'team_' do |problems|
+        problems.resource :result, :controller => 'team_problem_result', :name_prefix => 'team_problem_'
+      end
       teams.resources :submittions, :controller => 'team_submittions', :name_prefix => 'team_' do |submittion|  
         submittion.resource :compilation_error
       end

@@ -1,0 +1,24 @@
+<%
+	@page_title = "Рейтинг"
+	@current_tab = :rating
+-%>
+
+<table border="1" class="data_table">
+<tr>
+<th>Номер теста</th>
+<th>Результат</th>
+<th>Очки</th>
+</tr>
+<% @submittion.tests.each_with_index do |pair, test_counter| %>
+  <% ord, test_state = *pair %>
+  <tr class="<%= if test_counter % 2 == 0 then "odd" else "even" end %>">
+  <td class="position"><%= ord %></td>
+  <td><%=h test_state.outcome %></td>
+  <td><%=h test_state.points %></td>
+  </tr>
+<% end %>
+</table>
+
+<% content_for(:hint) do %>
+	<%= render :partial => 'contests/overview', :locals => {:contest => @contest} %>
+<% end %>

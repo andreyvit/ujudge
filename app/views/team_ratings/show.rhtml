@@ -18,16 +18,17 @@
 <% end %>
 </tr>
 <% @rating.sorted_teams.each_with_index do |team, team_counter| %>
+  <% db_team = @teams.find {|t| t.id == team.id} %>
   <tr class="<%= if team_counter % 2 == 0 then "odd" else "even" end %>">
   <td class="position"><%= team_counter + 1 %></td>
-  <td><%=h @teams.find {|t| t.id == team.id}.name %></td>
+  <td><%=h db_team.name %></td>
   <% @problems.each do |problem| %>
     <% if @contest.rules == 'acm' %>
     <td><%= acm_designator(team.submittions[problem.id]) %><% if team.submittions[problem.id] && team.submittions[problem.id].last_run_time %><br><small><%= team.submittions[problem.id].last_run_time %></small><% end %></td>
     <% else %>
     <td>
       <% if team.submittions[problem.id] %>
-        <%= team.submittions[problem.id].points %>
+        <%= link_to team.submittions[problem.id].points.to_s, team_problem_result_url(@contest, db_team, problem), :target => '_new' %>
       <% else %>
        —
       <% end %>
