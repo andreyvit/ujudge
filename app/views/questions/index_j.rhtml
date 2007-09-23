@@ -10,7 +10,7 @@
   <p>Еще ни одного вопроса не задано.</p>
   <% else %>
   <% @questions.each_with_index do |question, questions_counter| %>
-    <div style="margin-top: 20px;"><b><%= question.asked_at.strftime("%d.%m.%Y %H:%M") %> <%=h question.team.identifying_name %></b>
+    <div style="margin-top: 20px;"><b><%= question.asked_at.strftime("%d.%m.%Y %H:%M") %> <%=h question.team.identifying_name %></b><% unless question.problem_id.nil? %> (по задаче «<%= question.problem.display_name %>»)<% end %>
       (<%= link_to "удалить", contest_question_url(@contest, question), :method => 'delete' %>,
       <%= link_to "редактировать", contest_edit_question_url(@contest, question), :method => 'get' %>
       <%- unless question.answer.nil? -%>

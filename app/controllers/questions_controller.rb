@@ -9,6 +9,7 @@ class QuestionsController < ApplicationController
 	  
 	  def index
 		find_all_questions
+		@problems = @contest.problems.find(:all)
     if current_user.is_a?(Team)
       render :action => 'index_t'
     else

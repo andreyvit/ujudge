@@ -5,6 +5,7 @@
 <div class="mb">
   <h1 class="section">Добавить вопрос</h1>
 <%= form_tag(team_questions_url(@contest, @team), :method => 'post') %>
+  <div>Задача: <%= select :question, :problem_id, [["(общий вопрос)", nil]] + @problems.collect { |p| [p.display_name, p.id] }, :include_blank => false %></div>
   <div><%= text_area :question, :question, :rows => 6, :style => 'width: 400px;' %></div>
   <div><%= submit_tag "Добавить вопрос" %></div>
 </form>  
@@ -15,7 +16,7 @@
   <p>Еще ни одного вопроса не задано.</p>
   <% else %>
   <% @questions.each_with_index do |question, questions_counter| %>
-    <div style="margin-top: 20px;"><b><%= question.asked_at.strftime("%d.%m.%Y %H:%M") %></b><% if question.team != current_user %> (опубликован для всех)<% end %> — 
+    <div style="margin-top: 20px;"><b><%= question.asked_at.strftime("%d.%m.%Y %H:%M") %></b><% if question.team != current_user %> (опубликован для всех)<% end %><% unless question.problem_id.nil? %> (по задаче «<%= question.problem.display_name %>»)<% end %> — 
       <%= question.question %>
       <% unless question.answer.nil? %><div style="margin-left: 40px; margin-top: 0px; padding-top: 0px;"><b>Ответ жюри:</b> <%= question.answer %></div><% end %>
     </div>
