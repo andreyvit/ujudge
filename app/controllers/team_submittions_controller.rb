@@ -73,7 +73,7 @@ private
 	end
   
   def verify_contest_running
-    return if current_user.is_a?(User)
+    return if current_user.allow?(:submit_always)
     unless @contest.state == 2
       if @contest.state == 3
         flash[:message] = "Олимпиада окончена"
