@@ -161,8 +161,8 @@ class Judge::Client::Client
     options.port ||= 15837
     options.host ||= 'localhost'
     uri = "druby://#{options.host}:#{options.port}"
-    puts "Local URL: druby://localhost:#{client.local_port}"
-    DRb.start_service("druby://localhost:#{client.local_port}", nil)
+    puts "Local URL: druby://localhost:#{options.local_port}"
+    DRb.start_service("druby://localhost:#{options.local_port}", nil)
     begin
       server = DRbObject.new(nil, uri)
       puts "Connected to #{uri}."
@@ -179,8 +179,8 @@ class Judge::Client::Client
     options.port ||= 15837
     options.host ||= 'localhost'
     uri = "druby://#{options.host}:#{options.port}"
-    puts "Local URL: druby://localhost:#{client.local_port}"
-    DRb.start_service("druby://localhost:#{client.local_port}", nil)
+    puts "Local URL: druby://localhost:#{options.local_port}"
+    DRb.start_service("druby://localhost:#{options.local_port}", nil)
     server = DRbObject.new(nil, uri)
     puts "Connected to #{uri}."
     $root = self.new(server)
