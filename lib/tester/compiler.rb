@@ -76,13 +76,13 @@ module Judge
       
       invoker.chdir = wdir.path
       invoker.usewrapper = true
-      if invoker.time_limit
-        if compiler.interpreter
-          invoker.time_limit *= 5 
-        else
-          invoker.time_limit *= 2 
-        end
-      end
+      # if invoker.time_limit
+      #   if compiler.interpreter
+      #     invoker.time_limit *= 5 
+      #   else
+      #     invoker.time_limit *= 2 
+      #   end
+      # end
       res = invoker.invoke
       res.reason = :ok if compiler.interpreter && res.reason == :runtime_error
       return res
