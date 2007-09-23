@@ -35,7 +35,7 @@ module ActualResults
 	    runs = contest.evaluated_runs
 	    runs.sort {|a,b| a.submitted_at <=> b.submitted_at}
 	    runs.each do |run|
-	      problem = (@problems[run.problem_id] ||= ProblemState.new(run.problem_id))
+	      problem = (@problems[run.problem_id] ||= ProblemState.new(run.problem))
 	      run.tests.each { |test| problem.add_test(test) }
 	    end
 	    runs.each do |run|

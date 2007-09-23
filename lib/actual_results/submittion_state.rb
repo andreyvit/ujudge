@@ -47,6 +47,15 @@ module ActualResults
         @result_known = true
         @attention_required = false
         sorted_tests = @tests.sort.collect {|pair| pair.last}
+        problem.per_test_dependencies.each do |dependent_test, dependencies|
+          all_required_tests_succeded = catch(:all_required_tests_succeded) do
+            dependencies.each do |dependency|
+              throw :all_required_tests_succeded, false if !@tests[dependency].succeeded?
+            end
+            throw :all_required_tests_succeded, true
+          end
+          @tests[dependent_test].points = 0 unless all_required_tests_succeded
+        end
         sorted_tests.each_with_index do |test, test_index|
           @passed_tests += 1 if test.succeeded?
           @points += test.points.to_i if test.succeeded? && !test.points.nil?

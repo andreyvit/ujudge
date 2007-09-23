@@ -45,6 +45,12 @@
   <tr>
     <td>Ограничение памяти на тест:</td>
     <td><%= tag :input, :type => 'text', :id => "#{prefix}_memory_limit", :name => "#{name_prefix}[memory_limit]", :value => problem.memory_limit %> мегабайт<%= error_info problem, :memory_limit %></td>
+	</tr>
+  <tr>
+    <td>Сложная система оценки:</td>
+    <td><%= tag :input, :type => 'text', :id => "#{prefix}_test_dependencies", :name => "#{name_prefix}[test_dependencies]", :value => problem.test_dependencies %> <%= error_info problem, :test_dependencies %></td>
+	</tr>
+    
   <tr>
     <td>Входной файл:</td>
     <td><%= tag :input, :type => 'text', :id => "#{prefix}_input_file", :name => "#{name_prefix}[input_file]", :value => problem.input_file %><%= error_info problem, :input_file %></td>

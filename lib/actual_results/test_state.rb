@@ -4,7 +4,7 @@ module ActualResults
 	  
 	  attr_reader :position
 	  attr_reader :outcome
-	  attr_reader :points
+	  attr_accessor :points
 	  
 	  def initialize(position)
 	    @position = position

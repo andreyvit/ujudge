@@ -2,7 +2,7 @@
 # migrations feature of ActiveRecord to incrementally modify your database, and
 # then regenerate this schema definition.
 
-ActiveRecord::Schema.define(:version => 34) do
+ActiveRecord::Schema.define(:version => 35) do
 
   create_table "compilers", :force => true do |t|
     t.column "display_name",   :string
@@ -116,19 +116,20 @@ ActiveRecord::Schema.define(:version => 34) do
   end
 
   create_table "problems", :force => true do |t|
-    t.column "contest_id",     :integer
-    t.column "name",           :string
-    t.column "display_name",   :string
-    t.column "input_file",     :string
-    t.column "output_file",    :string
-    t.column "check_method",   :integer,  :default => 2,    :null => false
-    t.column "scoring_method", :string,   :default => "",   :null => false
-    t.column "time_limit",     :integer
-    t.column "memory_limit",   :string
-    t.column "letter",         :string
-    t.column "available",      :boolean,  :default => true
-    t.column "created_at",     :datetime
-    t.column "updated_at",     :datetime
+    t.column "contest_id",        :integer
+    t.column "name",              :string
+    t.column "display_name",      :string
+    t.column "input_file",        :string
+    t.column "output_file",       :string
+    t.column "check_method",      :integer,  :default => 2,    :null => false
+    t.column "scoring_method",    :string,   :default => "",   :null => false
+    t.column "time_limit",        :integer
+    t.column "memory_limit",      :string
+    t.column "letter",            :string
+    t.column "available",         :boolean,  :default => true
+    t.column "created_at",        :datetime
+    t.column "updated_at",        :datetime
+    t.column "test_dependencies", :text
   end
 
   create_table "questions", :force => true do |t|
