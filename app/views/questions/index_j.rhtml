@@ -4,26 +4,20 @@
 -%>
 
 <div class="mb">
-  <h1 class="section">Добавить вопрос</h1>
-<%= form_tag(contest_questions_url(@contest), :method => 'post') %>
-  <div><%= text_area :question, :question, :rows => 6, :style => 'width: 400px;' %></div>
-  <div><%= submit_tag "Добавить вопрос" %></div>
-</form>  
-
   <h1 class="section">Список вопросов</h1>
 
   <% if @questions.blank?%>
   <p>Еще ни одного вопроса не задано.</p>
   <% else %>
   <% @questions.each_with_index do |question, questions_counter| %>
-    <div style="margin-top: 20px;"><b><%= question.asked_at.strftime("%d.%m.%Y") %></b>
+    <div style="margin-top: 20px;"><b><%= question.asked_at.strftime("%d.%m.%Y %H:%M") %> <%=h question.team.identifying_name %></b>
       (<%= link_to "удалить", contest_question_url(@contest, question), :method => 'delete' %>,
       <%= link_to "редактировать", contest_edit_question_url(@contest, question), :method => 'get' %>
       <%- unless question.answer.nil? -%>
       <%- if question.visible_for_spectators.nil? || !question.visible_for_spectators -%> 
       , <%= link_to "опубликовать", contest_publish_question_url(@contest, question), :method => 'put' %>
       <%- else -%> 
-      , <%= link_to "не публиковать", contest_unpublish_question_url(@contest, question), :method => 'put' %>
+      , <b>опубликован</b> — <%= link_to "не публиковать", contest_unpublish_question_url(@contest, question), :method => 'put' %>
       <%- end -%>
       <%- end %>) —
       <%= question.question %>

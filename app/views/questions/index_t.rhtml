@@ -15,9 +15,9 @@
   <p>Еще ни одного вопроса не задано.</p>
   <% else %>
   <% @questions.each_with_index do |question, questions_counter| %>
-    <div style="margin-top: 20px;"><b><%= question.asked_at.strftime("%d.%m.%Y") %></b> — 
+    <div style="margin-top: 20px;"><b><%= question.asked_at.strftime("%d.%m.%Y %H:%M") %></b><% if question.team != current_user %> (опубликован для всех)<% end %> — 
       <%= question.question %>
-      <% unless question.answer.nil? %><div style="margin-left: 40px; margin-top: 0px; padding-top: 0px;">Ответ жюри: <%= question.answer %></div><% end %>
+      <% unless question.answer.nil? %><div style="margin-left: 40px; margin-top: 0px; padding-top: 0px;"><b>Ответ жюри:</b> <%= question.answer %></div><% end %>
     </div>
   <% end %>
   <% end %>
