@@ -22,7 +22,7 @@ class Judge::Server::ProcessTestsUploadJob < Judge::Server::Job
   end
   
   class TestInfo
-    attr_accessor :input, :answer
+    attr_accessor :input, :answer, :pts
     attr_reader :position
     
     def initialize(position)
@@ -142,7 +142,8 @@ class Judge::Server::ProcessTestsUploadJob < Judge::Server::Job
           FileUtils.rmdir_r(path) rescue nil
           File.makedirs(path)
           dir.tests.each do |pos, test|
-            [test.input, test.answer].each do |file_name|
+            [test.input, test.answer, test.pts].each do |file_name|
+              next if file_name.nil?
               file_name = File.split(file_name).last
               puts "Trying #{file_name} in #{path}, zip dir #{dir} (exists: #{File.directory?(path) ? "yes" : "no"})"
               File.open(File.join(path, file_name), 'wb') { |f| f.write(zip.read(dir.append(file_name))) }
@@ -168,6 +169,8 @@ class Judge::Server::ProcessTestsUploadJob < Judge::Server::Job
 				  dir.test($1.to_i).input = entry.name
 				when %r!(?:^|/)(\d+)(\.out|\.ans|\.a)$!
 				  dir.test($1.to_i).answer = entry.name
+				when %r!(?:^|/)(\d+)(\.pts)$!
+				  dir.test($1.to_i).pts = entry.name
 	      else
 	        dir.leftover << entry.name
 				end
