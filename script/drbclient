@@ -26,6 +26,8 @@ require_gem 'rails'
 Dependencies.load_paths << File.join(RAILS_ROOT, 'lib')
 
 options = OpenStruct.new
+options.local_port = 9004
+
 OptionParser.new do |opts|
   opts.banner = "Usage: script/drbclient [options]"
   
@@ -37,6 +39,11 @@ OptionParser.new do |opts|
   opts.on( "-p", "--port PORT", Integer,
            "port number of the server" ) do |opt|
     options.port = opt.to_i
+  end
+  
+  opts.on( "-l", "--local-port PORT", Integer,
+           "port number to bind the client to" ) do |opt|
+    options.local_port = opt.to_i
   end
 
   opts.on_tail("-H", "--help", "Show this message") do
