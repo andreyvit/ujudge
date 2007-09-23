@@ -3,7 +3,7 @@ class Judge::Client::DiffChecker
   def normalize(text)
     text.strip.gsub("\r", '').split("\n").collect do |line|
       line.gsub(/\s+/, ' ').strip
-    end.join("\n")
+    end.join("\n").rstrip
   end
 
   def check(test, input_path, output_path, wdir, invoker, vfs)
