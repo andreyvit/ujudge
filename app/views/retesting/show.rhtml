@@ -29,6 +29,7 @@
   <td width="70%">
     <%= radio_button_tag "scope", "all", true, :id => "scope_all" %> <label for="scope_all">все сданные решения</label><br>
     <%= radio_button_tag "scope", "latest", false, :id => "scope_latest" %> <label for="scope_latest">только последнюю попытку по каждой задаче</label><br>
+    <%= radio_button_tag "scope", "latest_compilable", false, :id => "scope_latest_compilable" %> <label for="scope_latest_compilable">только последнюю <em>успешно скомпилированную</em> попытку по каждой задаче</label><br>
   </td>
 </tr>
 <tr>

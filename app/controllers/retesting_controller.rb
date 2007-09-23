@@ -21,6 +21,8 @@ class RetestingController < ApplicationController
       when 'all'
       when 'latest'
         @runs.delete_if { |r| @runs.any? { |r2| r2.problem_id == r.problem_id && r2.team_id == r.team_id && r2.id > r.id } }
+      when 'latest_compilable'
+        @runs.delete_if { |r| @runs.any? { |r2| r2.problem_id == r.problem_id && r2.team_id == r.team_id && r2.id > r.id && r2.outcome != 'compilation-error' } }
       end
       @runs.each do |run|
         new_run = Run.new(run.attributes)
