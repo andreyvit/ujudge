@@ -1,6 +1,6 @@
 <h1>Перетестировать</h1>
 
-<% start_form_tag do %>
+<% form_tag contest_retesting_url(@contest), :method => 'post' do %>
 <table>
 <tr>
   <td width="30%" valign="top">
@@ -8,17 +8,8 @@
   </td>
   <td width="70%">
   <% @problems.each do |problem| %>
-  <%= check_box_tag :name => "#{problem.id}", :value => "0", :checked => false %>&nbsp;&nbsp;<%= problem.display_name %><br>
+  <%= check_box_tag "problems[#{problem.id}]", "1", false, :id => "problem_#{problem.id}" %> <label for="problem_<%= problem.id %>"><%= problem.display_name %></label><br>
   <% end %>
-  </td>
-</tr>
-<tr>
-  <td width="30%" valign="top">
-  Участники:
-  </td>
-  <td width="70%">
-    <div><input type="radio" name="participants" value="all"> Все</div>
-    <div><input type="radio" name="participants" value="some"> Отдельные участники</div>
   </td>
 </tr>
 <tr>
@@ -27,11 +18,29 @@
   </td>
   <td width="70%">
     <% @compilers.each do |compiler| %>
-    <%= check_box_tag :name => "#{compiler.id}", :value => "0", :checked => false %>&nbsp;&nbsp;<%= compiler.display_name %><br>
+    <%= check_box_tag "compilers[#{compiler.id}]", "1", true, :id => "compiler_#{compiler.id}" %> <label for="compiler_<%= compiler.id %>"><%= compiler.display_name %></label><br>
     <% end %>
   </td>
 </tr>
+<tr>
+  <td width="30%" valign="top">
+  Перетестировать:
+  </td>
+  <td width="70%">
+    <%= radio_button_tag "scope", "all", true, :id => "scope_all" %> <label for="scope_all">все сданные решения</label><br>
+    <%= radio_button_tag "scope", "latest", false, :id => "scope_latest" %> <label for="scope_latest">только последнюю попытку по каждой задаче</label><br>
+  </td>
+</tr>
+<tr>
+  <td width="30%" valign="top">
+  &nbsp;
+  </td>
+  <td width="70%">
+    <%= submit_tag "Начать перетестирование" %>
+  </td>
+</tr>
 </table>
+<% %>
 <% end %>
 
 <% content_for(:hint) do %>
