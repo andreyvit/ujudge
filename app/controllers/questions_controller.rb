@@ -49,10 +49,12 @@ class QuestionsController < ApplicationController
 	  end
 	  
 	  def predefinedanswer
-	  	
-	  	@question.answer = "Без комментариев." if params[:answer] == "no_comments"
-		  @question.answer = "Да." if params[:answer] == "yes"
-		  @question.answer = "Нет." if params[:answer] == "no"
+	    case params[:answer]
+      when "see_statement"         then @question.answer = "Читайте условие."
+      when "no_comments"           then @question.answer = "Без комментариев."
+      when "yes"                   then @question.answer = "Да."
+      when "no"                    then @question.answer = "Нет."
+      end
 		  @question.answered_at = Time.new if @question.answered_at.nil?
 		  @question.save!
 		  redirect_to contest_questions_url(@contest)

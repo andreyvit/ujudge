@@ -26,7 +26,9 @@
        <div>Ответить: &nbsp;&nbsp;
          <%= link_to "да", contest_predefinedanswer_question_url(@contest, question) + "?answer=yes",:method => 'put' %>,
          <%= link_to "нет", contest_predefinedanswer_question_url(@contest, question) + "?answer=no",:method => 'put' %>,
-         <%= link_to "без комментариев", contest_predefinedanswer_question_url(@contest, question) + "?answer=no_comments", :method => 'put' %>
+         <%= link_to "без комментариев", contest_predefinedanswer_question_url(@contest, question) + "?answer=no_comments", :method => 'put' %>,
+         <%= link_to "читайте условие", contest_predefinedanswer_question_url(@contest, question) + "?answer=see_statement", :method => 'put' %>
+         
        </div>
         <% form_tag(contest_question_url(@contest, question), :method => 'put') do %>
           <div><%= text_area :question, :answer, :rows => 3, :style => 'width: 400px;' %></div>
