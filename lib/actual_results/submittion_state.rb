@@ -17,6 +17,7 @@ module ActualResults
       @last_run_time = 0
       @ignore_others = false
       @compilation_error = false
+      @no_compilation_errors_megahack = false
       @points = 0
 	  end
 	  
@@ -31,10 +32,12 @@ module ActualResults
 	    end
       #self.finalize!
       @compilation_error = (run.outcome == 'compilation-error')
+      @no_compilation_errors_megahack = true unless @compilation_error
       @ignore_others = true if @succeeded
 	  end
 	  
 	  def finalize!(problem = nil)
+	    @compilation_error = false if @no_compilation_errors_megahack
 	    Judge::Problem.new(Problem.find(@problem_id)).tests.each do |test|
 	      @tests[test.ord] ||= TestState.new(test.ord)
 	    end
