@@ -4,14 +4,20 @@
   
 -%>
 
-<% if @contest.rating_comment %>
-<p style="text-align: center;"><%= @contest.rating_comment %></p>
+<% if can_change_rating? %>
+  <div id="rating_access_control">
+    <%= render :partial => 'access_control' %>
+  </div>
+<% else %>
+  <% if @contest.rating_comment %>
+  <p style="text-align: center;"><%= @contest.rating_comment %></p>
+  <% end %>
 <% end %>
 
 <table border="1" class="data_table">
 <tr>
-<th>&nbsp;</td>
-<th>&nbsp;</td>
+<th>№ п/п</td>
+<th>Решение</td>
 <% @problems.each do |problem| %>
 <th><%=h !problem.letter.empty? && problem.letter || problem.name || problem.display_name %></td>
 <% end %>
@@ -33,7 +39,11 @@
     <% else %>
     <td>
       <% if team.submittions[problem.id] %>
-        <%= link_to team.submittions[problem.id].points.to_s, team_problem_result_url(@contest, db_team, problem), :target => '_new' %>
+        <% if team.submittions[problem.id].compilation_error? %>
+          CE
+        <% else %>
+          <%= link_to team.submittions[problem.id].points.to_s, team_problem_result_url(@contest, db_team, problem), :target => '_new' %>
+        <% end %>
       <% else %>
        —
       <% end %>

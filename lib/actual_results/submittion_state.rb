@@ -16,6 +16,7 @@ module ActualResults
       @attemps = 0
       @last_run_time = 0
       @ignore_others = false
+      @compilation_error = false
       @points = 0
 	  end
 	  
@@ -29,6 +30,7 @@ module ActualResults
 	      my_test.add_test(test)
 	    end
       #self.finalize!
+      @compilation_error = (run.outcome == 'compilation-error')
       @ignore_others = true if @succeeded
 	  end
 	  
@@ -48,14 +50,13 @@ module ActualResults
         @attention_required = false
         sorted_tests = @tests.sort.collect {|pair| pair.last}
         problem.per_test_dependencies.each do |dependent_test, dependencies|
-          RAILS_DEFAULT_LOGGER.info "!!!@@@ #{dependent_test} depends on #{dependencies.join(', ')}"
-          all_required_tests_succeded = catch(:all_required_tests_succeded) do
+          some_required_tests_succeded = catch(:some_required_tests_succeded) do
             dependencies.each do |dependency|
-              throw :all_required_tests_succeded, true if @tests[dependency].succeeded?
+              throw :some_required_tests_succeded, true if @tests[dependency].succeeded?
             end
-            throw :all_required_tests_succeded, false
+            throw :some_required_tests_succeded, false
           end
-          @tests[dependent_test].points = 0 unless all_required_tests_succeded
+          @tests[dependent_test].points = 0 unless some_required_tests_succeded || @tests[dependent_test].points.nil?
         end
         sorted_tests.each_with_index do |test, test_index|
           @passed_tests += 1 if test.succeeded?
@@ -76,6 +77,7 @@ module ActualResults
     def succeeded?; @succeeded; end
     def result_known?; @result_known; end
     def attention_required?; @attention_required; end
+    def compilation_error?; @compilation_error; end
       
   end
 end
