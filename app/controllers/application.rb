@@ -102,7 +102,7 @@ protected
     @page_tabs = []
     @page_tabs << Tab.new(:news, 'Новости', lambda { contest_url(@contest) })
     @page_tabs << Tab.new(:submittions, 'Сдать', lambda { team_submittions_url(@contest, @team) }) if @contest.state == 2
-    @page_tabs << Tab.new(:rating, 'Рейтинг', lambda { team_rating_url(@contest, @team, 'default') })
+    @page_tabs << Tab.new(:rating, 'Рейтинг', lambda { team_rating_url(@contest, @team, 'default') }) if can_see_rating?
     @page_tabs << Tab.new(:questions, 'Вопросы', lambda { team_questions_url(@contest, @team) })
   end
   
@@ -111,7 +111,7 @@ protected
     @page_tabs = []
     @page_tabs << Tab.new(:contest, 'Олимпиада', lambda { contest_url(@contest) })
     @page_tabs << Tab.new(:teams, 'Команды', lambda { overview_teams_url(@contest) }) if @contest.registration_open > 0
-    @page_tabs << Tab.new(:rating, 'Рейтинг', lambda { contest_rating_url(@contest, 'default') })
+    @page_tabs << Tab.new(:rating, 'Рейтинг', lambda { contest_rating_url(@contest, 'default') }) if can_see_rating?
   end
   
   def set_general_tabs
@@ -147,6 +147,10 @@ protected
     else
       set_contest_tabs
     end
+  end
+  
+  def can_see_rating?
+    @contest.rating_visibility == 1 || current_user.allow?(:see_hidden_rating)
   end
   
 end

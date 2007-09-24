@@ -7,6 +7,12 @@ class TeamRatingsController < ApplicationController
   before_filter :set_tabs
     
   def show
+    unless can_see_rating?
+      flash[:message] = "Рейтинг недоступен"
+      redirect_to contest_url(@contest)
+      return
+    end
+    
     @problems = @contest.problems.find_all
     @teams = @contest.teams.find_all
     @rating = ActualResults::CalculatedRating.get(@contest, @rating_definition, @team)

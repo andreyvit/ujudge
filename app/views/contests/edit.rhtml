@@ -68,6 +68,19 @@
     	<label for="statement_openall"> доступны для участников олимпиады и всем желающим со страницы олимпиады</label>
    	</div>
   </dd>
+  <dt>Рейтинг:</dt>
+  <dd>
+    <div><input id="rating_hidden" type="radio" name="contest[rating_visibility]" value="0" <%= checked_text(@contest.rating_visibility == 0) %>>
+    	<label for="rating_hidden"> виден только членам жюри</label>
+    </div>
+    <div><input id="rating_open" type="radio" name="contest[rating_visibility]" value="1" <%= checked_text(@contest.rating_visibility == 1) %>>
+    	<label for="rating_open"> виден всем участникам и зрителям олимпиады</label>
+   	</div>
+    <div>
+      <label for="contest_rating_comment">Текст над рейтингом:</label><br>
+      <%= text_area :contest, :rating_comment, :cols => 60, :rows => 4 %>
+   	</div>
+  </dd>
   </dl>
 
   <h1 class="section">Правила</h1>
