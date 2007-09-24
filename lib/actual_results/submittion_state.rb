@@ -48,11 +48,12 @@ module ActualResults
         @attention_required = false
         sorted_tests = @tests.sort.collect {|pair| pair.last}
         problem.per_test_dependencies.each do |dependent_test, dependencies|
+          RAILS_DEFAULT_LOGGER.info "!!!@@@ #{dependent_test} depends on #{dependencies.join(', ')}"
           all_required_tests_succeded = catch(:all_required_tests_succeded) do
             dependencies.each do |dependency|
-              throw :all_required_tests_succeded, false if !@tests[dependency].succeeded?
+              throw :all_required_tests_succeded, true if @tests[dependency].succeeded?
             end
-            throw :all_required_tests_succeded, true
+            throw :all_required_tests_succeded, false
           end
           @tests[dependent_test].points = 0 unless all_required_tests_succeded
         end
