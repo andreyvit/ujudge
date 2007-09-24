@@ -46,8 +46,15 @@ module ActualResults
 	      team.finalize!(@problems)
 	    end
       #RAILS_DEFAULT_LOGGER.info "teams: #{@teams.values.join(', ')}"
-      @sorted_teams = @teams.values.sort do |a, b|
-        ((b.solved_problems <=> a.solved_problems) * 10 + (a.penalty_time <=> b.penalty_time) * 4) <=> 0
+      case contest.rules
+      when 'acm'
+        @sorted_teams = @teams.values.sort do |a, b|
+          ((b.solved_problems <=> a.solved_problems) * 10 + (a.penalty_time <=> b.penalty_time) * 4) <=> 0
+        end
+      when 'ioi'
+        @sorted_teams = @teams.values.sort do |a, b|
+          b.points <=> a.points
+        end
       end
 	  end
 	  
