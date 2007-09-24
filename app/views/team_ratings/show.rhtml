@@ -3,6 +3,11 @@
 	@current_tab = :rating
   
 -%>
+
+<% if @contest.rating_comment %>
+<p style="text-align: center;"><%= @contest.rating_comment %></p>
+<% end %>
+
 <table border="1" class="data_table">
 <tr>
 <th>&nbsp;</td>
