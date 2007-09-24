@@ -6,11 +6,13 @@ module ActualResults
     attr_reader :solved_problems
     attr_reader :penalty_time
     attr_reader :points
+    attr_reader :compilation_errors
 	  
 	  def initialize(team_id)
 	    @id = team_id
 	    @submittions = {}
 	    @points = 0
+	    @compilation_errors = 0
 	  end
 	  
 	  def add_run(run)
@@ -34,6 +36,7 @@ module ActualResults
         @result_known = false unless submittion.result_known?
         @attention_required = true if submittion.attention_required?
         @points += submittion.points
+        @compilation_errors += 1 if submittion.compilation_error?
 	    end
 	  end
 

@@ -53,7 +53,7 @@ module ActualResults
         end
       when 'ioi'
         @sorted_teams = @teams.values.sort do |a, b|
-          b.points <=> a.points
+          (b.points <=> a.points) * 10 + (a.compilation_errors <=> b.compilation_errors)
         end
       end
 	  end
