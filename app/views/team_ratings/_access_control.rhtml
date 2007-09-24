@@ -1,0 +1,5 @@
+<% if @contest.rating_visibility == 0 %>
+  <p>Рейтинг доступен только членам жюри — <%= ajax_link_to "открыть доступ для всех", contest_set_access_to_rating_url(:visibility => 1) %><%= spinner %>.</p>
+<% else %>
+  <p>Рейтинг <b>открыт для всех</b> — <%= ajax_link_to "закрыть доступ",  contest_set_access_to_rating_url(:visibility => 0) %><%= spinner %>.</p>
+<% end %>

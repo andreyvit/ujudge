@@ -1,0 +1,1 @@
+page.replace_html 'rating_access_control', render(:partial => 'access_control')

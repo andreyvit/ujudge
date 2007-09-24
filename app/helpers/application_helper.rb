@@ -1,5 +1,6 @@
 # Methods added to this helper will be available to all templates in the application.
 module ApplicationHelper
+
   def checked_attr(bool)
     bool && "checked" || nil
   end
@@ -145,8 +146,31 @@ module ApplicationHelper
     end
   end
   
-  def small_indicator(params = {})
+  def spinner(params = {})
+    params[:id] ||= last_spinner_id
     image_tag 'indicator-small.gif', {:alt => '', :style => 'display: none;'}.merge(params)
+  end
+  alias_method :small_indicator, :spinner
+  
+  def ajax_link_to(link_text, url, options = {})
+    spinner_id = options.delete(:spinner) || next_spinner_id
+    options.merge!(:loading => update_page {|page| page.show spinner_id},
+        :completed => update_page {|page| page.hide spinner_id})
+    options[:url] = url
+    html_options = {:href => url}
+    link_to_remote(link_text, options, html_options)
+  end
+  
+  @@spinner_counter = 0
+  
+  def next_spinner_id
+    @@spinner_counter += 1
+    @@spinner_id = "spinner_#{Time.now.to_i}_#{@@spinner_counter}"
+    last_spinner_id
+  end
+  
+  def last_spinner_id
+    @@spinner_id
   end
     
 end
