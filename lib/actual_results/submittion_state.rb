@@ -30,9 +30,13 @@ module ActualResults
 	      my_test = (@tests[test.test_ord] ||= TestState.new(test.test_ord))
 	      my_test.add_test(test)
 	    end
-      #self.finalize!
+	    # determine 
       @compilation_error = (run.outcome == 'compilation-error')
       @no_compilation_errors_megahack = true unless @compilation_error
+      
+      # determine which tests passed, because if the problem is accepted (in ACM mode)
+      # we want to ignore any additional results
+      self.finalize!
       @ignore_others = true if @succeeded
 	  end
 	  
