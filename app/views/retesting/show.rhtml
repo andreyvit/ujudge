@@ -8,8 +8,18 @@
   </td>
   <td width="70%">
   <% @problems.each do |problem| %>
-  <%= check_box_tag "problems[#{problem.id}]", "1", false, :id => "problem_#{problem.id}" %> <label for="problem_<%= problem.id %>"><%= problem.display_name %></label><br>
+  <%= check_box_tag "problems[#{problem.id}]", "1", @retesting.problems.include?(problem), :id => "problem_#{problem.id}" %> <label for="problem_<%= problem.id %>"><%= problem.display_name %></label><br>
   <% end %>
+  </td>
+</tr>
+<tr>
+  <td width="30%" valign="top">
+  Тесты:
+  </td>
+  <td width="70%">
+  <%= text_field_tag "retesting[tests]", if @retesting.tests then combine_items(@retesting.tests) else "" end, 
+      :id => "retesting_tests", :size => 60 %><br>
+  (оставьте поле пустым, чтобы проверить на всех тестах)
   </td>
 </tr>
 <tr>
@@ -18,7 +28,7 @@
   </td>
   <td width="70%">
     <% @compilers.each do |compiler| %>
-    <%= check_box_tag "compilers[#{compiler.id}]", "1", true, :id => "compiler_#{compiler.id}" %> <label for="compiler_<%= compiler.id %>"><%= compiler.display_name %></label><br>
+    <%= check_box_tag "compilers[#{compiler.id}]", "1", @retesting.compilers.include?(compiler), :id => "compiler_#{compiler.id}" %> <label for="compiler_<%= compiler.id %>"><%= compiler.display_name %></label><br>
     <% end %>
   </td>
 </tr>
@@ -27,9 +37,9 @@
   Перетестировать:
   </td>
   <td width="70%">
-    <%= radio_button_tag "scope", "all", true, :id => "scope_all" %> <label for="scope_all">все сданные решения</label><br>
-    <%= radio_button_tag "scope", "latest", false, :id => "scope_latest" %> <label for="scope_latest">только последнюю попытку по каждой задаче</label><br>
-    <%= radio_button_tag "scope", "latest_compilable", false, :id => "scope_latest_compilable" %> <label for="scope_latest_compilable">только последнюю <em>успешно скомпилированную</em> попытку по каждой задаче</label><br>
+    <%= radio_button_tag "scope", "all", @retesting.scope == 'all', :id => "scope_all" %> <label for="scope_all">все сданные решения</label><br>
+    <%= radio_button_tag "scope", "latest", @retesting.scope == 'latest', :id => "scope_latest" %> <label for="scope_latest">только последнюю попытку по каждой задаче</label><br>
+    <%= radio_button_tag "scope", "latest_compilable", @retesting.scope == 'latest_compilable', :id => "scope_latest_compilable" %> <label for="scope_latest_compilable">только последнюю <em>успешно скомпилированную</em> попытку по каждой задаче</label><br>
   </td>
 </tr>
 <tr>

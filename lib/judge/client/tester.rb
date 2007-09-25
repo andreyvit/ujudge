@@ -25,6 +25,7 @@ class Judge::Client::Tester
     
     problem = solution.problem
     problem.tests.sort { |a,b| a.ord <=> b.ord }.each do |test|
+      next unless solution.should_check_on_test?(test.ord)
       id = catch(:end_test) do
         reporter.testing(test)
       
