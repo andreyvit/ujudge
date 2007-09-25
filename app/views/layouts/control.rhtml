@@ -10,6 +10,8 @@
   <meta http-equiv="Content-type" content="text/html; charset=utf-8">
 
   <title><%= @page_title %></title>
+  <%= stylesheet_link_tag 'ext-all' %>
+  <%= stylesheet_link_tag 'application' %>
   <%= stylesheet_link_tag 'screen' %>
   <%= stylesheet_link_tag 'forms' %>
   <%= stylesheet_link_tag 'redbox' %>
@@ -18,6 +20,8 @@
   <%= javascript_include_tag 'redbox' %>
   <%= javascript_include_tag 'placeholder' %>
   <%= javascript_include_tag 'humanized' %>
+  <%= javascript_include_tag 'ext/ext-prototype-adapter' %>
+  <%= javascript_include_tag 'ext/ext-all' %>
   <link rel="stylesheet" type="text/css" href="/stylesheets/print.css" media="print">
   <link rel="icon" href="/favicon.ico">
   <link rel="alternate" type="application/rss+xml" title="Ochen Ochen Dlinnoe Figovoe Prefigovoe Neinteresoye Nazvanie timeline feed" href="http://sandbox.goplan.org/fignya/rss/timeline?hash=3d5fb82fafcb283b2c4bf5f53dd0043c50d5a0dc">

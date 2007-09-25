@@ -73,23 +73,23 @@ div.f6f6f6 {
 	border: 1px solid #eee;
 }
 
-form dt {
-	clear: both;
-	/* float: left; */
-	/* width: 100px; */
-	margin: 0;
-	padding: 0;
-	color: #333;
-	/* margin-right: 15px; */
+/*form dt {
+    clear: both;
+    /* float: left; */
+    /* width: 100px; */
+    margin: 0;
+    padding: 0;
+    color: #333;
+    /* margin-right: 15px; */
 }
 
 form dd {
-	margin: 0;
-	padding: 0;
-	/* color: #999; */
-	/* margin-bottom: 7px; */
+    margin: 0;
+    padding: 0;
+    /* color: #999; */
+    /* margin-bottom: 7px; */
 }
-
+*/
 /*
 label {
 	display: block;
@@ -98,22 +98,23 @@ label {
 }
 */
 
-label span {
-	color: #aaa;
+/*label span {
+    color: #aaa;
 }
 
 label.cb {
-	display: inline;
-	margin-left: 5px;
+    display: inline;
+    margin-left: 5px;
 }
-
-fieldset input[type=text], input[type=password] {
-	font-size: 1.1em;
-	background: #fff;
-	border: 1px solid #ccc;
-	padding: 4px;
-	margin-right: 10px;
+*/
+/*fieldset input[type=text], input[type=password] {
+    font-size: 1.1em;
+    background: #fff;
+    border: 1px solid #ccc;
+    padding: 4px;
+    margin-right: 10px;
 }
+*/
 
 /*
 input {
@@ -133,68 +134,70 @@ input[type=submit] {
 
 */
 
-* input:focus {
-	background-color: #FFFFEE !important;
+/** input:focus {
+    background-color: #FFFFEE !important;
 }
 
 select {
-	margin-bottom: 8px;
-	background: #fff;
-	border: 1px solid #ccc;
-	padding: 2px;
-	font-size: 1em;
-	width: 200px;
+    margin-bottom: 8px;
+    background: #fff;
+    border: 1px solid #ccc;
+    padding: 2px;
+    font-size: 1em;
+    width: 200px;
 }
 
 textarea {
-	margin-bottom: 8px;
-	background: #fff;
-	border: 1px solid #ccc;
-	padding: 4px;
-	font-size: 1em;
-	/* width: 95%;
-	height: 160px; */
+    margin-bottom: 8px;
+    background: #fff;
+    border: 1px solid #ccc;
+    padding: 4px;
+    font-size: 1em;
+    /* width: 95%;
+    height: 160px; */
+    /*
 }
 
 fieldset {
-	background: #f6f6f6;
-	padding: 10px 15px;
-	border: 1px solid #eee;
-	margin-bottom: 2.5em;
+    background: #f6f6f6;
+    padding: 10px 15px;
+    border: 1px solid #eee;
+    margin-bottom: 2.5em;
 }
 
 fieldset.white {
-	background: #fff;
-	border: none;
+    background: #fff;
+    border: none;
 }
 
 legend {
-	padding: 3px 10px;
-	background: #f6f6f6;
-	border: 1px solid #ccc;
-	font-weight: bold;
-	color: #666;
+    padding: 3px 10px;
+    background: #f6f6f6;
+    border: 1px solid #ccc;
+    font-weight: bold;
+    color: #666;
 }
 
 fieldset.optional {
-	background: #f6f6f6;
+    background: #f6f6f6;
 }
 
 fieldset.optional legend {
-	color: #999;
+    color: #999;
 }
-
-form div.column {
-	float: left;
-	margin-right: 20px;
-	width: 46%;
+*/
+/*form div.column {
+    float: left;
+    margin-right: 20px;
+    width: 46%;
 }
 
 form br {
-	clear: left;
-	display: block;
-	margin-bottom: 10px;
+    clear: left;
+    display: block;
+    margin-bottom: 10px;
 }
+*/
 
 #right input[type=text], #right textarea {
 	width: 90%;

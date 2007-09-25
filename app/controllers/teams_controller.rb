@@ -139,15 +139,17 @@ class TeamsController < ApplicationController
   end
   
   def show
-    security_violation if params[:cookie].nil?
-    
-    @team = Team.find(params[:id])
-    @password_set = @team.active_password_set
-    cookie = SecurityCookie.find_by_owner_and_usage_and_text(@team, 'post_registration', params[:cookie])
-    return security_violation if cookie.nil?
-    #@form = @contest.form
-    #@moredata = @form.render_data(@team)
-    render :action => 'post_registration'
+    if params[:cookie].nil?
+      #
+    else
+      @team = Team.find(params[:id])
+      @password_set = @team.active_password_set
+      cookie = SecurityCookie.find_by_owner_and_usage_and_text(@team, 'post_registration', params[:cookie])
+      return security_violation if cookie.nil?
+      #@form = @contest.form
+      #@moredata = @form.render_data(@team)
+      render :action => 'post_registration'
+    end
   end
   
   def do_select

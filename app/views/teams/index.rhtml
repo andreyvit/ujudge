@@ -2,6 +2,10 @@
   @page_title = "Зарегистрированные команды"
 -%>
 
+<% content_for(:head ) do %>
+<%= javascript_include_tag 'teams_index' %>
+<% end %>
+
 <h1 class="section">Команды</h1>
 
 
@@ -11,7 +15,8 @@
 <%= link_to "странице выборки данных", :controller => 'teams', :action => 'select', :contest_name => @contest.short_name %>.
 <% end %>
 
-<table class="data_table" border="1" width="100%">
+<p></p>
+<table id="data_table" border="1" width="100%">
 <thead>
 <tr>
 	<th>&nbsp;</th>
@@ -29,7 +34,7 @@
 <% @teams.each_with_index do |team, team_counter| %>
   <tr id="team_<%= team.id %>" class="<%= if team_counter % 2 == 0 then "odd" else "even" end %>">
 	  <td><%= order_num += 1  %></td>
-	  <td><%=h team.name %></td>
+	  <td><%=link_to h(team.name), team_url(@contest, team), :target => '_new' %></td>
 	  <td><%=h team.member_names %></td>
 	  <td><%=h team.university.city %></td>
 	  <td><%=h team.university.name %></td>

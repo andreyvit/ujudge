@@ -67,7 +67,8 @@ h1.section {
 	color: #339933;
 	padding: 0 0 5px 20px;
 	border-bottom: 1px dotted #ccc;
-	margin-bottom: 1em;
+	margin-top: 1em;
+	margin-bottom: 0.2em;
 }
 
 a, a:visited {	
@@ -94,12 +95,6 @@ a img {
 abbr {
 	border-bottom: 1px dotted #999;
 }
-
-p {
-	color: #444;
-	margin-bottom: 2em;
-}
-
 
 #wrap {
 	margin: 0px auto;
@@ -589,24 +584,6 @@ table {
 	border-collapse: collapse;
 }
 
-table th {
-	padding: 3px 5px;
-	background: #f6f6f6 url("/images/buttonbg.gif") repeat-x top left;
-	border-bottom: 1px solid #ddd;
-	font-weight: bold;
-	text-align: left;
-}
-
-table thead th {
-	border-bottom: 1px solid #ddd;
-}
-
-table td {
-	padding: 5px 8px;
-	border-bottom: 1px solid #eee;
-	border-top: 1px solid #fff;
-}
-
 table td.icon {
 	width: 16px;
 	padding: 3px 0px 3px 8px;
@@ -619,18 +596,6 @@ table td.item_number {
 
 table td.icon img {
 	vertical-align: middle;
-}
-
-table tr.alt {
-	background: #f6f6f6;
-}
-
-table tr.reg {
-	background: #fffeee;
-}
-
-table tr.center {
-	text-align: center;
 }
 
 /* ----------------------------
