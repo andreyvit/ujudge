@@ -9,7 +9,18 @@ class AccountController < ApplicationController
         wants.html  { flash[:login_failure] = true; redirect_to :back }
       end
     else
-      session['user'] = @user = pwd.password_set.principal
+      @user = pwd.password_set.principal      
+      
+      if @user.is_a?(Team) && @user.disqualified?
+        @failure = true
+        respond_to do |wants|
+          # wants.js    { flash.now[:login_failure] = true; render :action => 'login_failure.rjs' }
+          wants.html  { flash[:login_failure] = true; redirect_to :back }
+        end
+        return
+      end
+      
+      session['user'] = @user
       @target = :back
       if @user.is_a?(Team)
         @target = team_participation_url(@user.contest, @user)

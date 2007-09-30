@@ -32,8 +32,10 @@ module ActualResults
 	  end
 	  
 	  def calculate(contest, rdef, team)
-	    runs = contest.evaluated_runs
+	    runs = contest.evaluated_runs.find(:all)
 	    runs.sort {|a,b| a.submitted_at <=> b.submitted_at}
+	    all_teams = contest.teams.find(:all)
+	    runs.delete_if do |run| all_teams.find { |t| t.id == run.team_id }.disqualified? end
 	    runs.each do |run|
 	      problem = (@problems[run.problem_id] ||= ProblemState.new(run.problem))
 	      run.tests.each { |test| problem.add_test(test) }
