@@ -42,6 +42,7 @@ class Judge::Problem
           if info[0] && info[1] && ans_map[info[0]]
             Judge::Test.new(self, info[0], info[1], ans_map[info[0]]) 
           else
+            # TODO: signal an error!
             nil
           end
         end.compact
