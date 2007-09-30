@@ -36,7 +36,7 @@ module ActualResults
       
       # determine which tests passed, because if the problem is accepted (in ACM mode)
       # we want to ignore any additional results
-      self.finalize!
+      #self.finalize!
       @ignore_others = true if @succeeded
 	  end
 	  
@@ -56,14 +56,16 @@ module ActualResults
         @result_known = true
         @attention_required = false
         sorted_tests = @tests.sort.collect {|pair| pair.last}
-        problem.per_test_dependencies.each do |dependent_test, dependencies|
-          some_required_tests_succeded = catch(:some_required_tests_succeded) do
-            dependencies.each do |dependency|
-              throw :some_required_tests_succeded, true if @tests[dependency].succeeded?
+        unless problem.nil?
+          problem.per_test_dependencies.each do |dependent_test, dependencies|
+            some_required_tests_succeded = catch(:some_required_tests_succeded) do
+              dependencies.each do |dependency|
+                throw :some_required_tests_succeded, true if @tests[dependency].succeeded?
+              end
+              throw :some_required_tests_succeded, false
             end
-            throw :some_required_tests_succeded, false
+            @tests[dependent_test].points = 0 unless some_required_tests_succeded || @tests[dependent_test].points.nil?
           end
-          @tests[dependent_test].points = 0 unless some_required_tests_succeded || @tests[dependent_test].points.nil?
         end
         sorted_tests.each_with_index do |test, test_index|
           @passed_tests += 1 if test.succeeded?
