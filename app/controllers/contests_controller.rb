@@ -41,7 +41,7 @@ class ContestsController < ApplicationController
   end
   
   def create_training
-    @contest = Contest.create
+    @contest = Contest.create(:rating_visibility => 0)
     redirect_to edit_contest_url(@contest)
   end
   
