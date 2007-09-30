@@ -160,7 +160,7 @@ class Judge::Server::Server
     local_mtime = File.mtime(local_file)
     # consider the files the same if times differ by less than 4 seconds
     return :unchanged if remote_mtime && (local_mtime - remote_mtime).abs < 4
-    data = File.open(local_file, 'r') { |f| f.read }
+    data = File.open(local_file, 'rb') { |f| f.read }
     return [data, local_mtime]
   end
   
