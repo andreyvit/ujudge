@@ -38,7 +38,13 @@ class Judge::Problem
         end
 
         @tests.sort { |a, b| a[0] <=> b[0] }
-        @tests = @tests.collect { |info| Judge::Test.new(self, info[0], info[1], ans_map[info[0]]) }
+        @tests = @tests.collect do |info|
+          if info[0] && info[1] && ans_map[info[0]]
+            Judge::Test.new(self, info[0], info[1], ans_map[info[0]]) 
+          else
+            nil
+          end
+        end.compact
         read_points
       end
     end
