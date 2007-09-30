@@ -9,11 +9,11 @@ class Judge::Client::NativeChecker
 
     output_path = File.basename(output_path) # TODO: this assumes it's in the working dir
     answer_path = vfs.get(test.answer_file)
-
-    bn = File.basename(@bin_path)
-    local_bin = wdir.path_of(bn)
-    File.copy(@bin_path, local_bin)
+    cached_bin = vfs.get(@bin_path)
+    local_bin = wdir.path_of(cached_bin)
+    File.copy(cached_bin, local_bin)
     
+    bn = File.basename(local_bin)
     bn = "./" + bn if !(RUBY_PLATFORM =~ /mswin32/)
 
     case @spec
