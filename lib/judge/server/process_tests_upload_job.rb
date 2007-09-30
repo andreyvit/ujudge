@@ -3,12 +3,14 @@ class Judge::Server::ProcessTestsUploadJob < Judge::Server::Job
   
   class DirInfo
     attr_reader :name, :display_name, :tests, :leftover
+    attr_accessor :checker_file
     
     def initialize(name)
       @name = name || ""
       @display_name = name || "/"
       @tests = {}
       @leftover = []
+      @checker_file = nil
     end
     
     def test(position)
@@ -149,6 +151,9 @@ class Judge::Server::ProcessTestsUploadJob < Judge::Server::Job
               File.open(File.join(path, file_name), 'wb') { |f| f.write(zip.read(dir.append(file_name))) }
             end
           end
+          unless dir.checker_file.nil?
+            File.open(File.join(path, dir.checker_file), 'wb') { |f| f.write(zip.read(dir.append(dir.checker_file))) }
+          end
         end
       end
     end
@@ -171,6 +176,8 @@ class Judge::Server::ProcessTestsUploadJob < Judge::Server::Job
 				  dir.test($1.to_i).answer = entry.name
 				when %r!(?:^|/)(\d+)(\.pts)$!
 				  dir.test($1.to_i).pts = entry.name
+				when %r!(?:^|/)checker.exe$!
+				  dir.checker_file = entry.name
 	      else
 	        dir.leftover << entry.name
 				end
