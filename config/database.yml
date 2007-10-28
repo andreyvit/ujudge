@@ -31,7 +31,7 @@ test:
 
 production:
   adapter: mysql
-  database: ujudge_production
+  database: ujudge_development
   username: root
   password: 
   host: localhost

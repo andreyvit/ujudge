@@ -179,12 +179,12 @@ class Judge::Server::Server
   end
   
   def calculate_rating_1(contest_id)
-    return if Time.now.to_i < @last_rating_calculation + 30
+    return if Time.now.to_i < @last_rating_calculation.to_i + 30
     do_calculate_rating(contest_id)
   end
   
   def calculate_rating_2(contest_id)
-    return unless Time.now.to_i > @last_rating_calculation + 120
+    return unless Time.now.to_i > @last_rating_calculation.to_i + 120
     do_calculate_rating(contest_id)
   end
   
