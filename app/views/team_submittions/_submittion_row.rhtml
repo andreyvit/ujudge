@@ -9,6 +9,6 @@
     <td>
         <%= submittion.created_at.strftime("%d.%m.%Y %H:%M") %>
     </td>
-    <td><%=h submittion.compiler.display_name %></td>
-	<td><%= run_status(run) %></td>
+    <td><% if submittion.compiler.nil? %>(deleted compiler)<% else %><%=h submittion.compiler.display_name %><% end %></td>
+	<td><% unless run.nil? %><%= run_status(run) %><% end %></td>
 </tr>
