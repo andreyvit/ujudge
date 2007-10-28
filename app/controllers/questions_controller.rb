@@ -6,7 +6,7 @@ class QuestionsController < ApplicationController
   before_filter :set_tabs
   before_filter :set_current_tab
   before_filter :check_access
-  before_filter :check_write_access, :except => ['index']
+  before_filter :check_write_access, :except => ['index', 'create']
   layout 'control'
   
   def index

@@ -138,7 +138,8 @@ class Judge::Server::ClientProxy
   end
   
   def all_done
-    ActualResults::CalculatedRating.invalidate(@run.team.contest)
+    # ActualResults::CalculatedRating.invalidate(@run.team.contest)
+    @server.schedule_rating_recalc(@run.team.contest_id)
     @run = nil # hurra, done!
   end
 end

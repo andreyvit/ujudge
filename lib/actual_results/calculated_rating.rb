@@ -9,19 +9,26 @@ module ActualResults
     def self.cache_key(contest)
       "c#{contest.respond_to?(:id) ? contest.id : contest}-rating"
     end
-	  
-	  def self.get(contest, rdef, team)
+    
+    def self.preload_classes
 	    ActualResults::TeamState
 	    ActualResults::TestState
 	    ActualResults::SubmittionState
 	    ActualResults::ProblemState
-	    Cache.get(cache_key(contest)) do 
-		    returning self.new do |r|
-	        r.calculate(contest, rdef, team)
-		    end
-      end
+    end
+	  
+	  def self.try_get(contest, rdef, team)
+	    self.preload_classes
+	    Cache.get(cache_key(contest))
 	  end
-    
+	  
+	  def self.recalc(contest, rdef, team)
+	    self.preload_classes
+	    r = self.new
+      r.calculate(contest, rdef, team)
+	    Cache.put(cache_key(contest), r)
+	  end
+	  
     def self.invalidate(contest)
       Cache.delete(cache_key(contest))
     end
@@ -29,6 +36,7 @@ module ActualResults
 	  def initialize
 	    @problems = {}
 	    @teams = {}
+	    @sorted_teams = []
 	  end
 	  
 	  def calculate(contest, rdef, team)

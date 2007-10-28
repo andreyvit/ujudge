@@ -17,7 +17,8 @@ class TeamRatingsController < ApplicationController
     
     @problems = @contest.problems.find_all
     @teams = @contest.teams.find_all
-    @rating = ActualResults::CalculatedRating.get(@contest, @rating_definition, @team)
+    ActualResults::CalculatedRating.preload_classes
+    @rating = Server.get_rating(@contest.id, @team && @team.id || nil)
   end
   
   def set_access_to

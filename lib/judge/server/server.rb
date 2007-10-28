@@ -22,6 +22,8 @@ class Judge::Server::Server
     @jobs = []
     pickup_stale_runs
     @thread = Thread.new { self.async_loop }
+    @last_rating_calculation = 0
+    @ratings_to_recalculate = Set.new
     x = Judge::Client::CheckingResult
     # sol = Judge::Solution.new(Run.find(:first, :conditions => 'state IN (0, 1)'))
     # s = Marshal.dump(sol);
@@ -114,6 +116,18 @@ class Judge::Server::Server
     Judge::Problem.new(::Problem.find(problem_id)).tests.size
   end
   
+  def get_rating(contest_id, team_id)
+    contest = Contest.find(contest_id)
+    # team = Team.find(team_id)
+    r = ActualResults::CalculatedRating.try_get(contest, nil, nil)
+    if r.nil?
+      schedule_rating_recalc(contest_id)
+      return ActualResults::CalculatedRating.new
+    else
+      return r
+    end
+  end
+  
   def create_job(proxy)
     returning Judge::Solution.new(proxy.run) do |s|
       s.problem.tests
@@ -164,6 +178,34 @@ class Judge::Server::Server
     return [data, local_mtime]
   end
   
+  def calculate_rating_1(contest_id)
+    return if Time.now.to_i < @last_rating_calculation + 30
+    do_calculate_rating(contest_id)
+  end
+  
+  def calculate_rating_2(contest_id)
+    return unless Time.now.to_i > @last_rating_calculation + 120
+    do_calculate_rating(contest_id)
+  end
+  
+  def do_calculate_rating(contest_id)
+    puts
+    puts "recalculating rating for contest #{contest_id}"
+    puts
+    contest = Contest.find(contest_id)
+    ActualResults::CalculatedRating.recalc(contest, nil, nil)
+    @clients.synchronize do
+      @last_rating_calculation = Time.now
+      @ratings_to_recalculate.delete(contest_id)
+    end
+  end
+  
+  def schedule_rating_recalc(contest_id)
+    @clients.synchronize do
+      @ratings_to_recalculate << contest_id.to_i
+    end
+  end
+  
   def async_loop
     loop {
       sleep 2
@@ -198,6 +240,15 @@ class Judge::Server::Server
             puts "Job #{job.class.name} exception: #{e}"
             puts "In #{e.backtrace}"
           end
+        end
+        
+        loop do
+          r = nil
+          @clients.synchronize do
+            r = @ratings_to_recalculate.to_a.first
+          end
+          break if r.nil?
+          calculate_rating_1(r)
         end
       
       # cls = @clients.synchronize { @clients.collect {|x| x} }

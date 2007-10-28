@@ -41,6 +41,10 @@ module Server
     @@server.get_tests(problem_id)
   end
   
+  def self.get_rating(contest_id, team_id)
+    @@server.get_rating(contest_id, team_id)
+  end
+  
   def self.queue_size
     @@server.queue_size
   rescue
