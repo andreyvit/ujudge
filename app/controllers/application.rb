@@ -155,4 +155,14 @@ protected
     @contest.rating_visibility == 1 || current_user.allow?(:see_hidden_rating)
   end
   
+  def contest_state
+    (@team && @team.state_override) || @contest.state
+  end
+  helper_method :contest_state
+  
+  def contest_started_at
+    (@team && @team.started_at_override) || @contest.started_at
+  end
+  helper_method :contest_started_at
+  
 end

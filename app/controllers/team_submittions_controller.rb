@@ -36,7 +36,7 @@ class TeamSubmittionsController < ApplicationController
     
 	  run = @submittion.runs.build(:problem_id => @submittion.problem_id, :compiler_id => @submittion.compiler_id, :team_id => @submittion.team_id)
 	  run.submitted_at = Time.now
-    run.penalty_time = ((run.submitted_at - @contest.started_at) / 60).to_i
+    run.penalty_time = ((run.submitted_at - contest_started_at) / 60).to_i
 	  run.state = -1
 	  run.state_assigned_at = Time.now
 	  run.save!
@@ -74,8 +74,9 @@ private
   
   def verify_contest_running
     return if current_user.allow?(:submit_always)
-    unless @contest.state == 2
-      if @contest.state == 3
+    st = (@team && @team.state_override) || @contest.state
+    unless st == 2
+      if st == 3
         flash[:message] = "Олимпиада окончена"
       else
         flash[:message] = "Олимпиада еще не началась"

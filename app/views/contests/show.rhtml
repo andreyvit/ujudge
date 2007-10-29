@@ -12,16 +12,16 @@
   <p><%= @contest.welcome_message %></p>
   <% end %>
   
-  <% if @contest.registration_open > 0 || @contest.state >= 2 %>
+  <% if @contest.registration_open > 0 || contest_state >= 2 %>
   <h1 class="section">Как принять участие?</h1>
   <% end %>
-  <% if @contest.registration_open > 0 && @contest.state < 2 %>
+  <% if @contest.registration_open > 0 && contest_state < 2 %>
   <p>Чтобы принять участие в этой олимпиаде, вам нужно <a href="<%=h new_team_url(@contest) %>">зарегистрироваться</a>.</p>
-	<% elsif @contest.state == 2 && @contest.registration_open > 0 %>
+	<% elsif contest_state == 2 && @contest.registration_open > 0 %>
 	<p>Олимпиада идет в данный момент. Если вы уже зарегистрировались, воспользуйтесь вашим паролем для входа. Если нет, вам нужно сначала <a href="<%=h new_team_url(@contest) %>">зарегистрироваться</a>.</p>
-	<% elsif @contest.state == 2 && @contest.registration_open <= 0 %>
+	<% elsif contest_state == 2 && @contest.registration_open <= 0 %>
 	<p>Олимпиада идет в данный момент. Если вы зарегистрировались, воспользуйтесь вашим паролем для входа. В противном случае, увы, вы уже не можете принять участие.</p>
-	<% elsif @contest.state == 3 %>
+	<% elsif contest_state == 3 %>
 	<p>Олимпиада окончена. Принять участие в ней невозможно.</p>
 	<% end %>
   

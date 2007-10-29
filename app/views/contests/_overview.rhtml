@@ -1,10 +1,10 @@
-<% if contest.state == 0 %>
+<% if contest_state == 0 %>
 	<h2>Олимпиада не началась</h2>
 	<p>После начала олимпиады здесь будет отображаться оставшееся время.</p>
-<% elsif contest.state == 2 %>
+<% elsif contest_state == 2 %>
 	<h2>Олимпиада идет</h2>
-	<p><%= ((Time.now - contest.started_at)/60).to_i.russian("Прошла # минута", "Прошло # минуты", "Прошло # минут") %>.</p>
-<% elsif contest.state == 3 %>
+	<p><%= ((Time.now - contest_started_at)/60).to_i.russian("Прошла # минута", "Прошло # минуты", "Прошло # минут") %>.</p>
+<% elsif contest_state == 3 %>
 	<h2>Олимпиада завершена</h2>
 	<% if current_user.is_a?(Team) %>
 		<p>
