@@ -8,6 +8,9 @@
   <div id="rating_access_control">
     <%= render :partial => 'access_control' %>
   </div>
+  <% if @contest.rating_comment %>
+  <p style="text-align: center;"><%= @contest.rating_comment %></p>
+  <% end %>
 <% else %>
   <% if @contest.rating_comment %>
   <p style="text-align: center;"><%= @contest.rating_comment %></p>
