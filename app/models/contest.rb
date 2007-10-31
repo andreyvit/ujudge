@@ -29,6 +29,7 @@ class Contest < CachedModel
   #has_many :contests_forms
   has_and_belongs_to_many :forms
     
+  has_many :submittions, :through => :teams
   has_many :runs, :through => :teams
   has_many :evaluated_runs, :through => :teams
   

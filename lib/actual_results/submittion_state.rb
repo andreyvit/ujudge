@@ -21,7 +21,7 @@ module ActualResults
       @points = 0
 	  end
 	  
-	  def add_run(run)
+	  def add_run(run, state)
 	    return if @ignore_others
 	    return unless run.state >= 3
 	    @attemps += 1
@@ -36,15 +36,14 @@ module ActualResults
       
       # determine which tests passed, because if the problem is accepted (in ACM mode)
       # we want to ignore any additional results
-      self.finalize!
+      self.finalize!(state)
       @ignore_others = true if @succeeded
 	  end
 	  
-	  def finalize!(problem = nil)
+	  def finalize!(state)
 	    @compilation_error = false if @no_compilation_errors_megahack
-	    Judge::Problem.new(Problem.find(@problem_id)).tests.each do |test|
-	      @tests[test.ord] ||= TestState.new(test.ord)
-	    end
+	    problem = state.problems_by_id[@problem_id]
+	    problem.tests.each { |test| @tests[test.ord] ||= TestState.new(test.ord) }
 	    @passed_tests = 0
       if @tests.empty?
 	      @succeeded = false

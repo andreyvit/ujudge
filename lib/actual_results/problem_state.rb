@@ -3,11 +3,11 @@ module ActualResults
 	class ProblemState
 	  
 	  attr_reader :id
-	  attr_accessor :tests
 	  attr_reader :per_test_dependencies
 	  
 	  def initialize(problem)
 	    @id = problem.id
+	    @problem_def = Judge::Problem.new(problem)
 	    @per_test_dependencies = {}
 	    (problem.test_dependencies || '').split(';').collect(&:strip).each do |rule|
 	      lhs, rhs = rule.split('if', 2).collect(&:strip)
@@ -17,13 +17,12 @@ module ActualResults
           @per_test_dependencies[dependent_test] = rhs
         end
 	    end
-	    @tests = Set.new
 	  end
 	  
-	  def add_test(test)
-	    @tests << test.test_ord
-	  end
-	  
+	  def tests
+	    @problem_def.tests
+    end
+  
 	  def self.parse_items(comma_separated_items)
 	    comma_separated_items.split(',').collect(&:strip).collect do |item|
         if item =~ /^(\d+)..(\d+)$/

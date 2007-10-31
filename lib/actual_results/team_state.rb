@@ -15,19 +15,19 @@ module ActualResults
 	    @compilation_errors = 0
 	  end
 	  
-	  def add_run(run)
+	  def add_run(run, state)
 	    submittion = (@submittions[run.problem_id] ||= SubmittionState.new(run.problem_id))
-	    submittion.add_run(run)
+	    submittion.add_run(run, state)
 	  end
 	  
-	  def finalize!(problems)
+	  def finalize!(state)
 	    @result_known = true
       @attention_required = false
       @solved_problems = 0
       @penalty_time = 0
 	    
 	    @submittions.each do |problem_id, submittion|
-	      submittion.finalize!(problems[problem_id])
+	      submittion.finalize!(state)
 	    end
       
 	    @submittions.each do |k, submittion|

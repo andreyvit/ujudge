@@ -40,21 +40,39 @@ module ActualResults
 	  end
 	  
 	  def calculate(contest, rdef, team)
+	    state = IntermediateState.new
+	    puts "1"
 	    runs = contest.evaluated_runs.find(:all)
+	    puts "2"
 	    runs.sort {|a,b| a.submitted_at <=> b.submitted_at}
+	    puts "3"
 	    all_teams = contest.teams.find(:all)
+	    puts "4"
 	    runs.delete_if do |run| all_teams.find { |t| t.id == run.team_id }.disqualified? end
+      puts "loading problems"
+	    contest.problems.find(:all).each do |problem| 
+	      state.add_problem!(problem)
+      end
+	    puts "calculating tests"
+	    tests = RunTest.find(:all, :select => 'id, run_id, test_ord', :conditions => {:run_id => runs})
+	    run_tests = {}
+	    tests.each { |test| (run_tests[test.run_id] ||= []) << test }
+      # runs.each do |run|
+      #   puts " - run #{run.id}"
+      #   problem = (@problems[run.problem_id] ||= ProblemState.new(run.problem))
+      #   run_tests[run.id].each { |test| problem.add_test(test) }
+      # end
+      # state.problems_by_id = @problems
 	    runs.each do |run|
-	      problem = (@problems[run.problem_id] ||= ProblemState.new(run.problem))
-	      run.tests.each { |test| problem.add_test(test) }
-	    end
-	    runs.each do |run|
+	      puts "run #{run.id}"
 	      team = (@teams[run.team_id] ||= TeamState.new(run.team_id))
-	      team.add_run(run)
+	      team.add_run(run, state)
 	    end
 	    @teams.each do |team_id, team|
-	      team.finalize!(@problems)
+	      puts "finalizing team #{team_id}"
+	      team.finalize!(state)
 	    end
+	    puts "sorting"
       #RAILS_DEFAULT_LOGGER.info "teams: #{@teams.values.join(', ')}"
       case contest.rules
       when 'acm'

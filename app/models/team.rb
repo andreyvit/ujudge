@@ -12,7 +12,7 @@ class Team < CachedModel
   has_many :password_sets, :as => :principal
   has_many :submittions
   has_many :runs #, :through => :submittion
-  has_many :evaluated_runs, :class_name => 'Run', :conditions => ['runs.state IN (3,4)'], :include => [:tests]
+  has_many :evaluated_runs, :class_name => 'Run', :conditions => ['runs.state IN (3,4)']
   
   after_save :invalidate_cache
   after_destroy :invalidate_cache
