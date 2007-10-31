@@ -36,7 +36,7 @@ module ActualResults
       
       # determine which tests passed, because if the problem is accepted (in ACM mode)
       # we want to ignore any additional results
-      #self.finalize!
+      self.finalize!
       @ignore_others = true if @succeeded
 	  end
 	  
