@@ -48,6 +48,7 @@ namespace :ujudge do
         catch(:dont_save) do
           catch(:done) do
             throw(:done) if prev_sub.nil?
+            throw(:done) if prev_sub.compiler_id != submittion.compiler_id
             this_file = File.join(UJUDGE_ROOT, 'data', contest.short_name, 'solutions', submittion.file_name)
             prev_file = File.join(UJUDGE_ROOT, 'data', contest.short_name, 'solutions', prev_sub.file_name)
             throw(:done) if File.size(this_file) != File.size(prev_file)
@@ -63,9 +64,10 @@ namespace :ujudge do
       end
     end
     candidates.each do |submittion|
-      puts "Will delete: #{submittion.id}"
+      submittion.runs.each { |r| r.destroy }
+      submittion.destroy
     end
-    puts "#{candidates.size} total submittions to be deleted."
+    puts "#{candidates.size} submittions deleted."
     if errors.empty?
       puts "Success."
     else
