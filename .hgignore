@@ -4,3 +4,4 @@
 ^log/.*\.log$
 ^dump$
 \.DS_Store$
+^config/site.yml$
