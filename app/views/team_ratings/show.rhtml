@@ -17,7 +17,7 @@
 <table border="1" class="data_table">
 <tr>
 <th>№ п/п</td>
-<th>Решение</td>
+<th>Команда</td>
 <% @problems.each do |problem| %>
 <th><%=h !problem.letter.empty? && problem.letter || problem.name || problem.display_name %></td>
 <% end %>
