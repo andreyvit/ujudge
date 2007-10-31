@@ -5,7 +5,7 @@ module Server
   
   def self.connect
     @@localserver = DRb.start_service('druby://localhost:0')
-    @@server = DRbObject.new(nil, 'druby://193.124.208.121:15837')
+    @@server = DRbObject.new(nil, "druby://#{GlobalConfig.instance.server_url}")
   end
   
   def self.instance

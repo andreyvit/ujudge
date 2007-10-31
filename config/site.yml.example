@@ -1,0 +1,7 @@
+memcached:
+  - localhost:11211
+
+server: localhost:15837
+
+#server: 193.124.208.121:15837
+  
