@@ -1,0 +1,2 @@
+hg pull http://193.124.208.119:8000/
+hg update
