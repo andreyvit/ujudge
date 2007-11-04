@@ -1,4 +1,4 @@
 @echo off
 setlocal enableextensions enabledelayedexpansion
-%~dp0winkill261.exe %*
+%~dp0winkill27.exe %*
 echo !ERRORLEVEL!>%~dp0tmp/wd2/exitcode
