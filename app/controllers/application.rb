@@ -122,6 +122,7 @@ protected
     if current_user.is_a?(User)
       @page_tabs << Tab.new(:forms, 'Формы', lambda { forms_url })
       @page_tabs << Tab.new(:appearance, 'Настройки', lambda { appearance_url })
+      @page_tabs << Tab.new(:judges, 'Жюри', lambda { judges_url })
     end
     @page_links = []
     case @current_tab

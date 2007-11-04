@@ -1,4 +1,8 @@
-class JuryController < ApplicationController
+class JudgesController < ApplicationController
+
+  layout 'control'
+  before_filter :set_current_tab
+  before_filter :set_tabs
   
   before_filter :login_required
   before_filter :set_new_user
@@ -58,6 +62,12 @@ private
   def set_new_user
     @users = User.find(:all)
     @newuser = User.new
+  end
+
+private
+
+  def set_current_tab
+    @current_tab = :judges
   end
   
 end

@@ -17,6 +17,8 @@ ActionController::Routing::Routes.draw do |map|
     map.resource :appearance
    
     map.resource :texts
+    
+    map.resources :judges
      
     map.resources :contests, :collection => {:manage => :get, :import => :post}, :member => {:export => :any} do |contests|
     contests.resource :queue, :controller => 'testing_queue', :name_prefix => 'contest_'
