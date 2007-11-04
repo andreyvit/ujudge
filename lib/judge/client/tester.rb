@@ -8,7 +8,10 @@ class Judge::Client::Tester
   end
   
   def compile_and_evaluate(reporter, solution, vfs)
-    local_solution_file = vfs.get(solution.source_file)
+    local_solution_file = vfs.try_to_get(solution.source_file)
+    if local_solution_file.nil?
+        return reporter.compilation_error("Source file not found: #{solution.source_file}")
+    end
     
     reporter.start(solution)
     
