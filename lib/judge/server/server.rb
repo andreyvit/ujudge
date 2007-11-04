@@ -178,6 +178,10 @@ class Judge::Server::Server
     return [data, local_mtime]
   end
   
+  def get_submittion_text(contest_short_name, submittion_file_name)
+    File.open(File.join(UJUDGE_ROOT, 'data', contest_short_name, 'solutions', submittion_file_name)) { |f| f.read }
+  end
+  
   def calculate_rating_1(contest_id)
     return if Time.now.to_i < @last_rating_calculation.to_i + 30
     do_calculate_rating(contest_id)
@@ -203,6 +207,12 @@ class Judge::Server::Server
   def schedule_rating_recalc(contest_id)
     @clients.synchronize do
       @ratings_to_recalculate << contest_id.to_i
+    end
+  end
+  
+  def submit(team_id, problem_id, compiler_id, text)
+    @clients.synchronize do
+      @jobs << Judge::Server::SubmitJob.new(self, team_id, problem_id, compiler_id, text)
     end
   end
   
@@ -248,7 +258,15 @@ class Judge::Server::Server
             r = @ratings_to_recalculate.to_a.first
           end
           break if r.nil?
-          calculate_rating_1(r)
+          begin
+            calculate_rating_1(r)
+          rescue Exception => e
+            puts "Rating calculation exception: #{e}"
+            puts "In #{e.backtrace}"
+            @clients.synchronize do
+              @ratings_to_recalculate.delete(r)
+            end
+          end
         end
       
       # cls = @clients.synchronize { @clients.collect {|x| x} }

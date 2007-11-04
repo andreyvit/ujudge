@@ -45,6 +45,14 @@ module Server
     @@server.get_rating(contest_id, team_id)
   end
   
+  def self.submit(*args)
+    @@server.submit(*args)
+  end
+  
+  def self.get_submittion_text(*args)
+    @@server.get_submittion_text(*args)
+  end
+  
   def self.queue_size
     @@server.queue_size
   rescue

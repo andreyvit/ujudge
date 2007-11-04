@@ -23,41 +23,17 @@ class TeamSubmittionsController < ApplicationController
   
   def show
     access_denied unless current_user.allow?(:view_all_submittions) || current_user == @team
+    @submittion.text = Server.get_submittion_text(@contest.short_name, @submittion.file_name || @submittion.runs.first.file_name)
     render :layout => false
   end
   
   def create
-    @submittion.compiler_id = params[:submittion][:compiler_id]
-    @submittion.problem_id = params[:submittion][:problem_id]
-    @submittion.text = params[:submittion][:text]
-    @submittion.text ||= params[:file].read
-    @submittion.state = 0
-    @submittion.save!
-    
-	  run = @submittion.runs.build(:problem_id => @submittion.problem_id, :compiler_id => @submittion.compiler_id, :team_id => @submittion.team_id)
-	  run.submitted_at = Time.now
-    run.penalty_time = ((run.submitted_at - contest_started_at) / 60).to_i
-	  run.state = -1
-	  run.state_assigned_at = Time.now
-	  run.save!
-    
-	  run.file_name = "#{@contest.short_name}-team#{@submittion.team_id}-#{@submittion.problem.name}-run#{run.id}.#{run.compiler.extension}"
-    
-	  f = File.join(UJUDGE_ROOT, 'data')
-    Dir.mkdir(f) unless File.exists?(f)
-	  f = File.join(UJUDGE_ROOT, 'data', @contest.short_name)
-    Dir.mkdir(f) unless File.exists?(f)
-	  f = File.join(UJUDGE_ROOT, 'data', @contest.short_name, 'solutions')
-    Dir.mkdir(f) unless File.exists?(f)
-	  f = File.join(UJUDGE_ROOT, 'data', @contest.short_name, 'solutions', run.file_name)
-    
-    File.open(f, 'wb') do |f|
-	    f.write(@submittion.text)
-    end
-	  
-	  run.state = 0
-	  run.save!
-    
+    team_id = @team.id
+    compiler_id = params[:submittion][:compiler_id]
+    problem_id = params[:submittion][:problem_id]
+    text = params[:submittion][:text]
+    text ||= params[:file].read
+    Server.submit(team_id, problem_id, compiler_id, text)
     flash[:message] = "Решение отправлено на проверку."
     redirect_to team_submittions_url(@contest.id, @team.id)
   end
