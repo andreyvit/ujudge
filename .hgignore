@@ -6,3 +6,5 @@
 \.DS_Store$
 ^config/site.yml$
 ^pull_server_repos\.cmd$
+^config/database.yml$
+^start-.*\.cmd$
