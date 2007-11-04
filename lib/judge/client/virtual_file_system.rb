@@ -7,6 +7,7 @@ class Judge::Client::VirtualFileSystem
   end
   
   def try_to_get(rel_path)
+    puts "getting #{rel_path}"
     local_file = File.join(@path, rel_path)
     local_dir = File.dirname(local_file)
     File.makedirs(local_dir) unless File.directory?(local_dir)
@@ -27,7 +28,9 @@ class Judge::Client::VirtualFileSystem
       return nil
     when Array
       remote_body, remote_mtime = *result
-      File.open(local_file, 'w') { |f| f.write(remote_body) }
+      puts "size: #{remote_body.size} bytes"
+      File.open(local_file, 'wb') { |f| f.write(remote_body) }
+      puts "real size: #{File.size(local_file)} bytes"
       File.utime(Time.new, remote_mtime, local_file)
       return local_file
     end
