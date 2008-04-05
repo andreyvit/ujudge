@@ -10,9 +10,9 @@
 
 <%
     if @is_editing
-        url, method = team_url(@contest, @team), 'put'
+        url, method = contest_team_url(@contest, @team), 'put'
     else
-        url, method = teams_url(@contest), 'post'
+        url, method = contest_teams_url(@contest), 'post'
     end
 %>
 

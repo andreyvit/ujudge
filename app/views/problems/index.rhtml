@@ -31,26 +31,26 @@ Problems.editorTypes = {
 		var row = Element.ancestor(el, "TR");
 		var problemId = parseInt(row.getAttribute("problem_id"));
 		new uJudge.Editors.Editor(table, el, type, 8, "editor", "edited-cell",
-		  "<%= edit_problem_url(@contest, 999) %>".replace(/999/, "" + problemId));
+		  "<%= edit_contest_problem_url(@contest, 999) %>".replace(/999/, "" + problemId));
 	},
 
 	new_problem: function(table, el, type) {
 		new uJudge.Editors.Editor(table, el, type, 8, "editor", "edited-cell",
-		  "<%= new_problem_url(@contest) %>");
+		  "<%= new_contest_problem_url(@contest) %>");
 	},
 	
 	tests: function(table, el, type) {
 		var row = Element.ancestor(el, "TR");
 		var problemId = parseInt(row.getAttribute("problem_id"));
 		new uJudge.Editors.Editor(table, el, type, 8, "editor", "edited-cell",
-		  "<%= tests_url(@contest, 999) %>".replace(/999/, "" + problemId));
+		  "<%= contest_problem_tests_url(@contest, 999) %>".replace(/999/, "" + problemId));
 	},
 	
 	statement: function(table, el, type) {
 		var row = Element.ancestor(el, "TR");
 		var problemId = parseInt(row.getAttribute("problem_id"));
 		new uJudge.Editors.Editor(table, el, type, 8, "editor", "edited-cell",
-		  "<%= statements_url(@contest, 999) %>".replace(/999/, "" + problemId));
+		  "<%= contest_problem_statements_url(@contest, 999) %>".replace(/999/, "" + problemId));
 	}
 }
 

@@ -70,9 +70,9 @@ protected
 	  @page_tabs << Tab.new(:dashboard, 'Олимпиада', lambda { edit_contest_url(@contest) })
 	  # @page_tabs << Tab.new(:tours, 'Туры')
 	  # @page_tabs << Tab.new(:schedule, 'Расписание')
-	  @page_tabs << Tab.new(:news, 'Новости', lambda { messages_url(@contest) })
-	  @page_tabs << Tab.new(:problems, 'Задачи', lambda { problems_url(@contest) })
-	  @page_tabs << Tab.new(:teams, 'Участники', lambda { overview_teams_url(@contest) })
+	  @page_tabs << Tab.new(:news, 'Новости', lambda { contest_messages_url(@contest) })
+	  @page_tabs << Tab.new(:problems, 'Задачи', lambda { contest_problems_url(@contest) })
+	  @page_tabs << Tab.new(:teams, 'Участники', lambda { overview_contest_teams_url(@contest) })
 	  @page_tabs << Tab.new(:rating, 'Рейтинг', lambda { contest_rating_url(@contest, 'default') })
 	  @page_tabs << Tab.new(:testing, 'Тестирование', lambda { contest_queue_url(@contest) })
 	  @page_tabs << Tab.new(:questions, 'Вопросы', lambda { contest_questions_url(@contest) })
@@ -105,14 +105,14 @@ protected
     @page_tabs << Tab.new(:submittions, 'Сдать', lambda { team_submittions_url(@contest, current_user) }) if @contest.state == 2
     @page_tabs << Tab.new(:rating, 'Рейтинг', lambda { team_rating_url(@contest, current_user, 'default') }) if can_see_rating?
     @page_tabs << Tab.new(:questions, 'Вопросы', lambda { team_questions_url(@contest, current_user) })
-    @page_tabs << Tab.new(:teams, 'Команды', lambda { overview_teams_url(@contest) })
+    @page_tabs << Tab.new(:teams, 'Команды', lambda { overview_contest_teams_url(@contest) })
   end
   
   def set_spectator_tabs
   	@page_heading = (@contest.display_name || "Контест #{@contest.id}")
     @page_tabs = []
     @page_tabs << Tab.new(:contest, 'Олимпиада', lambda { contest_url(@contest) })
-    @page_tabs << Tab.new(:teams, 'Команды', lambda { overview_teams_url(@contest) })
+    @page_tabs << Tab.new(:teams, 'Команды', lambda { overview_contest_teams_url(@contest) })
     @page_tabs << Tab.new(:rating, 'Рейтинг', lambda { contest_rating_url(@contest, 'default') }) if can_see_rating?
   end
   

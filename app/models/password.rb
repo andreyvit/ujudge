@@ -45,7 +45,10 @@ class Password < ActiveRecord::Base
   end
   
   def self.find_by_text(text)
-    self.find(:first, :conditions => ['text = ?', text], :include => [:password_set])
+    logger.info "!!!!! #{text}"
+    # XXX fix for Rails 2.0 (not sure it's correct)
+    # self.find(:first, :conditions => ['text = ?', text, :include => [:password_set]])
+    self.find(:first, :conditions => ['text = ?', text])
   end
   
   def words

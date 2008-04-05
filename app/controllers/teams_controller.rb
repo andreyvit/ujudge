@@ -32,7 +32,7 @@ class TeamsController < ApplicationController
         end
       end
     end
-    redirect_to overview_teams_url(@contest)
+    redirect_to overview_contest_teams_url(@contest)
   end
   
   def index
@@ -51,7 +51,7 @@ class TeamsController < ApplicationController
     return access_denied unless current_user.allow?(:reset_all_passwords)
     @team.create_passwords!(:reset)
     flash[:message] = "Пароли для команды #{@team.identifying_name} успешно созданы. Добро пожаловать в базу!"
-    redirect_to select_teams_url(@contest)
+    redirect_to select_contest_teams_url(@contest)
   end
   
   def create
@@ -61,7 +61,7 @@ class TeamsController < ApplicationController
     if @form.nil?
       finish_team_creation
     else
-      redirect_to fill_forms_team_url(@contest, @team)
+      redirect_to fill_forms_contest_team_url(@contest, @team)
     end
   rescue ActiveRecord::RecordInvalid
     render_team_editor(:editing => false)
@@ -73,7 +73,7 @@ class TeamsController < ApplicationController
     cookie.save!
     result = @team.send_password!(:registration)
     
-    redirect_to team_url(@contest, @team) + '?cookie=' + cookie.text
+    redirect_to contest_team_url(@contest, @team) + '?cookie=' + cookie.text
   end
   
   def fill_forms
@@ -118,9 +118,9 @@ class TeamsController < ApplicationController
     flash[:message] = "Данные сохранены"
 
     if current_user.is_a?(User)
-      redirect_to edit_team_url(@contest, @team)
+      redirect_to edit_contest_team_url(@contest, @team)
     else
-      redirect_to edit_team_url(@contest, @team)
+      redirect_to edit_contest_team_url(@contest, @team)
     end
   rescue ActiveRecord::RecordInvalid
     render_team_editor(:editing => true)
@@ -132,7 +132,7 @@ class TeamsController < ApplicationController
     respond_to do |wants|
       wants.html {
         flash[:message] = "Команда #{@team.identifying_name} удалена"
-        redirect_to select_teams_url(@contest)
+        redirect_to select_contest_teams_url(@contest)
       }
       wants.js
     end
@@ -165,7 +165,7 @@ class TeamsController < ApplicationController
       @listing.set_default_visibility
     end
     
-    if @params[:export]
+    if params[:export]
       @teams = Team.find(:all, :order => 'id', :conditions => ["contest_id = ?", @contest.id])
       content_type = if request.user_agent =~ /windows/i
           'application/vnd.ms-excel'

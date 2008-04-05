@@ -1,4 +1,4 @@
-class ParticipationController < ApplicationController
+class ParticipationsController < ApplicationController
   
   before_filter :set_team
   before_filter :verify_team_access

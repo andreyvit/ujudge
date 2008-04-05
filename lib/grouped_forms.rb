@@ -12,9 +12,9 @@ module GroupedFormHelper
     end
   
     def to_s(helpers)
-      helpers.form_tag(url, options, params_for_url) + 
+      helpers.form_tag(url, options) + #, params_for_url) + 
         groups.collect {|g| g.to_s(helpers)}.join('') +
-        helpers.end_form_tag + @additional_code
+        "</form>" + @additional_code
     end
   end
 

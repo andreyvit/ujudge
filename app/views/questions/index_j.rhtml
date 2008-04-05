@@ -12,22 +12,32 @@
   <% @questions.each_with_index do |question, questions_counter| %>
     <div style="margin-top: 20px;"><b><%= question.asked_at.strftime("%d.%m.%Y %H:%M") %> <%=h question.team.identifying_name %></b><% unless question.problem_id.nil? %> (по задаче «<%= question.problem.display_name %>»)<% end %>
       (<%= link_to "удалить", contest_question_url(@contest, question), :method => 'delete' %>,
-      <%= link_to "редактировать", contest_edit_question_url(@contest, question), :method => 'get' %>
+      <%= link_to "редактировать", edit_contest_question_url(@contest, question), :method => 'get' %>
       <%- unless question.answer.nil? -%>
       <%- if question.visible_for_spectators.nil? || !question.visible_for_spectators -%> 
-      , <%= link_to "опубликовать", contest_publish_question_url(@contest, question), :method => 'put' %>
+      , <%= link_to "опубликовать", publish_contest_question_url(@contest, question), :method => 'put' %>
       <%- else -%> 
-      , <b>опубликован</b> — <%= link_to "не публиковать", contest_unpublish_question_url(@contest, question), :method => 'put' %>
+      , <b>опубликован</b> — <%= link_to "не публиковать", unpublish_contest_question_url(@contest, question), :method => 'put' %>
       <%- end -%>
       <%- end %>) —
       <%= question.question %>
       <% if question.answer.nil? %>
         <div style="margin-left: 40px; margin-top: 0px; padding-top: 0px;">
        <div>Ответить: &nbsp;&nbsp;
-         <%= link_to "да", contest_predefinedanswer_question_url(@contest, question) + "?answer=yes",:method => 'put' %>,
-         <%= link_to "нет", contest_predefinedanswer_question_url(@contest, question) + "?answer=no",:method => 'put' %>,
-         <%= link_to "без комментариев", contest_predefinedanswer_question_url(@contest, question) + "?answer=no_comments", :method => 'put' %>,
-         <%= link_to "читайте условие", contest_predefinedanswer_question_url(@contest, question) + "?answer=see_statement", :method => 'put' %>
+         <%= link_to "да", predefinedanswer_contest_question_url(@contest, question) + "?answer=yes",:method => 'put' %>,
+         <%= link_to "нет", predefinedanswer_contest_question_url(@contest, question) + "?answer=no",:method => 'put' %>,
+         <%= link_to "без комментариев", predefinedanswer_contest_question_url(@contest, question) + "?answer=no_comments", :method => 'put' %>,
+         <%= link_to "читайте условие", predefinedanswer_contest_question_url^tmp/
+         ^data/
+         ^public/statements/
+         ^log/.*\.log$
+         ^dump$
+         \.DS_Store$
+         ^config/site.yml$
+         ^pull_server_repos\.cmd$
+         ^config/database.yml$
+         ^start-.*\.cmd$
+         (@contest, question) + "?answer=see_statement", :method => 'put' %>
          
        </div>
         <% form_tag(contest_question_url(@contest, question), :method => 'put') do %>

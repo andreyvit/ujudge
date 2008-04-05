@@ -28,16 +28,16 @@
 	<p>Регистрация сейчас <% if @contest.registration_open > 0 %>открыта<% else %>закрыта<% end %>.
 Зарегистрировано команд: <%= @teams.size %>.</p>
 
-	<p>Может, вы хотите <%= link_to "зарегистрировать новую команду", new_team_path(@contest) %>?</p>
+	<p>Может, вы хотите <%= link_to "зарегистрировать новую команду", new_contest_team_path(@contest) %>?</p>
 
-	<p><%= link_to "Список зарегистрированных команд", teams_path(@contest) %> (для участников).</p>
+	<p><%= link_to "Список зарегистрированных команд", contest_teams_path(@contest) %> (для участников).</p>
 
-	<p><%= link_to "Выборка зарегистрированных команд", select_teams_path(@contest) %> (только для жюри).</p>
+	<p><%= link_to "Выборка зарегистрированных команд", select_contest_teams_path(@contest) %> (только для жюри).</p>
 <% else %>
 	<% if @contest.registration_open > 0 %>
-		<p>Вы можете <%= link_to "зарегистрировать команду", new_team_path(@contest) %>.</p>
+		<p>Вы можете <%= link_to "зарегистрировать команду", new_contest_team_path(@contest) %>.</p>
 	<% end %>
-	<p><%= link_to "Список зарегистрированных команд", teams_path(@contest) %>.</p>
+	<p><%= link_to "Список зарегистрированных команд", contest_teams_path(@contest) %>.</p>
 <% end %>
 
 <% content_for(:hint) do %>  
